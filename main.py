@@ -24,10 +24,14 @@ for i in range(number_of_cells):
         while not genome.is_replicated():
             fork_manager.advance_attached_forks()
 
-            attempts = fork_manager.number_of_unattached_forks
-            for attempt in range(attempts):   # IMPROVEMENT: Stop loop when out of unattached forks
+            # One attempt for each unattached fork (this number can be changed)
+            for attempt in range(fork_manager.number_of_unattached_forks):
                 genomic_location = genome.random_genomic_location()
-                if not genomic_location.is_replicated() and genomic_location.will_activate():
+                if not genomic_location.is_replicated()\
+                        and genomic_location.will_activate()\
+                        and fork_manager.number_of_unattached_forks >= 2:
                     fork_manager.attach_forks(genomic_location=genomic_location)
 
             time += 1
+            # TODO: print(genome.number_of_replicated_bases_in_this_step())
+        print(j, time, genome.average_interorigin_distance())

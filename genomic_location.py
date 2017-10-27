@@ -7,7 +7,7 @@ class GenomicLocation:
         self.chromosome = chromosome
 
     def is_replicated(self):
-        return self.chromosome.strand[self.base]
+        return self.chromosome.base_is_replicated(base=self.base)
 
     def will_activate(self):
         return random.random() < self.chromosome.activation_probability(base=self.base)
