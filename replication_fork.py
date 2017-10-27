@@ -8,12 +8,13 @@ class ReplicationFork:
         self.speed = None
 
     def attach(self, genomic_location, direction):
-        if self.is_attached:
+        if self.is_attached():
             raise ValueError("Tried to attach an already attached fork")
 
         self.attached_genomic_location = genomic_location
         self.speed = ReplicationFork.overall_replication_speed * direction
-        self.genome.duplicate(start=genomic_location, end=genomic_location)
+        genomic_location.chromosome.replicate(start=genomic_location.base,
+                                              end=genomic_location.base)
 
     def unattach(self):
         self.attached_genomic_location = None

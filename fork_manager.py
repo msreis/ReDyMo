@@ -24,10 +24,12 @@ class ForkManager:
 
     def attach_forks(self, genomic_location):
         number_of_forks_attached_to_this_location = 0
+        direction = 1
         for fork in self.replication_forks:
-            if not fork.is_attached and not self.just_unattached[fork]:
-                fork.attach(genomic_location=genomic_location)
+            if not fork.is_attached() and not self.just_unattached[fork]:
+                fork.attach(genomic_location=genomic_location, direction=direction)
                 number_of_forks_attached_to_this_location += 1
+                direction = - direction
                 if number_of_forks_attached_to_this_location == 2:
                     break
 

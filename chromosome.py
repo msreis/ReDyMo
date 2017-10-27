@@ -36,4 +36,5 @@ class Chromosome:
         return is_normal_transcription
 
     def is_replicated(self):
-        return self.number_of_replicated_bases == len(self)
+        #print(float(self.number_of_replicated_bases/len(self)), end=" ")
+        return self.number_of_replicated_bases >= len(self)

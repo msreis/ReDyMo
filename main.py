@@ -31,4 +31,3 @@ for i in range(number_of_cells):
                     fork_manager.attach_forks(genomic_location=genomic_location)
 
             time += 1
-

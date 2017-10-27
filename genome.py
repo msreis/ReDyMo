@@ -14,4 +14,5 @@ class Genome:
         return GenomicLocation(random_base, random_chromosome)
 
     def is_replicated(self):    # IMPROVEMENT: Use a variable to remember amount of replicated chromosomes
+        #print()
         return all([chromosome.is_replicated() for chromosome in self.chromosomes])
