@@ -1,12 +1,11 @@
 class ReplicationFork:
-    overall_replication_speed = 64  # bp/s
-
-    def __init__(self, genome):
+    def __init__(self, genome, speed):
         self.genome = genome
+        self.speed = speed
 
         self.base = None
         self.chromosome = None
-        self.speed = None
+        self.direction = None
 
     def attach(self, genomic_location, direction):
         if self.is_attached():
@@ -14,7 +13,7 @@ class ReplicationFork:
 
         self.base = genomic_location.base
         self.chromosome = genomic_location.chromosome
-        self.speed = ReplicationFork.overall_replication_speed * direction
+        self.direction = direction
 
         self.chromosome.replicate(start=self.base,
                                   end=self.base)
@@ -22,10 +21,10 @@ class ReplicationFork:
     def unattach(self):
         self.base = None
         self.chromosome = None
-        self.speed = None
+        self.direction = None
 
     def advance(self):
-        new_base = self.base + self.speed
+        new_base = self.base + self.speed * self.direction
 
         if not self.chromosome.replicate(start=self.base,
                                          end=new_base):
