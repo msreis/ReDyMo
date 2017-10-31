@@ -2,7 +2,7 @@
 import sys
 
 from chromosome import Chromosome
-from database import Database
+from data_manager import DataManager
 from fork_manager import ForkManager
 from genome import Genome
 
@@ -11,12 +11,11 @@ number_of_resources = (int(sys.argv[sys.argv.index('--resources') + 1]),
                        int(sys.argv[sys.argv.index('--resources') + 2]),
                        int(sys.argv[sys.argv.index('--resources') + 3]))
 number_of_cells = int(sys.argv[sys.argv.index('--cells') + 1])
-with Database('simulation.sqlite') as db:
-    chromosome_data = db.select_chromosomes(organism=organism)
+data = DataManager(database_path='data/simulation.sqlite', mfa_seq_folder_path='data/MFA-Seq_TBrucei_TREU927')
 
 for i in range(number_of_cells):
     for j in range(*number_of_resources):
-        chromosomes = [Chromosome(t[0], t[1]) for t in chromosome_data]
+        chromosomes = [Chromosome(**data) for data in data.chromosomes(organism=organism)]
         genome = Genome(chromosomes=chromosomes)
         fork_manager = ForkManager(size=j, genome=genome)
         time = 0

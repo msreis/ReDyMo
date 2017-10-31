@@ -2,11 +2,11 @@ import math
 
 
 class Chromosome:
-    def __init__(self, code, length):
+    def __init__(self, code, length, probability_landscape):
         self.code = code
         self.length = length
         self.strand = [False] * self.length
-        self.activation_probabilities = [.1] * self.length
+        self.activation_probabilities = probability_landscape
         self.number_of_replicated_bases = 0
         self.number_of_origins = 0
         self.number_of_recently_replicated_bases = 0
