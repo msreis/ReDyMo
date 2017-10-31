@@ -2,10 +2,10 @@ from replication_fork import ReplicationFork
 
 
 class ForkManager:
-    def __init__(self, size, genome):
+    def __init__(self, size, genome, speed):
         self.replication_forks = list()
         for i in range(size):
-            self.replication_forks.append(ReplicationFork(genome=genome))
+            self.replication_forks.append(ReplicationFork(genome=genome, speed=speed))
 
         self.just_unattached = dict()
         for fork in self.replication_forks:
