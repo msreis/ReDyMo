@@ -1,0 +1,3 @@
+syntax:
+python3 script/cell_output_aggregator.py output/ aggregated.txt
+
