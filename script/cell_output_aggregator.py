@@ -21,7 +21,7 @@ for result_file_name in next(os.walk(sys.argv[1]))[2]:
                 aggregated_data[(int(N), int(speed))] = data
 
 with open(sys.argv[2], 'w') as output_file:
-    output_file.write("N\tinterorigin_distance\ttime_avg\ttime_sd\tinter_avg\tinter_sd\tmeasurements\t\n")
+    output_file.write("N\tspeed\ttime_avg\ttime_sd\tinter_avg\tinter_sd\tmeasurements\t\n")
     for key, value in aggregated_data.items():
         time_avg = value[0]/value[4]
         inter_avg = value[1]/value[4]

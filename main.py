@@ -16,7 +16,7 @@ def main(args):
     replication_fork_speed = (int(sys.argv[sys.argv.index('--speed') + 1]),
                               int(sys.argv[sys.argv.index('--speed') + 2]),
                               int(sys.argv[sys.argv.index('--speed') + 3]))
-    with open("cell_{}.txt".format(args[1]), 'w') as output_file:
+    with open("output/cell_{}.txt".format(args[1]), 'w') as output_file:
         for j in range(*number_of_resources):
             for k in range(*replication_fork_speed):
                 chromosomes = [Chromosome(**d) for d in args[0]]
