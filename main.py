@@ -54,4 +54,4 @@ if __name__ == '__main__':
     for i in range(number_of_cells):
         args_list.append((chromosome_data, i))
 
-    Pool().map(main, args_list)
+    Pool(processes=40).map(main, args_list)
