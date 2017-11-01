@@ -1,5 +1,6 @@
 from random import Random
-from genomic_location import GenomicLocation
+
+from source.genomic_location import GenomicLocation
 
 
 class Genome:

@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 import sys
-
 from multiprocessing import Pool
-from chromosome import Chromosome
-from data_manager import DataManager
-from fork_manager import ForkManager
-from genome import Genome
+
+from source.chromosome import Chromosome
+from source.data_manager import DataManager
+from source.fork_manager import ForkManager
+
+from source.genome import Genome
 
 
 def main(args):

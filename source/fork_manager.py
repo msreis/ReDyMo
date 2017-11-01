@@ -1,4 +1,4 @@
-from replication_fork import ReplicationFork
+from source.replication_fork import ReplicationFork
 
 
 class ForkManager:
