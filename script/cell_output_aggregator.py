@@ -2,9 +2,9 @@ import sys
 import os
 from collections import defaultdict
 
-aggregated_data = defaultdict(default_factory=lambda : [0, 0, 0, 0, 0])
+aggregated_data = defaultdict(default_factory=lambda: [0, 0, 0, 0, 0])
 for result_file_name in next(os.walk(sys.argv[1]))[2]:
-    if result_file_name.begins_with('cell_'):
+    if result_file_name.startswith('cell_'):
         result_path = '{}{}'.format(sys.argv[1], result_file_name)
         with open(result_path) as result_file:
             for line in result_file:
