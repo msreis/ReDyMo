@@ -14,6 +14,17 @@ class Chromosome:
     def __len__(self):
         return self.length
 
+    def __str__(self):
+        chromosome_string = ""
+        for i in self.strand:
+            if i:
+                chromosome_string += "1 "
+            else:
+                chromosome_string += "0 "
+        chromosome_string += "\n"
+
+        return chromosome_string
+
     def base_is_replicated(self, base):
         return self.strand[base]
 
@@ -46,6 +57,5 @@ class Chromosome:
         return is_normal_transcription
 
     def is_replicated(self):
-        # TODO: print("{:.2f}".format(float(self.number_of_replicated_bases/len(self))), end=" ")
         self.number_of_recently_replicated_bases = 0
         return self.number_of_replicated_bases == len(self)
