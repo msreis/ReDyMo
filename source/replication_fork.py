@@ -7,7 +7,7 @@ class ReplicationFork:
         self.chromosome = None
         self.direction = None
 
-    def attach(self, genomic_location, direction):
+    def attach(self, genomic_location, direction, time):
         if self.is_attached():
             raise ValueError("Tried to attach an already attached fork")
 
@@ -16,18 +16,20 @@ class ReplicationFork:
         self.direction = direction
 
         self.chromosome.replicate(start=self.base,
-                                  end=self.base)
+                                  end=self.base,
+                                  time=time)
 
     def unattach(self):
         self.base = None
         self.chromosome = None
         self.direction = None
 
-    def advance(self):
+    def advance(self, time):
         new_base = self.base + self.speed * self.direction
 
         if not self.chromosome.replicate(start=self.base,
-                                         end=new_base):
+                                         end=new_base,
+                                         time=time):
             self.unattach()
             return False
 

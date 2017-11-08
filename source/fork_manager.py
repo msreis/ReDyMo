@@ -13,22 +13,22 @@ class ForkManager:
 
         self.number_of_free_forks = size
 
-    def advance_attached_forks(self):
+    def advance_attached_forks(self, time):
         for fork in self.replication_forks:
             if self.just_unattached[fork]:
                 self.just_unattached[fork] = False
                 self.number_of_free_forks += 1
 
             if fork.is_attached():
-                if not fork.advance():
+                if not fork.advance(time=time):
                     self.just_unattached[fork] = True
 
-    def attach_forks(self, genomic_location):
+    def attach_forks(self, genomic_location, time):
         number_of_forks_attached_to_this_location = 0
         direction = 1
         for fork in self.replication_forks:
             if not fork.is_attached() and not self.just_unattached[fork]:
-                fork.attach(genomic_location=genomic_location, direction=direction)
+                fork.attach(genomic_location=genomic_location, direction=direction, time=time)
                 number_of_forks_attached_to_this_location += 1
                 direction = - direction
                 if number_of_forks_attached_to_this_location == 2:

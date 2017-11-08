@@ -16,6 +16,9 @@ class Genome:
 
         return length
 
+    def __iter__(self):
+        return iter(self.chromosomes)
+
     def random_genomic_location(self):
         random_chromosome = self.chromosomes[self.rng.randint(0, len(self.chromosomes) - 1)]
         random_base = self.rng.randint(0, len(random_chromosome) - 1)
