@@ -16,9 +16,8 @@ class Chromosome:
     def __str__(self):
         chromosome_string = ""
         for i in range(0, len(self.strand), 500):
-            chromosome_string += "{}\t".format(str(self.strand[i]))
+            chromosome_string += "{}\n".format(str(self.strand[i]))
 
-        chromosome_string += "\n"
         return chromosome_string
 
     def base_is_replicated(self, base):
