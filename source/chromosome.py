@@ -15,8 +15,8 @@ class Chromosome:
 
     def __str__(self):
         chromosome_string = ""
-        for i in self.strand:
-            chromosome_string += "{}\t".format(str(i))
+        for i in range(0, len(self.strand), 500):
+            chromosome_string += "{}\t".format(str(self.strand[i]))
 
         chromosome_string += "\n"
         return chromosome_string
