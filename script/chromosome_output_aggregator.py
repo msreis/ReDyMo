@@ -9,7 +9,7 @@ for folder_name in next(os.walk(output_path))[1]:
         for file_name in next(os.walk(simulation_folder_path))[2]:
             file_path = simulation_folder_path + file_name
             with open(file_path) as output_file:
-                if file_name.startswith('cell_'):
+                if file_name.startswith('cell'):
                     pass
 
                 else:
