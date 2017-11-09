@@ -69,6 +69,6 @@ if __name__ == '__main__':
     data_manager = DataManager(database_path='data/simulation.sqlite',
                                mfa_seq_folder_path='data/MFA-Seq_TBrucei_TREU927/')
     chromosome_data = data_manager.chromosomes(organism=organism)
-    args_list = chromosome_data * number_of_repetitions
+    args_list = [chromosome_data] * number_of_repetitions
 
     Pool(processes=40).map(main, args_list)
