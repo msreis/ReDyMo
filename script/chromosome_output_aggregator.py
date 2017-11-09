@@ -18,11 +18,11 @@ for folder_name in next(os.walk(output_path))[1]:
                         l.append(int(line))
 
                     if not chromosome_dict.get(file_name):
-                        chromosome_dict[file_name] = (l, 1)
+                        chromosome_dict[file_name] = [l, 1]
                     else:
+                        chromosome_dict[file_name][1] += 1
                         for i, value in enumerate(l):
                             chromosome_dict[file_name][0][i] += value
-                            chromosome_dict[file_name][1] += 1
 
 for key, value in chromosome_dict.items():
     with open("aggregated_{}".format(key), 'w') as aggregated_file:
