@@ -26,13 +26,17 @@ class DataManager:
 
         probability_landscape = [0] * length
         step = int(ceil(length/len(scores)))
-        max_score = max(scores)
 
-        for i, score in enumerate(scores):
-            for j in range(i * step, (i + 1) * step):
-                probability_landscape[j] = (score/max_score)
-                if j == length - 1:
-                    return probability_landscape
+        a = float((1 - 10**-4)/(max(scores) - min(scores)))
+        b = 1 - (max(scores) * a)
+        with open(self.mfa_seq_folder_path + code + '_probability.txt', 'w') as probability_file:
+            for i, score in enumerate(scores):
+                probability = a * score + b
+                probability_file.write("{}\n".format(probability))
+                for j in range(i * step, (i + 1) * step):
+                    probability_landscape[j] = probability
+                    if j == length - 1:
+                        return probability_landscape
 
     def chromosomes(self, organism):
         chromosomes = []

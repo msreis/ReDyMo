@@ -67,7 +67,7 @@ if __name__ == '__main__':
     organism = sys.argv[sys.argv.index('--organism') + 1]
 
     data_manager = DataManager(database_path='data/simulation.sqlite',
-                               mfa_seq_folder_path='data/MFA-Seq_dummy/')
+                               mfa_seq_folder_path='data/MFA-Seq_TBrucei_TREU927/')
     chromosome_data = data_manager.chromosomes(organism=organism)
     args_list = []
     for i in range(number_of_cells):
