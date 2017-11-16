@@ -45,8 +45,8 @@ def main(args):
                     fork_manager.attach_forks(genomic_location=genomic_location, time=time)
 
         output(simulation_number=args['simulation_number'],
-               resources=j,
-               speed=k,
+               resources=args['number_of_resources'],
+               speed=args['replication_speed'],
                time=time,
                iod=genome.average_interorigin_distance(),
                genome=genome)
