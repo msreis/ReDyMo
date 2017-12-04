@@ -28,22 +28,31 @@ for folder_name in next(os.walk(output_path))[1]:
 
                 else:
                     l = []
+                    l_squared = []
                     for line in output_file:
                         l.append(int(line))
+                        l_squared.append(int(line)**2)
 
                     if not chromosome_dict.get(file_name):
-                        chromosome_dict[file_name] = [l, 1]
+                        chromosome_dict[file_name] = [l, l_squared, 1]
                     else:
-                        chromosome_dict[file_name][1] += 1
+                        chromosome_dict[file_name][2] += 1
                         for i, value in enumerate(l):
                             chromosome_dict[file_name][0][i] += value
+
+                        for i, value in enumerate(l_squared):
+                            chromosome_dict[file_name][1][i] += value
     if i > 1000:
         break
 
 for key, value in chromosome_dict.items():
     with open("aggregated_{}".format(key), 'w') as aggregated_file:
-        for i in value[0]:
-            aggregated_file.write("{}\n".format(float(i/value[1])))
+        for i in range(len(value[0])):
+            i_sum = value[0][i]
+            i_sum_squared = value[1][i]
+            i_avg = i_sum/value[2]
+            i_sd = 0 if value[2] == 1 else ((i_sum_squared / value[2] - (i_sum / value[2]) ** 2) * (value[2] / (value[2] - 1))) ** (1 / 2)
+            aggregated_file.write("{}\t{}\t\n".format(i_avg, i_sd))
 
 with open("aggregated_cell_data.txt", 'w') as aggregated_cell_file:
     aggregated_cell_file.write("N\tspeed\ttime_avg\ttime_sd\tinter_avg\tinter_sd\tmeasurements\t\n")
