@@ -9,6 +9,8 @@ class Chromosome:
         self.activation_probabilities = probability_landscape
         self.number_of_replicated_bases = 0
         self.number_of_origins = 0
+        self.replication_forks = dict()
+        self.transcription_forks = dict()
 
     def __len__(self):
         return self.length
@@ -20,8 +22,21 @@ class Chromosome:
 
         return chromosome_string
 
-    def base_is_replicated(self, base):
-        return True if self.strand[base] else False
+    def unattach_transcription(self, base):
+        for i, transcription in enumerate(self.transcription_forks):
+            if transcription.base == base:
+                removed_transcription = self.transcription_forks.pop(i)
+                break
+
+        for i, replication in enumerate(self.replication_forks):
+            if replication.base == base:
+                if replication.direction != removed_transcription.direction:
+                    del self.replication_forks[i]
+
+                break
+
+    def is_base_replicated(self, base):
+        return bool(self.strand[base])
 
     def activation_probability(self, base):
         return self.activation_probabilities[base]
