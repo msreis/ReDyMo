@@ -9,8 +9,8 @@ class Chromosome:
         self.activation_probabilities = probability_landscape
         self.number_of_replicated_bases = 0
         self.number_of_origins = 0
-        self.replication_forks = dict()
-        self.transcription_forks = dict()
+        self.replication_forks = list()
+        self.transcription_forks = list()
 
     def __len__(self):
         return self.length
@@ -22,7 +22,19 @@ class Chromosome:
 
         return chromosome_string
 
+    def advance_transcriptions(self, interval):
+        for transcription in self.transcription_forks:
+            transcription.advance(interval=interval)
+
+    def unattach_replication(self, base):
+        for i, replication in enumerate(self.replication_forks):
+            if replication.base == base:
+                del self.replication_forks[i]
+
+            break
+
     def unattach_transcription(self, base):
+        removed_transcription = None
         for i, transcription in enumerate(self.transcription_forks):
             if transcription.base == base:
                 removed_transcription = self.transcription_forks.pop(i)
