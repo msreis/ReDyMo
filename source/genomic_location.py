@@ -1,4 +1,3 @@
-import random
 
 
 class GenomicLocation:
@@ -9,5 +8,4 @@ class GenomicLocation:
     def is_replicated(self):
         return self.chromosome.base_is_replicated(base=self.base)
 
-    def will_activate(self):
-        return random.random() < self.chromosome.activation_probability(base=self.base)
+

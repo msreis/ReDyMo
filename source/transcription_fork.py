@@ -1,10 +1,12 @@
 class TranscriptionFork:
-    def __init__(self, speed, direction, boundaries, chromosome):
+    def __init__(self, speed, direction, boundaries, base, chromosome):
         self.boundaries = boundaries
-        self.base = boundaries[0]
         self.speed = speed
         self.direction = direction
+
+        self.base = base
         self.chromosome = chromosome
+        self.is_spawn_duplicated = None
 
     def advance(self, interval):
         for i in range(self.base, self.base + self.speed * self.direction * interval + self.direction, self.direction):

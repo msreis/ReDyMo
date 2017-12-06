@@ -6,8 +6,9 @@ from source.genomic_location import GenomicLocation
 class Genome:
     rng = Random()
 
-    def __init__(self, chromosomes):
+    def __init__(self, chromosomes, resources):
         self.chromosomes = chromosomes
+        self.resources = resources
 
     def __len__(self):
         length = 0
@@ -22,7 +23,7 @@ class Genome:
     def random_genomic_location(self):
         random_chromosome = self.chromosomes[self.rng.randint(0, len(self.chromosomes) - 1)]
         random_base = self.rng.randint(0, len(random_chromosome) - 1)
-        return GenomicLocation(base=random_base, chromosome=random_chromosome)
+        return random_base, random_chromosome
 
     def is_replicated(self):
         return all([chromosome.is_replicated() for chromosome in self.chromosomes])
@@ -40,3 +41,15 @@ class Genome:
             number_of_replicated_bases_in_this_step += chromosome.number_of_recently_replicated_bases
 
         return number_of_replicated_bases_in_this_step
+
+    def attach_transcription_forks(self, interval):
+        for chromosome in self:
+            for transcription_region in chromosome:
+                chromosome.attach_transcription(fork=transcription_region.spawn_fork(interval=interval))
+
+    def attach_replication_forks(self, time):
+        for attempt in range(self.resources):
+            if self.resources >= 2:
+                random_base, random_chromosome = self.random_genomic_location()
+                if random_chromosome.attach_replication(base=random_base, time=time):
+                    self.resources -= 2

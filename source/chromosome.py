@@ -1,4 +1,5 @@
 import math
+import random
 
 
 class Chromosome:
@@ -9,7 +10,7 @@ class Chromosome:
         self.activation_probabilities = probability_landscape
         self.number_of_replicated_bases = 0
         self.number_of_origins = 0
-        self.replication_forks = list()
+        self.replication_forks = dict()
         self.transcription_forks = list()
 
     def __len__(self):
@@ -32,6 +33,21 @@ class Chromosome:
                 del self.replication_forks[i]
 
             break
+
+    def attach_transcription(self, fork):
+        if fork is None:
+            return False
+
+        self.transcription_forks.append(fork)
+        fork.is_spawn_duplicated = bool(self.strand[fork.base])
+        return True
+
+    def attach_replication(self, base, time):
+        if self.strand[base] or random.random() >= self.activation_probabilities[base]:
+            return False  # Nothing was attached
+
+        self.number_of_origins += 1
+        self.replication_forks.append
 
     def unattach_transcription(self, base):
         removed_transcription = None
