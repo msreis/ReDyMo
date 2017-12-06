@@ -9,14 +9,14 @@ class TranscriptionRegion:
         self.period = 1/frequency
         self.chromosome = chromosome
 
-        self.timer = 0
+        self.timer = 0.0
 
     def spawn_fork(self, interval):
         if self.timer > self.period:
-            self.timer = 0
+            self.timer = 0.0
             return(TranscriptionFork(speed=40,
                                      direction=self.direction,
-                                     boundaries=(self.start, self.end),
+                                     end=self.end,
                                      base=self.start,
                                      chromosome=self.chromosome))
         else:
