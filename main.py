@@ -30,19 +30,17 @@ def main(args):
         genome = Genome(chromosomes=chromosomes)
         fork_manager = ForkManager(size=args['number_of_resources'], genome=genome, speed=args['replication_speed'])
         time = 0
-
+        interval = 1
         while not genome.is_replicated():
-            time += 1
+            time += interval
 
-            fork_manager.advance_attached_forks(time=time)
+            genome.advance_transcription_forks(interval=interval)
 
-            # One attempt for each unattached fork (this number can be changed)
-            for attempt in range(fork_manager.number_of_free_forks):
-                genomic_location = genome.random_genomic_location()
-                if not genomic_location.is_replicated()\
-                        and genomic_location.will_activate()\
-                        and fork_manager.number_of_free_forks >= 2:
-                    fork_manager.attach_forks(genomic_location=genomic_location, time=time)
+            genome.advance_replication_forks(interval=interval)
+
+            genome.attach_transcription_forks(interval=interval)
+
+            genome.attach_replication_forks(time=time)
 
         output(simulation_number=args['simulation_number'],
                resources=args['number_of_resources'],
