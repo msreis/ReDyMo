@@ -1,7 +1,5 @@
 from random import Random
 
-from source.genomic_location import GenomicLocation
-
 
 class Genome:
     rng = Random()
@@ -53,3 +51,7 @@ class Genome:
                 random_base, random_chromosome = self.random_genomic_location()
                 if random_chromosome.attach_replication(base=random_base, time=time):
                     self.resources -= 2
+
+    def advance_transcription_forks(self, interval):
+        for chromosome in self:
+            chromosome.advance_transcriptions(interval=interval)

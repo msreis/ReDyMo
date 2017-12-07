@@ -27,10 +27,10 @@ def output(simulation_number, resources, speed, time, iod, genome):
 
 def main(args):
         chromosomes = [Chromosome(**d) for d in args['chromosome_data']]
-        genome = Genome(chromosomes=chromosomes)
-        fork_manager = ForkManager(size=args['number_of_resources'], genome=genome, speed=args['replication_speed'])
+        genome = Genome(chromosomes=chromosomes, resources=args['number_of_resources'])
         time = 0
         interval = 1
+<<<<<<< HEAD
         while not genome.is_replicated():
             time += interval
 
