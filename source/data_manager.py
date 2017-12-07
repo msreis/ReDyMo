@@ -18,6 +18,17 @@ class DataManager:
         db.close()
         return chromosome_tuples
 
+    def select_transcription_regions_from_database(self, **kwargs):
+        db = sqlite3.connect(self.database_path)
+        cursor = db.cursor()
+        for key, value in kwargs.items():
+            query = 'SELECT * FROM TranscriptionRegion WHERE ' + key + ' = ?'
+            cursor.execute(query, (value,))
+
+        transcription_tuples = cursor.fetchall()
+        db.close()
+        return transcription_tuples
+
     def probability_landscape(self, code, length):
         scores = []
         with open(self.mfa_seq_folder_path + code + '.txt') as mfa_seq_file:
@@ -42,8 +53,11 @@ class DataManager:
         chromosomes = []
         chromosome_tuples = self.select_chromosomes_from_database(organism=organism)
         for t in chromosome_tuples:
+            transcription_tuples = self.select_transcription_regions_from_database(chromosome_code=t[0])
+
             chromosomes.append({'code': t[0],
                                 'length': t[1],
-                                'probability_landscape': self.probability_landscape(code=t[0], length=t[1])})
+                                'probability_landscape': self.probability_landscape(code=t[0], length=t[1]),
+                                'transcription_regions': [{'start': d[0], 'end': d[1]} for d in transcription_tuples]})
 
         return chromosomes

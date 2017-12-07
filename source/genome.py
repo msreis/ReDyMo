@@ -54,4 +54,8 @@ class Genome:
 
     def advance_transcription_forks(self, interval):
         for chromosome in self:
-            chromosome.advance_transcriptions(interval=interval)
+            self.resources += chromosome.advance_transcriptions(interval=interval)
+
+    def advance_replication_forks(self, interval, time):
+        for chromosome in self:
+            self.resources += chromosome.advance_replications(interval=interval, time=time)
