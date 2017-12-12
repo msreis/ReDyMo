@@ -1,5 +1,7 @@
 import os
 import sys
+import re
+
 
 output_path = sys.argv[1]
 chromosome_dict = dict()
@@ -34,8 +36,8 @@ for folder_name in next(os.walk(output_path))[1]:
                     for line in output_file:
                         l.append(int(line))
                         l_squared.append(int(line)**2)
-
-                    key = file_name + "_" + str(N) + "_" + str(speed)
+                    p = re.compile('(.*)\.txt')
+                    key = p.match(file_name).group(0) + "_" + str(N) + "_" + str(speed) + ".txt"
                     if not chromosome_dict.get(key):
                         chromosome_dict[key] = [l, l_squared, 1]
 
@@ -47,6 +49,8 @@ for folder_name in next(os.walk(output_path))[1]:
                         for i, value in enumerate(l_squared):
                             chromosome_dict[key][1][i] += value
 
+    if i > 1000:
+        break
 
 for key, value in chromosome_dict.items():
     with open("aggregated_{}".format(key), 'w') as aggregated_file:
@@ -54,7 +58,7 @@ for key, value in chromosome_dict.items():
             i_sum = value[0][i]
             i_sum_squared = value[1][i]
             i_avg = i_sum/value[2]
-            i_sd = 0 if value[2] == 1 else ((i_sum_squared / value[2] - (i_sum / value[2]) ** 2) * (value[2] / (value[2] - 1))) ** (1 / 2)
+            i_sd = 0 if value[2] == 1 else ((i_sum_squared - ((i_sum ** 2) / value[2])) / (value[2] - 1)) ** (1 / 2)
             aggregated_file.write("{}\t{}\t\n".format(i_avg, i_sd))
 
 with open("aggregated_cell_data.txt", 'w') as aggregated_cell_file:
