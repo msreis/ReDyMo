@@ -42,15 +42,14 @@ class Genome:
 
     def attach_transcription_forks(self, interval):
         for chromosome in self:
-            for transcription_region in chromosome:
+            for transcription_region in chromosome.transcription_regions:
                 chromosome.attach_transcription(fork=transcription_region.spawn_fork(interval=interval))
 
     def attach_replication_forks(self, time):
         for attempt in range(self.resources):
             if self.resources >= 2:
                 random_base, random_chromosome = self.random_genomic_location()
-                if random_chromosome.attach_replication(base=random_base, time=time):
-                    self.resources -= 2
+                self.resources += random_chromosome.attach_replication(base=random_base, time=time)
 
     def advance_transcription_forks(self, interval):
         for chromosome in self:

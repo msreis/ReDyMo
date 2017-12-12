@@ -32,7 +32,8 @@ def main(args):
             for region_data in data['transcription_regions']:
                 transcription_regions.append(TranscriptionRegion(start=region_data['start'],
                                                                  end=region_data['end'],
-                                                                 frequency=args['transcription_frequency']))
+                                                                 period=args['transcription_period'],
+                                                                 speed=int(2*args['replication_speed']/3)))
             chromosomes.append(Chromosome(code=data['code'],
                                           length=data['length'],
                                           probability_landscape=data['probability_landscape'],
@@ -42,9 +43,13 @@ def main(args):
         genome = Genome(chromosomes=chromosomes, resources=args['number_of_resources'])
         time = 0
         interval = 1
+        time_limit = 10
 
-        while not genome.is_replicated():
+        while not genome.is_replicated() and not time > time_limit:
             time += interval
+
+            for chromosome in genome:
+                print(chromosome)
 
             genome.advance_transcription_forks(interval=interval)
 
@@ -67,7 +72,7 @@ if __name__ == '__main__':
     organism = sys.argv[sys.argv.index('--organism') + 1]
 
     data_manager = DataManager(database_path='data/simulation.sqlite',
-                               mfa_seq_folder_path='data/MFA-Seq_TBrucei_TREU927/')
+                               mfa_seq_folder_path='data/MFA-Seq_dummy/')
     chromosome_data = data_manager.chromosomes(organism=organism)
     number_of_resources_range = (int(sys.argv[sys.argv.index('--resources') + 1]),
                                  int(sys.argv[sys.argv.index('--resources') + 2]),
@@ -76,20 +81,20 @@ if __name__ == '__main__':
                                     int(sys.argv[sys.argv.index('--speed') + 2]),
                                     int(sys.argv[sys.argv.index('--speed') + 3]))
 
-    transcription_frequency_range = (int(sys.argv[sys.argv.index('--frequency') + 1]),
-                                     int(sys.argv[sys.argv.index('--frequency') + 2]),
-                                     int(sys.argv[sys.argv.index('--frequency') + 3]))
+    transcription_period_range = (int(sys.argv[sys.argv.index('--period') + 1]),
+                                  int(sys.argv[sys.argv.index('--period') + 2]),
+                                  int(sys.argv[sys.argv.index('--period') + 3]))
 
     args_list = []
     simulation_number = 0
     for i in range(*number_of_resources_range):
         for j in range(*replication_fork_speed_range):
-            for k in range(*transcription_frequency_range):
+            for k in range(*transcription_period_range):
                 for l in range(number_of_repetitions):
                     args_list.append({'chromosome_data': chromosome_data,
                                       'number_of_resources': i,
                                       'replication_speed': j,
-                                      'transcription_frequency': k,
+                                      'transcription_period': k,
                                       'simulation_number': simulation_number})
                     simulation_number += 1
 

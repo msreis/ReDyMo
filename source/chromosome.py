@@ -22,10 +22,11 @@ class Chromosome:
 
     def __str__(self):
         chromosome_string = ""
-        for i in range(0, len(self.strand), 500):
-            chromosome_string += "{}\n".format(str(self.strand[i]))
+        for i in range(0, len(self.strand), 1):
+            a = "-" if not self.strand[i] else "*"
+            chromosome_string += "{} ".format(a)
 
-        return chromosome_string
+        return chromosome_string + "\n"
 
     def attach_transcription(self, fork):
         if fork is None:
@@ -38,29 +39,29 @@ class Chromosome:
     def attach_replication(self, base, time):
         if base + 1 >= self.length or self.strand[base] or self.strand[base + 1]\
                 or random.random() >= self.activation_probabilities[base]:
-            return False  # Nothing was attached
+            return 0  # Nothing was attached
 
         self.number_of_origins += 1
         self.replication_forks[base] = ReplicationFork(base=base, direction=-1, speed=self.replication_speed)
         self.replication_forks[base + 1] = ReplicationFork(base=base, direction=+1, speed=self.replication_speed)
         self.replicate(start=base, end=base+1, time=time)
-        return True
+        return -2
 
     def advance_transcriptions(self, interval):
         freed_forks = 0
-        for transcription in self.transcription_forks:
+        for index, transcription in enumerate(self.transcription_forks):
             final_base = None
             for i in range(transcription.base,
                            transcription.base + transcription.speed * transcription.direction * interval,
                            transcription.direction):
                 if transcription.is_outside_boundaries(base=i):
-                    self.transcription_forks.remove(transcription)
+                    self.transcription_forks.pop(index)
                     break
 
                 if transcription.is_spawn_duplicated != self.is_base_replicated(base=i):
-                    self.transcription_forks.remove(transcription)
+                    self.transcription_forks.pop(index)
 
-                    replication = self.replication_forks.pop(i, default=None)
+                    replication = self.replication_forks.pop(i, None)
                     if replication is not None:
                         freed_forks += 1
 
@@ -73,14 +74,13 @@ class Chromosome:
 
     def advance_replications(self, interval, time):
         freed_forks = 0
-        for base in self.replication_forks:
+        for base, fork in self.replication_forks.items():
             final_base = None
             conflict = False
-            replication = self.replication_forks.pop(base)
 
             for i in range(base,
-                           base + replication.speed * replication.direction * interval,
-                           replication.direction):
+                           base + fork.speed * fork.direction * interval,
+                           fork.direction):
                 if i < 0:
                     final_base = 0
                     conflict = True
@@ -100,11 +100,19 @@ class Chromosome:
 
             self.replicate(start=base, end=final_base, time=time)
             if conflict:
+                final_base = None
                 freed_forks += 1
-            else:
-                self.replication_forks[final_base] = replication
 
-            return freed_forks
+            fork.base = final_base
+
+        new_dict = dict()
+        for base, fork in self.replication_forks.items():
+            if fork.base is not None:
+                new_dict[fork.base] = fork
+
+        self.replication_forks = new_dict
+
+        return freed_forks
 
     def unattach_transcription(self, base):
         removed_transcription = None
