@@ -51,13 +51,13 @@ def main(args):
             for chromosome in genome:
                 print(chromosome)
 
-            genome.advance_transcription_forks(interval=interval)
-
             genome.advance_replication_forks(interval=interval, time=time)
+
+            genome.advance_transcription_forks(interval=interval)
 
             genome.attach_transcription_forks(interval=interval)
 
-            genome.attach_replication_forks(time=time)
+            genome.attach_replication_forks()
 
         output(sim_number=args['simulation_number'],
                resources=args['number_of_resources'],

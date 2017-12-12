@@ -21,22 +21,41 @@ class Chromosome:
         return self.length
 
     def __str__(self):
+        replications = []
+        bases = []
+        transcriptions = []
+        for i in range(len(self)):
+            bases.append("-" if not self.strand[i] else "*")
+            replications.append("R" if self.replication_forks.get(i) is not None else "-")
+            transcriptions.append("-")
+
+        for t in self.transcription_forks:
+            transcriptions[t.base] = "T"
+
         chromosome_string = ""
-        for i in range(0, len(self.strand), 1):
-            a = "-" if not self.strand[i] else "*"
-            chromosome_string += "{} ".format(a)
+        for i in range(len(self)):
+            chromosome_string += "{} ".format(bases[i])
+        chromosome_string += "\n"
+        for i in range(len(self)):
+            chromosome_string += "{} ".format(replications[i])
+        chromosome_string += "\n"
+        for i in range(len(self)):
+            chromosome_string += "{} ".format(transcriptions[i])
+        chromosome_string += "\n"
 
-        return chromosome_string + "\n"
+        print(self.replication_forks)
+        return chromosome_string
 
-    def attach_transcription(self, fork):
-        if fork is None:
-            return False
+    def attach_transcriptions(self, interval):
+        for transcription_region in self.transcription_regions:
+            fork = transcription_region.spawn_fork(interval=interval)
+            if fork is None:
+                continue
 
-        self.transcription_forks.append(fork)
-        fork.is_spawn_duplicated = self.is_base_replicated(base=fork.base)
-        return True
+            self.transcription_forks.append(fork)
+            fork.is_spawn_duplicated = self.is_base_replicated(base=fork.base)
 
-    def attach_replication(self, base, time):
+    def attach_replication(self, base):
         if base + 1 >= self.length or self.strand[base] or self.strand[base + 1]\
                 or random.random() >= self.activation_probabilities[base]:
             return 0  # Nothing was attached
@@ -44,7 +63,6 @@ class Chromosome:
         self.number_of_origins += 1
         self.replication_forks[base] = ReplicationFork(base=base, direction=-1, speed=self.replication_speed)
         self.replication_forks[base + 1] = ReplicationFork(base=base, direction=+1, speed=self.replication_speed)
-        self.replicate(start=base, end=base+1, time=time)
         return -2
 
     def advance_transcriptions(self, interval):
@@ -70,6 +88,7 @@ class Chromosome:
                 final_base = i
 
             transcription.base = final_base
+
         return freed_forks
 
     def advance_replications(self, interval, time):
