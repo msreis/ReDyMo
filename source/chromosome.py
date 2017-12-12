@@ -27,13 +27,6 @@ class Chromosome:
 
         return chromosome_string
 
-    def unattach_replication(self, base):
-        for i, replication in enumerate(self.replication_forks):
-            if replication.base == base:
-                del self.replication_forks[i]
-
-            break
-
     def attach_transcription(self, fork):
         if fork is None:
             return False
@@ -54,7 +47,9 @@ class Chromosome:
         return True
 
     def advance_transcriptions(self, interval):
+        freed_forks = 0
         for transcription in self.transcription_forks:
+            final_base = None
             for i in range(transcription.base,
                            transcription.base + transcription.speed * transcription.direction * interval,
                            transcription.direction):
@@ -64,7 +59,52 @@ class Chromosome:
 
                 if transcription.is_spawn_duplicated != self.is_base_replicated(base=i):
                     self.transcription_forks.remove(transcription)
-                    self.replication_forks.pop(i, default=None)
+
+                    replication = self.replication_forks.pop(i, default=None)
+                    if replication is not None:
+                        freed_forks += 1
+
+                    break
+
+                final_base = i
+
+            transcription.base = final_base
+        return freed_forks
+
+    def advance_replications(self, interval, time):
+        freed_forks = 0
+        for base in self.replication_forks:
+            final_base = None
+            conflict = False
+            replication = self.replication_forks.pop(base)
+
+            for i in range(base,
+                           base + replication.speed * replication.direction * interval,
+                           replication.direction):
+                if i < 0:
+                    final_base = 0
+                    conflict = True
+                    break
+
+                if i > len(self) - 1:
+                    final_base = len(self) - 1
+                    conflict = True
+                    break
+
+                if self.is_base_replicated(i):
+                    final_base = i
+                    conflict = True
+                    break
+
+                final_base = i
+
+            self.replicate(start=base, end=final_base, time=time)
+            if conflict:
+                freed_forks += 1
+            else:
+                self.replication_forks[final_base] = replication
+
+            return freed_forks
 
     def unattach_transcription(self, base):
         removed_transcription = None

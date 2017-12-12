@@ -5,15 +5,15 @@ from multiprocessing import Pool
 
 from source.chromosome import Chromosome
 from source.data_manager import DataManager
-from source.fork_manager import ForkManager
 from source.genome import Genome
+from source.transcription_region import TranscriptionRegion
 
 
-def output(simulation_number, resources, speed, time, iod, genome):
+def output(sim_number, resources, speed, time, iod, genome):
     os.makedirs('output/', exist_ok=True)
-    os.makedirs('output/simulation_{}/'.format(simulation_number))
+    os.makedirs('output/simulation_{}/'.format(sim_number))
 
-    with open("output/simulation_{}/cell.txt".format(simulation_number), 'w')\
+    with open("output/simulation_{}/cell.txt".format(sim_number), 'w')\
             as output_file:
         output_file.write("{}\t{}\t{}\t{}\t\n".format(resources,
                                                       speed,
@@ -21,24 +21,40 @@ def output(simulation_number, resources, speed, time, iod, genome):
                                                       iod))
 
     for chromosome in genome:
-        with open("output/simulation_{}/{}.txt".format(simulation_number, chromosome.code), 'w') as output_file:
+        with open("output/simulation_{}/{}.txt".format(sim_number, chromosome.code), 'w') as output_file:
             output_file.write(str(chromosome))
 
 
 def main(args):
-        chromosomes = [Chromosome(**d) for d in args['chromosome_data']]
+        chromosomes = []
+        for data in args['chromosome_data']:
+            transcription_regions = []
+            for region_data in data['transcription_regions']:
+                transcription_regions.append(TranscriptionRegion(start=region_data['start'],
+                                                                 end=region_data['end'],
+                                                                 frequency=args['transcription_frequency']))
+            chromosomes.append(Chromosome(code=data['code'],
+                                          length=data['length'],
+                                          probability_landscape=data['probability_landscape'],
+                                          replication_speed=args['replication_speed'],
+                                          transcription_regions=transcription_regions))
+
         genome = Genome(chromosomes=chromosomes, resources=args['number_of_resources'])
         time = 0
         interval = 1
 
         while not genome.is_replicated():
             time += interval
-            genome.advance_transcription_forks()
-            genome.advance_replication_forks()
+
+            genome.advance_transcription_forks(interval=interval)
+
+            genome.advance_replication_forks(interval=interval, time=time)
+
             genome.attach_transcription_forks(interval=interval)
+
             genome.attach_replication_forks(time=time)
 
-        output(simulation_number=args['simulation_number'],
+        output(sim_number=args['simulation_number'],
                resources=args['number_of_resources'],
                speed=args['replication_speed'],
                time=time,
@@ -60,15 +76,21 @@ if __name__ == '__main__':
                                     int(sys.argv[sys.argv.index('--speed') + 2]),
                                     int(sys.argv[sys.argv.index('--speed') + 3]))
 
+    transcription_frequency_range = (int(sys.argv[sys.argv.index('--frequency') + 1]),
+                                     int(sys.argv[sys.argv.index('--frequency') + 2]),
+                                     int(sys.argv[sys.argv.index('--frequency') + 3]))
+
     args_list = []
-    l = 0
+    simulation_number = 0
     for i in range(*number_of_resources_range):
         for j in range(*replication_fork_speed_range):
-            for k in range(number_of_repetitions):
-                args_list.append({'chromosome_data': chromosome_data,
-                                  'number_of_resources': i,
-                                  'replication_speed': j,
-                                  'simulation_number': l})
-                l += 1
+            for k in range(*transcription_frequency_range):
+                for l in range(number_of_repetitions):
+                    args_list.append({'chromosome_data': chromosome_data,
+                                      'number_of_resources': i,
+                                      'replication_speed': j,
+                                      'transcription_frequency': k,
+                                      'simulation_number': simulation_number})
+                    simulation_number += 1
 
     Pool(processes=40).map(main, args_list)
