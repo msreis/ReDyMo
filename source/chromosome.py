@@ -14,6 +14,7 @@ class Chromosome:
         self.number_of_replicated_bases = 0
         self.number_of_origins = 0
         self.replication_forks = dict()
+        self.conflict_bases = list()
         self.transcription_forks = list()
         self.transcription_regions = transcription_regions
 
@@ -43,8 +44,21 @@ class Chromosome:
             chromosome_string += "{} ".format(transcriptions[i])
         chromosome_string += "\n"
 
-        print(self.replication_forks)
-        return chromosome_string
+        return ""
+
+    def conflict_status(self):
+        output_string = ""
+        for i in self.conflict_bases:
+            output_string += "{}\n".format(i)
+
+        return output_string
+
+    def replication_status(self):
+        output_string = ""
+        for i in range(0, len(self), 500):
+            output_string += "{}\n".format(self.strand[i])
+
+        return output_string
 
     def attach_transcriptions(self, interval):
         for transcription_region in self.transcription_regions:
@@ -78,10 +92,13 @@ class Chromosome:
 
                 if transcription.is_spawn_duplicated != self.is_base_replicated(base=i):
                     self.transcription_forks.pop(index)
-
-                    replication = self.replication_forks.pop(i, None)
-                    if replication is not None:
-                        freed_forks += 1
+                    if self.is_base_replicated(base=i):
+                        for j in range(i, i - (self.replication_speed * interval + 2) * transcription.direction,
+                                       - transcription.direction):
+                            if self.replication_forks.get(j) is not None:
+                                self.replication_forks.pop(j)
+                                self.conflict_bases.append(j)
+                                freed_forks += 1
 
                     break
 
@@ -100,22 +117,11 @@ class Chromosome:
             for i in range(base,
                            base + fork.speed * fork.direction * interval,
                            fork.direction):
-                if i < 0:
-                    final_base = 0
-                    conflict = True
-                    break
-
-                if i > len(self) - 1:
-                    final_base = len(self) - 1
-                    conflict = True
-                    break
-
-                if self.is_base_replicated(i):
-                    final_base = i
-                    conflict = True
-                    break
-
                 final_base = i
+
+                if i < 0 or i > len(self) - 1 or self.is_base_replicated(i):
+                    conflict = True
+                    break
 
             self.replicate(start=base, end=final_base, time=time)
             if conflict:
@@ -152,9 +158,9 @@ class Chromosome:
 
     def replicate(self, start, end, time):
         direction = int(math.copysign(1, end - start))
-        for i in range(start, end + direction, direction):
+        for i in range(start, end, direction):
             if not self.strand[i]:
-                self.strand[i] = time * direction
+                self.strand[i] = time
                 self.number_of_replicated_bases += 1
 
     def is_replicated(self):

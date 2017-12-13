@@ -13,19 +13,20 @@ for folder_name in next(os.walk(output_path))[1]:
         simulation_folder_path = output_path + folder_name + '/'
         N = None
         speed = None
+        period = None
         for file_name in next(os.walk(simulation_folder_path))[2]:
             file_path = simulation_folder_path + file_name
             if file_name.startswith('cell'):
                 with open(file_path) as output_file:
                     line = output_file.readline()
-                    N, speed, time, inter_dist = line.split('\t')[0:4]
-                    data = aggregated_data.get((int(N), int(speed)), [0, 0, 0, 0, 0])
+                    N, speed, period, time, inter_dist = line.split('\t')[0:5]
+                    data = aggregated_data.get((int(N), int(speed), int(period)), [0, 0, 0, 0, 0])
                     data[0] += float(time)
                     data[1] += float(inter_dist)
                     data[2] += float(time) ** 2
                     data[3] += float(inter_dist) ** 2
                     data[4] += 1
-                    aggregated_data[(int(N), int(speed))] = data
+                    aggregated_data[(int(N), int(speed), int(period))] = data
 
         for file_name in next(os.walk(simulation_folder_path))[2]:
             file_path = simulation_folder_path + file_name
@@ -37,7 +38,7 @@ for folder_name in next(os.walk(output_path))[1]:
                         l.append(int(line))
                         l_squared.append(int(line)**2)
                     p = re.compile('(.*)\.txt')
-                    key = p.match(file_name).group(0) + "_" + str(N) + "_" + str(speed) + ".txt"
+                    key = p.match(file_name).group(0) + "_" + str(N) + "_" + str(speed) + "_" + str(period) + ".txt"
                     if not chromosome_dict.get(key):
                         chromosome_dict[key] = [l, l_squared, 1]
 

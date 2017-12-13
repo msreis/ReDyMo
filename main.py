@@ -9,20 +9,24 @@ from source.genome import Genome
 from source.transcription_region import TranscriptionRegion
 
 
-def output(sim_number, resources, speed, time, iod, genome):
+def output(sim_number, resources, speed, period, time, iod, genome):
     os.makedirs('output/', exist_ok=True)
     os.makedirs('output/simulation_{}/'.format(sim_number))
 
     with open("output/simulation_{}/cell.txt".format(sim_number), 'w')\
             as output_file:
-        output_file.write("{}\t{}\t{}\t{}\t\n".format(resources,
-                                                      speed,
-                                                      time,
-                                                      iod))
+        output_file.write("{}\t{}\t{}\t{}\t{}\t\n".format(resources,
+                                                          speed,
+                                                          period,
+                                                          time,
+                                                          iod))
 
     for chromosome in genome:
         with open("output/simulation_{}/{}.txt".format(sim_number, chromosome.code), 'w') as output_file:
-            output_file.write(str(chromosome))
+            output_file.write(str(chromosome.replication_status()))
+
+        with open("output/simulation_{}/{}_conflicts.txt".format(sim_number, chromosome.code), 'w') as output_file:
+            output_file.write(str(chromosome.conflict_status()))
 
 
 def main(args):
@@ -43,13 +47,10 @@ def main(args):
         genome = Genome(chromosomes=chromosomes, resources=args['number_of_resources'])
         time = 0
         interval = 1
-        time_limit = 10
+        time_limit = float('inf')
 
         while not genome.is_replicated() and not time > time_limit:
             time += interval
-
-            for chromosome in genome:
-                print(chromosome)
 
             genome.advance_replication_forks(interval=interval, time=time)
 
@@ -62,6 +63,7 @@ def main(args):
         output(sim_number=args['simulation_number'],
                resources=args['number_of_resources'],
                speed=args['replication_speed'],
+               period=args['transcription_period'],
                time=time,
                iod=genome.average_interorigin_distance(),
                genome=genome)
