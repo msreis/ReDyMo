@@ -26,6 +26,13 @@ class Genome:
     def is_replicated(self):
         return all([chromosome.is_replicated() for chromosome in self.chromosomes])
 
+    def replication_percentage(self):
+        total_replicated_bases = 0
+        for chromosome in self:
+            total_replicated_bases += chromosome.number_of_replicated_bases
+
+        return float(total_replicated_bases/len(self))
+
     def average_interorigin_distance(self):
         number_of_interorigin_distances = 0
         for chromosome in self.chromosomes:

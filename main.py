@@ -9,7 +9,7 @@ from source.genome import Genome
 from source.transcription_region import TranscriptionRegion
 
 
-def output(sim_number, resources, speed, period, time, iod, genome):
+def output(sim_number, resources, speed, period, time, iod, percentage, genome):
     os.makedirs('output/', exist_ok=True)
     os.makedirs('output/simulation_{}/'.format(sim_number))
 
@@ -19,7 +19,8 @@ def output(sim_number, resources, speed, period, time, iod, genome):
                                                           speed,
                                                           period,
                                                           time,
-                                                          iod))
+                                                          iod,
+                                                          percentage))
 
     for chromosome in genome:
         with open("output/simulation_{}/{}.txt".format(sim_number, chromosome.code), 'w') as output_file:
@@ -47,7 +48,7 @@ def main(args):
         genome = Genome(chromosomes=chromosomes, resources=args['number_of_resources'])
         time = 0
         interval = 1
-        time_limit = float('inf')
+        time_limit = 16600
 
         while not genome.is_replicated() and not time > time_limit:
             time += interval
@@ -66,6 +67,7 @@ def main(args):
                period=args['transcription_period'],
                time=time,
                iod=genome.average_interorigin_distance(),
+               percentage=genome.replication_percentage(),
                genome=genome)
 
 
