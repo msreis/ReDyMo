@@ -6,9 +6,8 @@ import re
 output_path = sys.argv[1]
 chromosome_dict = dict()
 aggregated_data = dict()
-i = 0
+number_of_folders = 0
 for folder_name in next(os.walk(output_path))[1]:
-    i += 1
     if folder_name.startswith('simulation_'):
         simulation_folder_path = output_path + folder_name + '/'
         N = None
@@ -50,7 +49,8 @@ for folder_name in next(os.walk(output_path))[1]:
                         for i, value in enumerate(l_squared):
                             chromosome_dict[key][1][i] += value
 
-    if i > 1000:
+    number_of_folders += 1
+    if number_of_folders > 1000:
         break
 
 for key, value in chromosome_dict.items():

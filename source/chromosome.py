@@ -139,20 +139,6 @@ class Chromosome:
 
         return freed_forks
 
-    def unattach_transcription(self, base):
-        removed_transcription = None
-        for i, transcription in enumerate(self.transcription_forks):
-            if transcription.base == base:
-                removed_transcription = self.transcription_forks.pop(i)
-                break
-
-        for i, replication in enumerate(self.replication_forks):
-            if replication.base == base:
-                if replication.direction != removed_transcription.direction:
-                    del self.replication_forks[i]
-
-                break
-
     def is_base_replicated(self, base):
         return bool(self.strand[base])
 

@@ -48,7 +48,7 @@ def main(args):
         genome = Genome(chromosomes=chromosomes, resources=args['number_of_resources'])
         time = 0
         interval = 1
-        time_limit = 16600
+        time_limit = int(1.25 * 8300)
 
         while not genome.is_replicated() and not time > time_limit:
             time += interval
@@ -76,7 +76,7 @@ if __name__ == '__main__':
     organism = sys.argv[sys.argv.index('--organism') + 1]
 
     data_manager = DataManager(database_path='data/simulation.sqlite',
-                               mfa_seq_folder_path='data/MFA-Seq_dummy/')
+                               mfa_seq_folder_path='data/MFA-Seq_TBrucei_TREU927/')
     chromosome_data = data_manager.chromosomes(organism=organism)
     number_of_resources_range = (int(sys.argv[sys.argv.index('--resources') + 1]),
                                  int(sys.argv[sys.argv.index('--resources') + 2]),
