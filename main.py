@@ -15,12 +15,12 @@ def output(sim_number, resources, speed, period, time, iod, percentage, genome):
 
     with open("output/simulation_{}/cell.txt".format(sim_number), 'w')\
             as output_file:
-        output_file.write("{}\t{}\t{}\t{}\t{}\t\n".format(resources,
-                                                          speed,
-                                                          period,
-                                                          time,
-                                                          iod,
-                                                          percentage))
+        output_file.write("{}\t{}\t{}\t{}\t{}\t{}\t\n".format(resources,
+                                                              speed,
+                                                              period,
+                                                              time,
+                                                              iod,
+                                                              percentage))
 
     for chromosome in genome:
         with open("output/simulation_{}/{}.txt".format(sim_number, chromosome.code), 'w') as output_file:
