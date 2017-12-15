@@ -9,18 +9,17 @@ from source.genome import Genome
 from source.transcription_region import TranscriptionRegion
 
 
-def output(sim_number, resources, speed, period, time, iod, percentage, genome):
+def output(sim_number, resources, speed, period, time, iod, percentage_log, genome):
     os.makedirs('output/', exist_ok=True)
     os.makedirs('output/simulation_{}/'.format(sim_number))
 
     with open("output/simulation_{}/cell.txt".format(sim_number), 'w')\
             as output_file:
-        output_file.write("{}\t{}\t{}\t{}\t{}\t{}\t\n".format(resources,
-                                                              speed,
-                                                              period,
-                                                              time,
-                                                              iod,
-                                                              percentage))
+        output_file.write("{}\t{}\t{}\t{}\t{}\t\n".format(resources,
+                                                          speed,
+                                                          period,
+                                                          time,
+                                                          iod))
 
     for chromosome in genome:
         with open("output/simulation_{}/{}.txt".format(sim_number, chromosome.code), 'w') as output_file:
@@ -28,6 +27,10 @@ def output(sim_number, resources, speed, period, time, iod, percentage, genome):
 
         with open("output/simulation_{}/{}_conflicts.txt".format(sim_number, chromosome.code), 'w') as output_file:
             output_file.write(str(chromosome.conflict_status()))
+
+        with open("output/simulation_{}/{}_percentage.txt".format(sim_number, chromosome.code), 'w') as output_file:
+            for log in percentage_log:
+                output_file.write("{}\t{}\t{}\t\n".format(*log))
 
 
 def main(args):
@@ -49,8 +52,11 @@ def main(args):
         time = 0
         interval = 1
         time_limit = int(1.25 * 8300)
+        percentage_log = list()
 
-        while not genome.is_replicated(threshold=.95) and not time > time_limit:
+        while not time > time_limit:
+            percentage_log.append((time, genome.replication_percentage(), genome.average_interorigin_distance()))
+
             time += interval
 
             genome.advance_replication_forks(interval=interval, time=time)
@@ -67,7 +73,7 @@ def main(args):
                period=args['transcription_period'],
                time=time,
                iod=genome.average_interorigin_distance(),
-               percentage=genome.replication_percentage(),
+               percentage_log=percentage_log,
                genome=genome)
 
 
