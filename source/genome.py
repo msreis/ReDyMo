@@ -23,8 +23,8 @@ class Genome:
         random_base = self.rng.randint(0, len(random_chromosome) - 1)
         return random_base, random_chromosome
 
-    def is_replicated(self):
-        return all([chromosome.is_replicated() for chromosome in self.chromosomes])
+    def is_replicated(self, threshold):
+        return self.replication_percentage() >= threshold
 
     def replication_percentage(self):
         total_replicated_bases = 0

@@ -50,7 +50,7 @@ def main(args):
         interval = 1
         time_limit = int(1.25 * 8300)
 
-        while not genome.is_replicated() and not time > time_limit:
+        while not genome.is_replicated(threshold=.95) and not time > time_limit:
             time += interval
 
             genome.advance_replication_forks(interval=interval, time=time)
