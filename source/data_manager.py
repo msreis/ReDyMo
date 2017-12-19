@@ -3,7 +3,7 @@ from math import ceil
 
 
 class DataManager:
-    def __init__(self, database_path, mfa_seq_folder_path):  # TODO: Include MFA-Seq data in database
+    def __init__(self, database_path, mfa_seq_folder_path):
         self.database_path = database_path
         self.mfa_seq_folder_path = mfa_seq_folder_path
 

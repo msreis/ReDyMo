@@ -8,8 +8,11 @@ class Chromosome:
         self.code = code
         self.length = length
         self.replication_speed = replication_speed
+        self.genome = None
 
         self.strand = [0] * self.length
+        self.AT_content = [1.0] * self.length
+        self.AT_threshold = .90
         self.activation_probabilities = probability_landscape
         self.number_of_replicated_bases = 0
         self.number_of_origins = 0
@@ -69,23 +72,25 @@ class Chromosome:
             self.transcription_forks.append(fork)
             fork.is_spawn_duplicated = self.is_base_replicated(base=fork.base)
 
-    def attach_replication(self, base):
-        if base + 1 >= self.length or self.strand[base] or self.strand[base + 1]\
-                or random.random() >= self.activation_probabilities[base]:
-            return 0  # Nothing was attached
+    def attach_replication(self, base, force=False):
+        if self.genome.resources < 2 or base + 1 >= self.length or self.strand[base] or self.strand[base + 1]\
+                or (random.random() >= self.activation_probabilities[base] and not force):
+            return
 
         self.number_of_origins += 1
         self.replication_forks[base] = ReplicationFork(base=base, direction=-1, speed=self.replication_speed)
         self.replication_forks[base + 1] = ReplicationFork(base=base, direction=+1, speed=self.replication_speed)
-        return -2
+        self.genome.resources -= 2
 
     def advance_transcriptions(self, interval):
         freed_forks = 0
         for index, transcription in enumerate(self.transcription_forks):
             final_base = None
+            conflict_base = None
             for i in range(transcription.base,
                            transcription.base + transcription.speed * transcription.direction * interval,
                            transcription.direction):
+
                 if transcription.is_outside_boundaries(base=i):
                     self.transcription_forks.pop(index)
                     break
@@ -96,17 +101,35 @@ class Chromosome:
                         for j in range(i, i - (self.replication_speed * interval + 2) * transcription.direction,
                                        - transcription.direction):
                             if self.replication_forks.get(j) is not None:
+                                conflict_base = j
                                 self.replication_forks.pop(j)
                                 self.conflict_bases.append(j)
                                 freed_forks += 1
+                                break
 
                     break
 
                 final_base = i
 
             transcription.base = final_base
+            b = self.closest_at_rich_base(base=conflict_base, direction=-transcription.direction)
+            print(b)
+            self.attach_replication(base=b, force=True)
 
         return freed_forks
+
+    def is_base_at_rich(self, base):
+        return self.AT_content[base] >= self.AT_threshold
+
+    def closest_at_rich_base(self, base, direction):
+        i = base
+        while 0 <= i < len(self) and not self.is_base_replicated(base=i):
+            if self.is_base_at_rich(base=i):
+                return i
+
+            i += direction
+
+        return i - direction
 
     def advance_replications(self, interval, time):
         freed_forks = 0
