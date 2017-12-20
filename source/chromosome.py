@@ -114,9 +114,9 @@ class Chromosome:
                 final_base = i
 
             transcription.base = final_base
-            b = self.closest_at_rich_base(base=conflict_base, direction=-transcription.direction)
-            print(b)
-            self.attach_replication(base=b, force=True)
+            if conflict_base is not None:
+                b = self.closest_at_rich_base(base=conflict_base, direction=-transcription.direction)
+                self.attach_replication(base=b, force=True)
 
         return freed_forks
 
