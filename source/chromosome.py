@@ -1,17 +1,19 @@
 import math
 import random
+
 from source.replication_fork import ReplicationFork
 
 
 class Chromosome:
-    def __init__(self, code, length, probability_landscape, replication_speed, transcription_regions, at_threshold):
+    def __init__(self, code, length, probability_landscape, replication_speed,
+                 at_content, transcription_regions, at_threshold):
         self.code = code
         self.length = length
         self.replication_speed = replication_speed
         self.genome = None
 
         self.strand = [0] * self.length
-        self.AT_content = [1.0] * self.length
+        self.AT_content = at_content
         self.AT_threshold = at_threshold
         self.activation_probabilities = probability_landscape
         self.number_of_replicated_bases = 0

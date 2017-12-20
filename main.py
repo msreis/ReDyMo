@@ -46,6 +46,7 @@ def main(args):
                                           length=data['length'],
                                           at_threshold=data['at_threshold'],
                                           probability_landscape=data['probability_landscape'],
+                                          at_content=data['at_content'],
                                           replication_speed=args['replication_speed'],
                                           transcription_regions=transcription_regions))
 
@@ -83,11 +84,15 @@ if __name__ == '__main__':
     organism = sys.argv[sys.argv.index('--organism') + 1]
 
     data_manager = DataManager(database_path='data/simulation.sqlite',
-                               mfa_seq_folder_path='data/MFA-Seq_TBrucei_TREU927/')
+                               mfa_seq_folder_path='data/MFA-Seq_TBrucei_TREU927/',
+                               gc_content_folder_path='data/GC_content_TBrucei_TREU927/')
+
     chromosome_data = data_manager.chromosomes(organism=organism)
+
     number_of_resources_range = (int(sys.argv[sys.argv.index('--resources') + 1]),
                                  int(sys.argv[sys.argv.index('--resources') + 2]),
                                  int(sys.argv[sys.argv.index('--resources') + 3]))
+
     replication_fork_speed_range = (int(sys.argv[sys.argv.index('--speed') + 1]),
                                     int(sys.argv[sys.argv.index('--speed') + 2]),
                                     int(sys.argv[sys.argv.index('--speed') + 3]))
