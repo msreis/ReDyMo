@@ -74,6 +74,7 @@ class DataManager:
 
             chromosomes.append({'code': t[0],
                                 'length': t[1],
+                                'at_threshold': t[2],
                                 'probability_landscape': self.probability_landscape(code=t[0], length=t[1]),
                                 'transcription_regions': [{'start': d[0], 'end': d[1]} for d in transcription_tuples]})
 

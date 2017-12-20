@@ -4,7 +4,7 @@ from source.replication_fork import ReplicationFork
 
 
 class Chromosome:
-    def __init__(self, code, length, probability_landscape, replication_speed, transcription_regions):
+    def __init__(self, code, length, probability_landscape, replication_speed, transcription_regions, at_threshold):
         self.code = code
         self.length = length
         self.replication_speed = replication_speed
@@ -12,7 +12,7 @@ class Chromosome:
 
         self.strand = [0] * self.length
         self.AT_content = [1.0] * self.length
-        self.AT_threshold = .90
+        self.AT_threshold = at_threshold
         self.activation_probabilities = probability_landscape
         self.number_of_replicated_bases = 0
         self.number_of_origins = 0
@@ -124,7 +124,7 @@ class Chromosome:
     def closest_at_rich_base(self, base, direction):
         i = base
         while 0 <= i < len(self) and not self.is_base_replicated(base=i):
-            if self.is_base_at_rich(base=i):
+            if self.is_base_at_rich(base=i) and base != i:
                 return i
 
             i += direction

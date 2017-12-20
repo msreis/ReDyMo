@@ -44,6 +44,7 @@ def main(args):
                                                                  speed=int(2*args['replication_speed']/3)))
             chromosomes.append(Chromosome(code=data['code'],
                                           length=data['length'],
+                                          at_threshold=data['at_threshold'],
                                           probability_landscape=data['probability_landscape'],
                                           replication_speed=args['replication_speed'],
                                           transcription_regions=transcription_regions))
