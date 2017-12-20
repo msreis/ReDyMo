@@ -3,9 +3,10 @@ from math import ceil
 
 
 class DataManager:
-    def __init__(self, database_path, mfa_seq_folder_path):
+    def __init__(self, database_path, mfa_seq_folder_path, gc_content_folder_path):
         self.database_path = database_path
         self.mfa_seq_folder_path = mfa_seq_folder_path
+        self.gc_content_folder_path = gc_content_folder_path
 
     def select_chromosomes_from_database(self, **kwargs):
         db = sqlite3.connect(self.database_path)
@@ -48,6 +49,22 @@ class DataManager:
                     probability_landscape[j] = probability
                     if j == length - 1:
                         return probability_landscape
+
+    def at_content(self, code, length):
+        at_content_intervals = []
+        with open(self.gc_content_folder_path + code + ".txt") as gc_content_file:
+            for content in gc_content_file:
+                if content != "\n":
+                    at_content_intervals.append(1 - float(content))
+
+        at_content = []
+        step = int(ceil(length/len(at_content_intervals)))
+        for i, content in enumerate(at_content_intervals):
+            for j in range(i * step, (i + 1) * step):
+                at_content.append(content)
+
+                if j == length - 1:
+                    return at_content
 
     def chromosomes(self, organism):
         chromosomes = []
