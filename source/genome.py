@@ -6,6 +6,8 @@ class Genome:
 
     def __init__(self, chromosomes, resources):
         self.chromosomes = chromosomes
+        for chromosome in self.chromosomes:
+            chromosome.genome = self
         self.resources = resources
 
     def __len__(self):
@@ -55,7 +57,7 @@ class Genome:
         for attempt in range(self.resources):
             if self.resources >= 2:
                 random_base, random_chromosome = self.random_genomic_location()
-                self.resources += random_chromosome.attach_replication(base=random_base)
+                random_chromosome.attach_replication(base=random_base)
 
     def advance_transcription_forks(self, interval):
         for chromosome in self:

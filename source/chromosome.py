@@ -1,5 +1,6 @@
 import math
 import random
+
 from source.replication_fork import ReplicationFork
 
 
@@ -8,6 +9,7 @@ class Chromosome:
         self.code = code
         self.length = length
         self.replication_speed = replication_speed
+        self.genome = None
 
         self.strand = [0] * self.length
         self.activation_probabilities = probability_landscape
@@ -69,15 +71,15 @@ class Chromosome:
             self.transcription_forks.append(fork)
             fork.is_spawn_duplicated = self.is_base_replicated(base=fork.base)
 
-    def attach_replication(self, base):
-        if base + 1 >= self.length or self.strand[base] or self.strand[base + 1]\
-                or random.random() >= self.activation_probabilities[base]:
-            return 0  # Nothing was attached
+    def attach_replication(self, base, force=False):
+        if self.genome.resources < 2 or base + 1 >= self.length or self.strand[base] or self.strand[base + 1]\
+                or (random.random() >= self.activation_probabilities[base] and not force):
+            return
 
         self.number_of_origins += 1
         self.replication_forks[base] = ReplicationFork(base=base, direction=-1, speed=self.replication_speed)
         self.replication_forks[base + 1] = ReplicationFork(base=base, direction=+1, speed=self.replication_speed)
-        return -2
+        self.genome.resources -= 2
 
     def advance_transcriptions(self, interval):
         freed_forks = 0
@@ -99,6 +101,7 @@ class Chromosome:
                                 self.replication_forks.pop(j)
                                 self.conflict_bases.append(j)
                                 freed_forks += 1
+                                break
 
                     break
 

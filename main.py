@@ -21,16 +21,16 @@ def output(sim_number, resources, speed, period, time, iod, percentage_log, geno
                                                           time,
                                                           iod))
 
+    with open("output/simulation_{}/replication_percentage.txt".format(sim_number), 'w') as output_file:
+        for log in percentage_log:
+            output_file.write("{}\t{}\t{}\t\n".format(*log))
+
     for chromosome in genome:
         with open("output/simulation_{}/{}.txt".format(sim_number, chromosome.code), 'w') as output_file:
             output_file.write(str(chromosome.replication_status()))
 
         with open("output/simulation_{}/{}_conflicts.txt".format(sim_number, chromosome.code), 'w') as output_file:
             output_file.write(str(chromosome.conflict_status()))
-
-        with open("output/simulation_{}/{}_percentage.txt".format(sim_number, chromosome.code), 'w') as output_file:
-            for log in percentage_log:
-                output_file.write("{}\t{}\t{}\t\n".format(*log))
 
 
 def main(args):
