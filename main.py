@@ -54,7 +54,7 @@ def main(args):
         time_limit = int(1.25 * 8300)
         percentage_log = list()
 
-        while not time > time_limit:
+        while not time > time_limit and genome.replication_percentage() < 1:
             percentage_log.append((time, genome.replication_percentage(), genome.average_interorigin_distance()))
 
             time += interval
