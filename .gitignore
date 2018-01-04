@@ -1,5 +1,2 @@
 .idea/
 __pycache__/
-old/
-.gitignore
-cell_*
