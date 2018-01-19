@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 """ This file is part of ReDyMo.
 
     ReDyMo is free software: you can redistribute it and/or modify it
@@ -17,6 +19,8 @@ import os
 import sys
 import re
 
+""" Script for aggregating simulation output.
+    Usage: ./chromosome_output_aggregator.py <path_to_output_folder> """
 
 output_path = sys.argv[1]
 chromosome_dict = dict()

@@ -43,6 +43,8 @@ class Chromosome:
         return self.length
 
     def __str__(self):
+        """ Print method for better visualization. """
+
         replications = []
         bases = []
         transcriptions = []

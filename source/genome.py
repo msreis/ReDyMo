@@ -29,6 +29,8 @@ class Genome:
         self.resources = resources
 
     def __len__(self):
+        """ Length of the genome, which is equal to the summed length of all chromosomes. """
+
         length = 0
         for chromosome in self.chromosomes:
             length += len(chromosome)
@@ -39,6 +41,8 @@ class Genome:
         return iter(self.chromosomes)
 
     def random_genomic_location(self):
+        """ Selects a random base in a random chromosome. """
+
         random_chromosome = self.chromosomes[self.rng.randint(0, len(self.chromosomes) - 1)]
         random_base = self.rng.randint(0, len(random_chromosome) - 1)
         return random_base, random_chromosome
@@ -60,27 +64,28 @@ class Genome:
 
         return float(len(self)/number_of_interorigin_distances)
 
-    def number_of_replicated_bases_in_this_step(self):
-        number_of_replicated_bases_in_this_step = 0
-        for chromosome in self.chromosomes:
-            number_of_replicated_bases_in_this_step += chromosome.number_of_recently_replicated_bases
-
-        return number_of_replicated_bases_in_this_step
-
     def attach_transcription_forks(self, interval):
+        """ Wrapper for transcription machinery attachment. """
+
         for chromosome in self:
             chromosome.attach_transcriptions(interval=interval)
 
     def attach_replication_forks(self):
+        """ Wrapper for replication machinery attachment. Note that one attempt is made for each free fork. """
+
         for attempt in range(self.resources):
             if self.resources >= 2:
                 random_base, random_chromosome = self.random_genomic_location()
                 random_chromosome.attach_replication(base=random_base)
 
     def advance_transcription_forks(self, interval):
+        """ Wrapper for transcription movement. """
+
         for chromosome in self:
             self.resources += chromosome.advance_transcriptions(interval=interval)
 
     def advance_replication_forks(self, interval, time):
+        """ Wrapper for replication movement. """
+
         for chromosome in self:
             self.resources += chromosome.advance_replications(interval=interval, time=time)

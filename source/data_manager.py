@@ -26,6 +26,8 @@ class DataManager:
         self.mfa_seq_folder_path = mfa_seq_folder_path
 
     def select_chromosomes_from_database(self, **kwargs):
+        """ Database selection wrapper. """
+
         db = sqlite3.connect(self.database_path)
         cursor = db.cursor()
         for key, value in kwargs.items():
@@ -37,6 +39,8 @@ class DataManager:
         return chromosome_tuples
 
     def select_transcription_regions_from_database(self, **kwargs):
+        """ Database selection wrapper. """
+
         db = sqlite3.connect(self.database_path)
         cursor = db.cursor()
         for key, value in kwargs.items():
@@ -48,6 +52,8 @@ class DataManager:
         return transcription_tuples
 
     def probability_landscape(self, code, length):
+        """ Generates the probability landscape for origin trigger from MFA-Seq data. """
+
         scores = []
         with open(self.mfa_seq_folder_path + code + '.txt') as mfa_seq_file:
             for line in mfa_seq_file:

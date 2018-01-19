@@ -16,6 +16,8 @@
 import sys
 from math import sin, pi
 
+""" Generates a stream of numbers following a senoid, used to test the model. Deprecated. """
+
 n = float(sys.argv[2])/(2 * 64 * 8312)
 k = (2 * pi * n)/1000
 with open(sys.argv[1], 'w') as output_file:
