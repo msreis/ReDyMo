@@ -1,1 +1,0 @@
-./main.py --organism 'Trypanosoma brucei brucei TREU927' --resources <start> <end> <step> --speed <start> <end> <step> --period <start> <end> <step> --cells <number_of_cells>
