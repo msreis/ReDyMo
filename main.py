@@ -15,10 +15,6 @@
     You should have received a copy of the GNU General Public License along
     with ReDyMo. If not, see <http://www.gnu.org/licenses/>. """
 
-""" Skeleton of the simulation process,
-    reads the input parameters from standard input,
-    starts the parallel simulations and write the results. """
-
 import os
 import sys
 from multiprocessing import Pool
@@ -27,6 +23,10 @@ from source.chromosome import Chromosome
 from source.data_manager import DataManager
 from source.genome import Genome
 from source.transcription_region import TranscriptionRegion
+
+""" Skeleton of the simulation process,
+    reads the input parameters from standard input,
+    starts the parallel simulations and write the results. """
 
 
 def parse_parameters(command_line_args):

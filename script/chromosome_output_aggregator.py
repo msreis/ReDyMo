@@ -1,3 +1,18 @@
+""" This file is part of ReDyMo.
+
+    ReDyMo is free software: you can redistribute it and/or modify it
+    under the terms of the GNU General Public License as published by the
+    Free Software Foundation, either version 3 of the License, or (at your
+    option) any later version.
+
+    ReDyMo is distributed in the hope that it will be useful, but WITHOUT
+    ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+    FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
+    for more details.
+
+    You should have received a copy of the GNU General Public License along
+    with ReDyMo. If not, see <http://www.gnu.org/licenses/>. """
+
 import os
 import sys
 import re
@@ -18,7 +33,7 @@ for folder_name in next(os.walk(output_path))[1]:
             if file_name.startswith('cell'):
                 with open(file_path) as output_file:
                     line = output_file.readline()
-                    N, speed, period, time_1, inter_dist_1, = line.split('\t')[0:-1]
+                    N, speed, period, time_1, inter_dist_1 = line.split('\t')[0:-1]
                     data = aggregated_data.get((int(N), int(speed), int(period)), [0, 0, 0, 0, 0])
                     data[0] += 1
                     data[1] += float(time_1)

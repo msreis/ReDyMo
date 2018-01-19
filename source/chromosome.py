@@ -13,6 +13,7 @@
     You should have received a copy of the GNU General Public License along
     with ReDyMo. If not, see <http://www.gnu.org/licenses/>. """
 
+
 import math
 import random
 
@@ -20,6 +21,9 @@ from source.replication_fork import ReplicationFork
 
 
 class Chromosome:
+    """ Class managing all processes that happen on a chromosome,
+        including the attachment and advancement of machineries. """
+
     def __init__(self, code, length, probability_landscape, replication_speed, transcription_regions):
         self.code = code
         self.length = length
@@ -64,6 +68,8 @@ class Chromosome:
         return ""
 
     def conflict_status(self):
+        """ Print method for output. """
+
         output_string = ""
         for i in self.conflict_bases:
             output_string += "{}\n".format(i)
@@ -71,6 +77,8 @@ class Chromosome:
         return output_string
 
     def replication_status(self):
+        """ Print method for output. """
+
         output_string = ""
         for i in range(0, len(self), 500):
             output_string += "{}\n".format(self.strand[i])
@@ -78,6 +86,8 @@ class Chromosome:
         return output_string
 
     def attach_transcriptions(self, interval):
+        """ Attach transcription machineries to the chromosome, respecting the transcription frequency. """
+
         for transcription_region in self.transcription_regions:
             fork = transcription_region.spawn_fork(interval=interval)
             if fork is None:
@@ -87,6 +97,9 @@ class Chromosome:
             fork.is_spawn_duplicated = self.is_base_replicated(base=fork.base)
 
     def attach_replication(self, base, force=False):
+        """ Attach replication machineries to the chromosome, respecting the number of resources, the duplication
+        state of the base and the space to fit the machineries. """
+
         if self.genome.resources < 2 or base + 1 >= self.length or self.strand[base] or self.strand[base + 1]\
                 or (random.random() >= self.activation_probabilities[base] and not force):
             return
@@ -97,6 +110,8 @@ class Chromosome:
         self.genome.resources -= 2
 
     def advance_transcriptions(self, interval):
+        """ Advance the transcription machineries AND deal with collisions with replication machineries. """
+
         freed_forks = 0
         for index, transcription in enumerate(self.transcription_forks):
             final_base = None
@@ -127,6 +142,8 @@ class Chromosome:
         return freed_forks
 
     def advance_replications(self, interval, time):
+        """ Advance replication machineries until they reach a replicated region or an end of the chromosome. """
+
         freed_forks = 0
         for base, fork in self.replication_forks.items():
             final_base = None
@@ -158,9 +175,13 @@ class Chromosome:
         return freed_forks
 
     def is_base_replicated(self, base):
+        """ Tests whether this base was replicated. """
+
         return bool(self.strand[base])
 
     def replicate(self, start, end, time):
+        """ Modify the DNA strand's bases between start and end from non-replicated to replicated. """
+
         direction = int(math.copysign(1, end - start))
         for i in range(start, end, direction):
             if not self.strand[i]:
@@ -168,4 +189,6 @@ class Chromosome:
                 self.number_of_replicated_bases += 1
 
     def is_replicated(self):
+        """ Tests whether this chromosome is fully replicated. """
+
         return self.number_of_replicated_bases == len(self)

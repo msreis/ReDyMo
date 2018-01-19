@@ -13,7 +13,10 @@
     You should have received a copy of the GNU General Public License along
     with ReDyMo. If not, see <http://www.gnu.org/licenses/>. """
 
+
 class ReplicationFork:
+    """ Class modeling each replication machinery. """
+
     def __init__(self, speed, direction, base):
         self.speed = speed
         self.base = base

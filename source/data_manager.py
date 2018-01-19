@@ -18,6 +18,9 @@ from math import ceil
 
 
 class DataManager:
+    """ Class responsible for reading external data and
+    parsing it for future object creation during the simulations. """
+
     def __init__(self, database_path, mfa_seq_folder_path):
         self.database_path = database_path
         self.mfa_seq_folder_path = mfa_seq_folder_path
@@ -65,6 +68,8 @@ class DataManager:
                         return probability_landscape
 
     def chromosomes(self, organism):
+        """ Final list of chromosome data that will be used by the simulation. """
+
         chromosomes = []
         chromosome_tuples = self.select_chromosomes_from_database(organism=organism)
         for t in chromosome_tuples:

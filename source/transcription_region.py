@@ -17,6 +17,8 @@ from source.transcription_fork import TranscriptionFork
 
 
 class TranscriptionRegion:
+    """ Responsible for storing the transcription boundaries and guaranteeing the transcription frequency (period). """
+
     def __init__(self, start, end, period, speed):
         self.start = start - 1
         self.end = end - 1

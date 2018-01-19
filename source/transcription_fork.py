@@ -13,7 +13,10 @@
     You should have received a copy of the GNU General Public License along
     with ReDyMo. If not, see <http://www.gnu.org/licenses/>. """
 
+
 class TranscriptionFork:
+    """ Class managing each transcription machinery. """
+
     def __init__(self, speed, direction, end, base):
         self.end = end
         self.speed = speed
@@ -21,6 +24,7 @@ class TranscriptionFork:
 
         self.base = base
         self.is_spawn_duplicated = None
+        # is the base in which this fork was attached duplicated? important for checking future collisions
 
     def is_outside_boundaries(self, base):
         return not base * self.direction <= self.end * self.direction

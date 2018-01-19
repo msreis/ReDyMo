@@ -17,6 +17,9 @@ from random import Random
 
 
 class Genome:
+    """ Class wrapping the individual chromosomes,
+    responsible for calculating important data regarding the overall simulation. """
+
     rng = Random()
 
     def __init__(self, chromosomes, resources):
