@@ -35,5 +35,7 @@ class TranscriptionRegion:
                                      end=self.end,
                                      base=self.start))
         else:
-            self.timer += interval
+            if self.period < 0:
+                self.timer += interval
+
             return None

@@ -80,7 +80,7 @@ def simulate(args):
 
     genome = Genome(chromosomes=chromosomes, resources=args['number_of_resources'])
     time = 0
-    interval = 1
+    interval = .1
     time_limit = int(1.25 * 8300)
     percentage_log = list()
 
@@ -110,10 +110,11 @@ def simulate(args):
 
 
 def write_results(sim_number, resources, speed, period, time, iod, percentage_log, genome):
-    os.makedirs('output/', exist_ok=True)
-    os.makedirs('output/simulation_{}/'.format(sim_number))
+    output_folder_path = sys.argv[1]
+    os.makedirs(output_folder_path, exist_ok=True)
+    os.makedirs(output_folder_path + 'simulation_{}/'.format(sim_number))
 
-    with open("output/simulation_{}/cell.txt".format(sim_number), 'w')\
+    with open(output_folder_path + "simulation_{}/cell.txt".format(sim_number), 'w')\
             as output_file:
         output_file.write("{}\t{}\t{}\t{}\t{}\t\n".format(resources,
                                                           speed,
@@ -121,22 +122,22 @@ def write_results(sim_number, resources, speed, period, time, iod, percentage_lo
                                                           time,
                                                           iod))
 
-    with open("output/simulation_{}/replication_percentage.txt".format(sim_number), 'w') as output_file:
+    with open(output_folder_path + "simulation_{}/replication_percentage.txt".format(sim_number), 'w') as output_file:
         for log in percentage_log:
             output_file.write("{}\t{}\t{}\t\n".format(*log))
 
     for chromosome in genome:
-        with open("output/simulation_{}/{}.txt".format(sim_number, chromosome.code), 'w') as output_file:
+        with open(output_folder_path + "simulation_{}/{}.txt".format(sim_number, chromosome.code), 'w') as output_file:
             output_file.write(str(chromosome.replication_status()))
 
-        with open("output/simulation_{}/{}_conflicts.txt".format(sim_number, chromosome.code), 'w') as output_file:
+        with open(output_folder_path + "simulation_{}/{}_conflicts.txt".format(sim_number, chromosome.code), 'w') as output_file:
             output_file.write(str(chromosome.conflict_status()))
 
 
 def main(args):
     simulation_arguments = parse_parameters(command_line_args=args)
 
-    Pool(processes=40).map(simulate, simulation_arguments)
+    Pool(processes=20).map(simulate, simulation_arguments)
 
 
 if __name__ == '__main__':
