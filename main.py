@@ -1,4 +1,23 @@
 #!/usr/bin/env python3
+
+""" This file is part of ReDyMo.
+
+    Copyright (c) 2018  Gustavo Cayres and Marcelo Reis.
+
+    ReDyMo is free software: you can redistribute it and/or modify it
+    under the terms of the GNU General Public License as published by the
+    Free Software Foundation, either version 3 of the License, or (at your
+    option) any later version.
+    ReDyMo is distributed in the hope that it will be useful, but WITHOUT
+    ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+    FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
+    for more details.
+    You should have received a copy of the GNU General Public License along
+    with ReDyMo. If not, see <http://www.gnu.org/licenses/>.
+
+"""
+
+
 import os
 import sys
 from multiprocessing import Pool
@@ -29,20 +48,47 @@ def main(args):
         chromosomes = [Chromosome(**d) for d in args['chromosome_data']]
         genome = Genome(chromosomes=chromosomes)
         fork_manager = ForkManager(size=args['number_of_resources'], genome=genome, speed=args['replication_speed'])
+        period = args['transcription_period']
+
         time = 0
+       
+        number_of_collisions = 0
 
         while not genome.is_replicated():
+
             time += 1
 
+            # Advance replisomes.
+            #
             fork_manager.advance_attached_forks(time=time)
 
+            # Spawn new RNAPs.
+            # 
+            if period > 0 and time % period == 0:
+                 fork_manager.spawn_transcription_forks(genome=genome)
+
+            # Check for head-to-head collisions.
+            #
+            number_of_collisions += fork_manager.check_replication_transcription_conflicts()
+
+            # Advance RNAPs.
+            #
+            fork_manager.advance_transcription_forks()
+
+            # Check for head-to-head collisions.
+            # 
+            number_of_collisions += fork_manager.check_replication_transcription_conflicts()
+
             # One attempt for each unattached fork (this number can be changed)
+            #
             for attempt in range(fork_manager.number_of_free_forks):
                 genomic_location = genome.random_genomic_location()
                 if not genomic_location.is_replicated()\
                         and genomic_location.will_activate()\
                         and fork_manager.number_of_free_forks >= 2:
                     fork_manager.attach_forks(genomic_location=genomic_location, time=time)
+
+        print "Number of head-to-head collisions:" + number_of_collisions + "\n"
 
         output(simulation_number=args['simulation_number'],
                resources=args['number_of_resources'],
@@ -58,13 +104,17 @@ if __name__ == '__main__':
 
     data_manager = DataManager(database_path='data/simulation.sqlite',
                                mfa_seq_folder_path='data/MFA-Seq_TBrucei_TREU927/')
-    chromosome_data = data_manager.chromosomes(organism=organism)
     number_of_resources_range = (int(sys.argv[sys.argv.index('--resources') + 1]),
                                  int(sys.argv[sys.argv.index('--resources') + 2]),
                                  int(sys.argv[sys.argv.index('--resources') + 3]))
     replication_fork_speed_range = (int(sys.argv[sys.argv.index('--speed') + 1]),
                                     int(sys.argv[sys.argv.index('--speed') + 2]),
                                     int(sys.argv[sys.argv.index('--speed') + 3]))
+    transcription_period = (int(sys.argv[sys.argv.index('--period') + 1]))
+
+    # Load data from database.
+    #
+    chromosome_data = data_manager.chromosomes(organism=organism)
 
     args_list = []
     l = 0
@@ -74,7 +124,8 @@ if __name__ == '__main__':
                 args_list.append({'chromosome_data': chromosome_data,
                                   'number_of_resources': i,
                                   'replication_speed': j,
-                                  'simulation_number': l})
+                                  'simulation_number': l,
+                                  'transcription_period': transcription_period})
                 l += 1
 
     Pool(processes=40).map(main, args_list)

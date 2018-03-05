@@ -15,4 +15,21 @@
 
 """
 
-./main.py --organism 'Trypanosoma brucei brucei TREU927' --resources <start> <end> <step> --speed <start> <end> <step> --cells <number_of_cells> --period <transcription_period>
+class TranscriptionFork:
+    """ Class managing each transcription machinery. """
+
+    def __init__(self, start, end):
+        self.base = start
+        self.end = end
+        self.direction = int((end - start)/abs(end - start))  # Either -1 or +1.
+ 
+    def advance(self):
+        base = self.base + self.direction
+        if self.direction == 1 and base == (end + 1):
+           return False
+        if self.direction == -1 and base == (end - 1):
+           return False
+        return True
+
+    def position(self):
+        return base
