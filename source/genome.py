@@ -57,3 +57,5 @@ class Genome:
             number_of_replicated_bases_in_this_step += chromosome.number_of_recently_replicated_bases
 
         return number_of_replicated_bases_in_this_step
+
+

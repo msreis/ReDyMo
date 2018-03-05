@@ -18,18 +18,22 @@
 class TranscriptionFork:
     """ Class managing each transcription machinery. """
 
-    def __init__(self, start, end):
+    def __init__(self, start, end, chromosome):
         self.base = start
         self.end = end
         self.direction = int((end - start)/abs(end - start))  # Either -1 or +1.
- 
+        self.chromosome = chromosome 
+
     def advance(self):
-        base = self.base + self.direction
-        if self.direction == 1 and base == (end + 1):
+        self.base = self.base + self.direction
+        if self.direction == 1 and self.base == (self.end + 1):
            return False
-        if self.direction == -1 and base == (end - 1):
+        if self.direction == -1 and self.base == (self.end - 1):
            return False
         return True
 
     def position(self):
-        return base
+        return self.base
+
+    def get_chromosome(self):
+        return self.chromosome

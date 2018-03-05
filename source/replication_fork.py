@@ -36,6 +36,11 @@ class ReplicationFork:
                                   end=self.base,
                                   time=time)
 
+
+    def get_chromosome(self):
+        return self.chromosome
+
+
     def unattach(self):
         self.base = None
         self.chromosome = None

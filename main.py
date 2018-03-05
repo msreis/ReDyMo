@@ -88,7 +88,7 @@ def main(args):
                         and fork_manager.number_of_free_forks >= 2:
                     fork_manager.attach_forks(genomic_location=genomic_location, time=time)
 
-        print "Number of head-to-head collisions:" + number_of_collisions + "\n"
+        print('Number of head-to-head collisions: ' + str(number_of_collisions) + '\n')
 
         output(simulation_number=args['simulation_number'],
                resources=args['number_of_resources'],
