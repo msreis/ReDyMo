@@ -17,8 +17,6 @@
 
 from source.replication_fork import ReplicationFork
 
-from source.transcription_fork import TranscriptionFork
-
 from array import *
 
 
@@ -33,53 +31,64 @@ class ForkManager:
             self.just_unattached[fork] = False
         self.number_of_free_forks = size
 
-        # Transcription arrays initialization.
-        self.transcription_array = dict()
-        for chromosome in genome.chromosomes:
-          self.transcription_array[chromosome] = array('b', (0 for x in range(0, len(chromosome))))
-
-        # List of active transcriptions initialization.
-        self.transcription_forks = list()
-
-    def spawn_transcription_forks(self, genome):
-        # For each chromosome, iterates over each of its polycistronic regions.
-        for chromosome in genome.chromosomes:
-            for region in chromosome.transcription_regions:
-                  if (region['start'] < region['end']):
-                       self.transcription_array[chromosome][region['start']] = 1
-                  else:
-                       self.transcription_array[chromosome][region['end']] = -1                   
-                  self.transcription_forks.append(TranscriptionFork(start=region['start'], end=region['end'], chromosome=chromosome))
 
 
-    def advance_transcription_forks(self):
-        for transcription_fork in self.transcription_forks:
-            if not transcription_fork.advance(transcription_array = self.transcription_array[transcription_fork.get_chromosome()]):
-                   self.transcription_forks.remove(transcription_fork)
+    def check_replication_transcription_conflicts(self, time, period):
 
-
-    def check_replication_transcription_conflicts(self):
         number_of_collisions = 0
+        
+        # Current position of the RNAPs "carousel".
+        # We assume that period < size of polycistronic region
+        #
+        RNAP_carousel_position = time % period
 
         for replication_fork in self.replication_forks:
            #
            # If it is not attached obviously there is no collision! :-)
            #
            if replication_fork.is_attached():
-             transcription_fork_direction = self.transcription_array[replication_fork.get_chromosome()][replication_fork.is_attached()]
-             if  transcription_fork_direction != 0 \
-             and transcription_fork_direction != 2 \
-             and transcription_fork_direction != replication_fork.get_direction():
-               #
-               # We set a flag ('2') to indicate that this RNAP was removed; its respective transcription_fork object
-               # will be removed during the next RNAPs advances.
-               #
-               self.transcription_array[replication_fork.get_chromosome()][replication_fork.is_attached()] = 2
-               replication_fork.unattach()
-               self.number_of_free_forks += 1 
-               number_of_collisions += 1
+
+             chromosome = replication_fork.get_chromosome()
+
+             for region in chromosome.transcription_regions:
+
+                  replisome_position_within_region = 0
+                  region_size = 0
+                  RNAP_direction = 0
+
+                  if (region['start'] < region['end']):
+                     if replication_fork.get_base() < region['start'] or replication_fork.get_base() > region['end']:
+                        continue
+                     replisome_position_within_region = replication_fork.get_base() - region['start']
+                     RNAP_direction = 1
+                  else:
+                     if replication_fork.get_base() < region['end'] or replication_fork.get_base() > region['start']:
+                        continue
+                     replisome_position_within_region = region['start'] - replication_fork.get_base()
+                     RNAP_direction = -1
+
+                  if  replisome_position_within_region % period == RNAP_carousel_position \
+                  and replication_fork.get_direction() != RNAP_direction:
+
+                     # For debug purposes.
+                     #
+                     #if (region['start'] < region['end']):
+                     #  print('+++ Replisome position: ' + str(replication_fork.get_base()))
+                     #  print('+++ RNAP position: ' + str(region['start']) + ' + ' + str(RNAP_carousel_position) + ' + ' + str(period) + ' x')
+                     #  print('+++ End position: ' + str(region['end']) + '\n')
+                     #else:
+                     #  print('--- Replisome position: ' + str(replication_fork.get_base()))
+                     #  print('--- RNAP position: ' + str(region['start']) + ' - ' + str(RNAP_carousel_position) + ' - ' + str(period) + ' x')
+                     #  print('--- End position: ' + str(region['end']) + '\n')
+                     
+                     replication_fork.unattach()
+                     self.number_of_free_forks += 1
+                     self.just_unattached[replication_fork] = False
+                     number_of_collisions += 1             
+                     break
 
         return number_of_collisions
+
 
 
     def advance_attached_forks(self, time):
@@ -91,6 +100,7 @@ class ForkManager:
             if fork.is_attached():
                 if not fork.advance(time=time):
                     self.just_unattached[fork] = True
+
 
     def attach_forks(self, genomic_location, time):
         number_of_forks_attached_to_this_location = 0

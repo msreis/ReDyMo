@@ -53,39 +53,34 @@ def main(args):
         genome = Genome(chromosomes=chromosomes)
         fork_manager = ForkManager(size=args['number_of_resources'], genome=genome, speed=args['replication_speed'])
         period = args['transcription_period']
+        simulation_timeout = args['timeout']
   
         print('[done]\n')
+        sys.stdout.flush()
 
         time = 0
        
         number_of_collisions = 0
 
         print('Starting simulation...')
+        sys.stdout.flush()
 
-        while not genome.is_replicated():
+        while not genome.is_replicated() and simulation_timeout > 0:
 
             time += 1
+
+            simulation_timeout -= 1
+
+            if time % 10000 == 0:
+              print('Iteration ' + str(time))
 
             # Advance replisomes.
             #
             fork_manager.advance_attached_forks(time=time)
 
-            # Spawn new RNAPs.
-            # 
-            if period > 0 and time % period == 0:
-                 fork_manager.spawn_transcription_forks(genome=genome)
-
-            # Check for head-to-head collisions (**)
-            # (**) For computational efficiency purposes, we do not check if a
-            # RNAP was spawned in the same current base of a replisome.
-
-            # Advance RNAPs.
-            #
-            fork_manager.advance_transcription_forks()
-
             # Check for head-to-head collisions.
             # 
-            number_of_collisions += fork_manager.check_replication_transcription_conflicts()
+            number_of_collisions += fork_manager.check_replication_transcription_conflicts(time=time, period=period)
 
             # One attempt for each unattached fork (this number can be changed)
             #
@@ -98,8 +93,8 @@ def main(args):
 
 
         print('[done]\n')
-
         print('Number of head-to-head collisions: ' + str(number_of_collisions) + '\n')
+        sys.stdout.flush()
 
         output(simulation_number=args['simulation_number'],
                resources=args['number_of_resources'],
@@ -128,9 +123,13 @@ if __name__ == '__main__':
 
     transcription_period = (int(sys.argv[sys.argv.index('--period') + 1]))
 
+    simulation_timeout = (int(sys.argv[sys.argv.index('--timout') + 1]))
+
+
     # Load data from database.
     #
     print('Loading data... ')
+    sys.stdout.flush()
 
     chromosome_data = data_manager.chromosomes(organism=organism)
 
@@ -143,7 +142,10 @@ if __name__ == '__main__':
                                   'number_of_resources': i,
                                   'replication_speed': j,
                                   'simulation_number': l,
+                                  'timeout': simulation_timeout,
                                   'transcription_period': transcription_period})
                 l += 1
 
-    Pool(processes=40).map(main, args_list)
+    Pool(processes=4).map(main, args_list)
+
+

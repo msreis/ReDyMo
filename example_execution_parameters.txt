@@ -15,4 +15,11 @@
 
 """
 
-./main.py --organism 'Trypanosoma brucei brucei TREU927' --resources <start> <end> <step> --speed <start> <end> <step> --cells <number_of_cells> --period <transcription_period>
+./main.py --organism 'Trypanosoma brucei brucei TREU927' --resources <start> <end> <step> --speed <start> <end> <step> --cells <number_of_cells> --period <transcription_period> --timout <maximum_number_of_iterations>
+
+Example:
+
+For a single simulation with replisome velocity = 1 bp/sec, 10 replisomes, 
+transcription period of 150 sec and at most 3 million simulation iterations:
+
+python3 ./main.py --organism 'Trypanosoma brucei brucei TREU927' --resources 10 11 1 --speed 1 2 1 --period 150 --timout 3000000 --cells 1

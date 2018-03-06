@@ -40,6 +40,10 @@ class ReplicationFork:
         return self.direction
 
 
+    def get_base(self):
+        return self.base
+
+
     def get_chromosome(self):
         return self.chromosome
 
