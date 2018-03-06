@@ -74,3 +74,7 @@ class Chromosome:
         return self.number_of_replicated_bases == len(self)
 
 
+    def get_code(self):
+        return self.code
+
+

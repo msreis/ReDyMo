@@ -36,6 +36,9 @@ class ReplicationFork:
                                   end=self.base,
                                   time=time)
 
+    def get_direction(self):
+        return self.direction
+
 
     def get_chromosome(self):
         return self.chromosome
@@ -60,3 +63,5 @@ class ReplicationFork:
 
     def is_attached(self):
         return self.base is not None
+
+

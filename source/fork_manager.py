@@ -19,6 +19,8 @@ from source.replication_fork import ReplicationFork
 
 from source.transcription_fork import TranscriptionFork
 
+from array import *
+
 
 class ForkManager:
 
@@ -30,38 +32,53 @@ class ForkManager:
         for fork in self.replication_forks:
             self.just_unattached[fork] = False
         self.number_of_free_forks = size
-        # Transcription initialization.
-        self.transcription_forks = list()
 
+        # Transcription arrays initialization.
+        self.transcription_array = dict()
+        for chromosome in genome.chromosomes:
+          self.transcription_array[chromosome] = array('b', (0 for x in range(1, len(chromosome))))
+
+        # List of active transcriptions initialization.
+        self.transcription_forks = list()
 
     def spawn_transcription_forks(self, genome):
         # For each chromosome, iterates over each of its polycistronic regions.
         for chromosome in genome.chromosomes:
             for region in chromosome.transcription_regions:
+                  if (region['start'] < region['end']):
+                       self.transcription_array[chromosome][region['start']] = 1
+                  else:
+                       self.transcription.array[chromosome][region['end']] = -1                   
                   self.transcription_forks.append(TranscriptionFork(start=region['start'], end=region['end'], chromosome=chromosome))
 
 
     def advance_transcription_forks(self):
         for transcription_fork in self.transcription_forks:
-            if not transcription_fork.advance():
+            if not transcription_fork.advance(my_array = self.transcription_array[transcription_fork.get_chromosome()]):
                    self.transcription_forks.remove(transcription_fork)
 
 
     def check_replication_transcription_conflicts(self):
         number_of_collisions = 0
-        for transcription_fork in self.transcription_forks:
-            for replication_fork in self.replication_forks:
-                   #
-                   # Here, we might treat a head-to-tail collision as a head-to-head one. When RNAP and replisome velocities are set as the same, the former
-                   # situation might occur when a RNAP has just spawned and/or a replisome was just fired. However, we assume that such situations are
-                   # very uncommon, hence they do not have significant impact in the final simulation results. Besides, we can make use of this assumption,
-                   # since we are indeed estimating an upper bound for the impact of replication-transcription conflicts.
-                   #
-                   if transcription_fork.get_chromosome() == replication_fork.get_chromosome() and transcription_fork.position() == replication_fork.is_attached():
-                         self.transcription_forks.remove(transcription_fork)
-                         replication_fork.unattach()
-                         self.number_of_free_forks += 1 
-                         number_of_collisions += 1
+
+        for replication_fork in self.replication_forks:
+           #
+           # If it is not attached obviously there is no collision! :-)
+           #
+           if replication_fork.is_attached():
+             transcription_fork_direction = self.transcription_array[replication_fork.get_chromosome()][replication_fork.is_attached()]
+             if  transcription_fork_direction != 0 \
+             and transcription_fork_direction != 2 \
+             and transcription_fork_direction != replication_fork.get_direction():
+               #
+               # We set a flag ('2') to indicate that this RNAP was removed; its respective transcription_fork object
+               # will be removed during the next RNAPs advances.
+               #
+               self.transcription_array[replication_fork.get_chromosome()][replication_fork.is_attached()] = 2
+               replication_fork.unattach()
+               self.number_of_free_forks += 1 
+               number_of_collisions += 1
+
         return number_of_collisions
 
 

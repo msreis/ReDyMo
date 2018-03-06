@@ -49,10 +49,14 @@ def main(args):
         genome = Genome(chromosomes=chromosomes)
         fork_manager = ForkManager(size=args['number_of_resources'], genome=genome, speed=args['replication_speed'])
         period = args['transcription_period']
+  
+        print('[done]\n')
 
         time = 0
        
         number_of_collisions = 0
+
+        print('Starting simulation...')
 
         while not genome.is_replicated():
 
@@ -88,6 +92,9 @@ def main(args):
                         and fork_manager.number_of_free_forks >= 2:
                     fork_manager.attach_forks(genomic_location=genomic_location, time=time)
 
+
+        print('[done]\n')
+
         print('Number of head-to-head collisions: ' + str(number_of_collisions) + '\n')
 
         output(simulation_number=args['simulation_number'],
@@ -99,21 +106,28 @@ def main(args):
 
 
 if __name__ == '__main__':
+
     number_of_repetitions = int(sys.argv[sys.argv.index('--cells') + 1])
+
     organism = sys.argv[sys.argv.index('--organism') + 1]
 
     data_manager = DataManager(database_path='data/simulation.sqlite',
                                mfa_seq_folder_path='data/MFA-Seq_TBrucei_TREU927/')
+
     number_of_resources_range = (int(sys.argv[sys.argv.index('--resources') + 1]),
                                  int(sys.argv[sys.argv.index('--resources') + 2]),
                                  int(sys.argv[sys.argv.index('--resources') + 3]))
+
     replication_fork_speed_range = (int(sys.argv[sys.argv.index('--speed') + 1]),
                                     int(sys.argv[sys.argv.index('--speed') + 2]),
                                     int(sys.argv[sys.argv.index('--speed') + 3]))
+
     transcription_period = (int(sys.argv[sys.argv.index('--period') + 1]))
 
     # Load data from database.
     #
+    print('Loading data... ')
+
     chromosome_data = data_manager.chromosomes(organism=organism)
 
     args_list = []
