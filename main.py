@@ -19,6 +19,7 @@
 
 
 import os
+import shutil
 import sys
 from multiprocessing import Pool
 
@@ -29,6 +30,9 @@ from source.genome import Genome
 
 
 def output(simulation_number, resources, speed, time, iod, genome):
+
+    shutil.rmtree('output/')
+
     os.makedirs('output/', exist_ok=True)
     os.makedirs('output/simulation_{}/'.format(simulation_number))
 
