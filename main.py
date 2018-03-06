@@ -146,6 +146,6 @@ if __name__ == '__main__':
                                   'transcription_period': transcription_period})
                 l += 1
 
-    Pool(processes=4).map(main, args_list)
+    Pool(processes=40).map(main, args_list)
 
 
