@@ -21,10 +21,18 @@ class TranscriptionFork:
     def __init__(self, start, end, chromosome):
         self.base = start
         self.end = end
-        self.direction = int((end - start)/abs(end - start))  # Either -1 or +1.
+        if start < end:
+          self.direction = 1
+        else:
+          self.direction = -1
         self.chromosome = chromosome 
 
     def advance(self, transcription_array):
+
+        # In the case of out-of-bound conditions, we remove this RNAP.
+        #
+        if self.base <= 0 or self.base >= len(transcription_array):
+          return False
 
         # If this RNAP was already removed due a replication-transcription 
         # conflict (which is indicated by the '2' flag), we proceed to remove

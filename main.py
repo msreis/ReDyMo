@@ -71,9 +71,9 @@ def main(args):
             if period > 0 and time % period == 0:
                  fork_manager.spawn_transcription_forks(genome=genome)
 
-            # Check for head-to-head collisions.
-            #
-            number_of_collisions += fork_manager.check_replication_transcription_conflicts()
+            # Check for head-to-head collisions (**)
+            # (**) For computational efficiency purposes, we do not check if a
+            # RNAP was spawned in the same current base of a replisome.
 
             # Advance RNAPs.
             #

@@ -36,7 +36,7 @@ class ForkManager:
         # Transcription arrays initialization.
         self.transcription_array = dict()
         for chromosome in genome.chromosomes:
-          self.transcription_array[chromosome] = array('b', (0 for x in range(1, len(chromosome))))
+          self.transcription_array[chromosome] = array('b', (0 for x in range(0, len(chromosome))))
 
         # List of active transcriptions initialization.
         self.transcription_forks = list()
@@ -48,13 +48,13 @@ class ForkManager:
                   if (region['start'] < region['end']):
                        self.transcription_array[chromosome][region['start']] = 1
                   else:
-                       self.transcription.array[chromosome][region['end']] = -1                   
+                       self.transcription_array[chromosome][region['end']] = -1                   
                   self.transcription_forks.append(TranscriptionFork(start=region['start'], end=region['end'], chromosome=chromosome))
 
 
     def advance_transcription_forks(self):
         for transcription_fork in self.transcription_forks:
-            if not transcription_fork.advance(my_array = self.transcription_array[transcription_fork.get_chromosome()]):
+            if not transcription_fork.advance(transcription_array = self.transcription_array[transcription_fork.get_chromosome()]):
                    self.transcription_forks.remove(transcription_fork)
 
 
