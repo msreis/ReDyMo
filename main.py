@@ -29,19 +29,19 @@ from source.fork_manager import ForkManager
 from source.genome import Genome
 
 
-def output(simulation_number, resources, speed, time, iod, genome):
-
-    # Erase results from a previous simulation.
-    #
-    if os.path.isdir('output/'):
-      shutil.rmtree('output/')
+def output(simulation_number, resources, speed, time, iod, genome, period):
 
     # Prepare directories for this simulation.
     #
-    os.makedirs('output/', exist_ok=True)
-    os.makedirs('output/simulation_{}/'.format(simulation_number))
+    directory = 'output_' + str(resources) + '_' + str(period) + '/'
 
-    with open("output/simulation_{}/cell.txt".format(simulation_number), 'w')\
+    os.makedirs(directory, exist_ok=True)
+   
+    simulation = 'simulation_{}/'.format(simulation_number)
+
+    os.makedirs(directory + simulation)
+
+    with open(directory + simulation + '/cell.txt', 'w')\
             as output_file:
         output_file.write("{}\t{}\t{}\t{}\t\n".format(resources,
                                                       speed,
@@ -49,7 +49,8 @@ def output(simulation_number, resources, speed, time, iod, genome):
                                                       iod))
 
     for chromosome in genome:
-        with open("output/simulation_{}/{}.txt".format(simulation_number, chromosome.code), 'w') as output_file:
+        code = "{}.txt".format(chromosome.code)
+        with open(directory + simulation + code, 'w') as output_file:
             output_file.write(str(chromosome))
 
 
@@ -104,7 +105,8 @@ def main(args):
                speed=args['replication_speed'],
                time=time,
                iod=genome.average_interorigin_distance(),
-               genome=genome)
+               genome=genome,
+               period=period)
 
 
 if __name__ == '__main__':
