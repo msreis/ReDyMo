@@ -33,7 +33,7 @@ def output(simulation_number, resources, speed, time, iod, genome):
 
     # Erase results from a previous simulation.
     #
-    if os.direxists('output/'):
+    if os.path.isdir('output/'):
       shutil.rmtree('output/')
 
     # Prepare directories for this simulation.
@@ -84,8 +84,9 @@ def main(args):
             fork_manager.advance_attached_forks(time=time)
 
             # Check for head-to-head collisions.
-            # 
-            number_of_collisions += fork_manager.check_replication_transcription_conflicts(time=time, period=period)
+            #
+            if period > 0:
+              number_of_collisions += fork_manager.check_replication_transcription_conflicts(time=time, period=period)
 
             # One attempt for each unattached fork (this number can be changed)
             #
