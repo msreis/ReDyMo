@@ -76,9 +76,6 @@ def main(args):
 
             simulation_timeout -= 1
 
-            if time % 10000 == 0:
-              print('Iteration ' + str(time))
-
             # Advance replisomes.
             #
             fork_manager.advance_attached_forks(time=time)
