@@ -31,8 +31,13 @@ from source.genome import Genome
 
 def output(simulation_number, resources, speed, time, iod, genome):
 
-    shutil.rmtree('output/')
+    # Erase results from a previous simulation.
+    #
+    if os.direxists('output/'):
+      shutil.rmtree('output/')
 
+    # Prepare directories for this simulation.
+    #
     os.makedirs('output/', exist_ok=True)
     os.makedirs('output/simulation_{}/'.format(simulation_number))
 
