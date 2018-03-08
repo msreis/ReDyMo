@@ -10,7 +10,7 @@ time python3 ./main.py --organism 'Trypanosoma brucei brucei TREU927' --resource
 
 time python3 ./main.py --organism 'Trypanosoma brucei brucei TREU927' --resources 10 11 1 --speed 1 2 1 --period 150 --timout 100000000 --cells 10 1> out_10_150 2> err_10_150
 
-time python3 ./main.py --organism 'Trypanosoma brucei brucei TREU927' --resources 50 11 1 --speed 1 2 1 --period 0 --timout 100000000 --cells 10 1> out_50_0 2> err_50_0
+time python3 ./main.py --organism 'Trypanosoma brucei brucei TREU927' --resources 50 51 1 --speed 1 2 1 --period 0 --timout 100000000 --cells 10 1> out_50_0 2> err_50_0
 
 time python3 ./main.py --organism 'Trypanosoma brucei brucei TREU927' --resources 50 51 1 --speed 1 2 1 --period 30 --timout 100000000 --cells 10 1> out_50_30 2> err_50_30
 
