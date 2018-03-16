@@ -19,11 +19,13 @@ import sys
 import os
 
 aggregated_data = dict()
-for result_file_name in next(os.walk(sys.argv[1]))[2]:
-    if result_file_name.startswith('cell_'):
-        result_path = '{}{}'.format(sys.argv[1], result_file_name)
-        with open(result_path) as result_file:
-            for line in result_file:
+
+for result_file_name in next(os.walk(sys.argv[1]))[1]:
+
+  result_path = '{}{}'.format(sys.argv[1], '/' + result_file_name + '/cell.txt')
+
+  with open(result_path) as result_file:
+        for line in result_file:
                 if len(line) == 1:
                     break
 

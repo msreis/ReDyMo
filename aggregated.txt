@@ -1,1 +1,0 @@
-N	speed	time_avg	time_sd	inter_avg	inter_sd	measurements	
