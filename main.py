@@ -60,6 +60,7 @@ def main(args):
         fork_manager = ForkManager(size=args['number_of_resources'], genome=genome, speed=args['replication_speed'])
         period = args['transcription_period']
         simulation_timeout = args['timeout']
+        dormant = args['has_dormant']
   
         print('[done]\n')
         sys.stdout.flush()
@@ -84,7 +85,7 @@ def main(args):
             # Check for head-to-head collisions.
             #
             if period > 0:
-              number_of_collisions += fork_manager.check_replication_transcription_conflicts(time=time, period=period)
+              number_of_collisions += fork_manager.check_replication_transcription_conflicts(time=time, period=period, has_dormant=dormant)
 
             # One attempt for each unattached fork (this number can be changed)
             #
@@ -131,6 +132,16 @@ if __name__ == '__main__':
     simulation_timeout = (int(sys.argv[sys.argv.index('--timout') + 1]))
 
 
+    # 'False' or 'True'
+    #
+    if (sys.argv[sys.argv.index('--dormant') + 1] == 'True'):
+      dormant_flag = True
+    elif (sys.argv[sys.argv.index('--dormant') + 1] == 'False'):
+      dormant_flag = False
+    else:
+      print('Error: --dormant parameter must be either False or True.\n')
+      sys.exit()
+
     # Load data from database.
     #
     print('Loading data... ')
@@ -148,6 +159,7 @@ if __name__ == '__main__':
                                   'replication_speed': j,
                                   'simulation_number': l,
                                   'timeout': simulation_timeout,
+                                  'has_dormant': dormant_flag,
                                   'transcription_period': transcription_period})
                 l += 1
 

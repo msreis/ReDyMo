@@ -32,8 +32,7 @@ class ForkManager:
         self.number_of_free_forks = size
 
 
-
-    def check_replication_transcription_conflicts(self, time, period):
+    def check_replication_transcription_conflicts(self, time, period, has_dormant):
 
         number_of_collisions = 0
         
@@ -67,6 +66,8 @@ class ForkManager:
                      replisome_position_within_region = region['start'] - replication_fork.get_base()
                      RNAP_direction = -1
 
+                  # A head-to-head collision has occurred!
+                  #
                   if  replisome_position_within_region % period == RNAP_carousel_position \
                   and replication_fork.get_direction() != RNAP_direction:
 
@@ -81,6 +82,9 @@ class ForkManager:
                      #  print('--- RNAP position: ' + str(region['start']) + ' - ' + str(RNAP_carousel_position) + ' - ' + str(period) + ' x')
                      #  print('--- End position: ' + str(region['end']) + '\n')
                      
+                     if (has_dormant == True):
+                       chromosome.set_dormant_origin_activation_probability(replication_fork.get_base())
+
                      replication_fork.unattach()
                      self.number_of_free_forks += 1
                      self.just_unattached[replication_fork] = False
