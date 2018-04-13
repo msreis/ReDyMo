@@ -154,6 +154,14 @@ if __name__ == '__main__':
     for i in range(*number_of_resources_range):
         for j in range(*replication_fork_speed_range):
             for k in range(number_of_repetitions):
+                
+                # Once the dormant origins assay modifies the probability 
+                # landscape, for that type of experiment we need to load
+                # the original landscape again.
+                #
+                if dormant_flag == True:
+                  chromosome_data = data_manager.chromosomes(organism=organism)
+
                 args_list.append({'chromosome_data': chromosome_data,
                                   'number_of_resources': i,
                                   'replication_speed': j,
