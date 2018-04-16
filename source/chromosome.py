@@ -1,18 +1,19 @@
 """ This file is part of ReDyMo.
 
+    Copyright (c) 2018  Gustavo Cayres and Marcelo Reis.
+
     ReDyMo is free software: you can redistribute it and/or modify it
     under the terms of the GNU General Public License as published by the
     Free Software Foundation, either version 3 of the License, or (at your
     option) any later version.
-
     ReDyMo is distributed in the hope that it will be useful, but WITHOUT
     ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
     FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
     for more details.
-
     You should have received a copy of the GNU General Public License along
-    with ReDyMo. If not, see <http://www.gnu.org/licenses/>. """
+    with ReDyMo. If not, see <http://www.gnu.org/licenses/>.
 
+"""
 
 import math
 import random
@@ -21,10 +22,7 @@ from source.replication_fork import ReplicationFork
 
 
 class Chromosome:
-    """ Class managing all processes that happen on a chromosome,
-        including the attachment and advancement of machineries. """
-
-    def __init__(self, code, length, probability_landscape, replication_speed, transcription_regions):
+    def __init__(self, code, length, probability_landscape, transcription_regions):
         self.code = code
         self.length = length
         self.replication_speed = replication_speed
@@ -34,14 +32,13 @@ class Chromosome:
         self.activation_probabilities = probability_landscape
         self.number_of_replicated_bases = 0
         self.number_of_origins = 0
-        self.replication_forks = dict()
-        self.conflict_bases = list()
-        self.transcription_forks = list()
         self.transcription_regions = transcription_regions
 
     def __len__(self):
         return self.length
 
+    # Print method for better visualization.
+    #
     def __str__(self):
         """ Print method for better visualization. """
 
@@ -76,40 +73,40 @@ class Chromosome:
         for i in self.conflict_bases:
             output_string += "{}\n".format(i)
 
-        return output_string
 
-    def replication_status(self):
-        """ Print method for output. """
+    # This method changes the probability landscape around the location of a
+    # head-to-head collision. It sets the probability landscape with a Gaussian
+    # function centered on the collision location, with parameters (a,b,c):
+    # height of the mean (a) = 1, mean (b) = 0 and deviation (c) = 10000 bp.
+    #
+    # Therefore, the parameterized Gaussian function is defined as: 
+    #
+    #                                      f(x) = a e^(-(x - b)^2 / (2 c^2))
+    #                                           = 1 e^(-(x - 0)^2 / (2 10000^2))
+    #                                           =   e^(-(x^2 / (2 10^8)).
+    #
+    def set_dormant_origin_activation_probability(self, base):
+      c = 10000
+      leftmost_base = base - 2 * c    # 2 deviations left
+      if leftmost_base < 0:
+        leftmost_base = 0
+      rightmost_base = base + 2 * c   # 2 deviations right
+      if rightmost_base >= self.length:
+        rightmost_base = self.length - 1
+      for current_base in range(leftmost_base, rightmost_base):
+        x = current_base - base
+        Gaussian_function_of_x = math.exp(- pow(x,2) / (2 * pow(c,2)) )
+        #
+        # For debug purposes.
+        #
+        # print('x = ' + str(x) + ', f(x) = ' + str(Gaussian_function_of_x) + ', current probability = ' + str(self.activation_probabilities[current_base])   + '\n')
+        self.activation_probabilities[current_base] += Gaussian_function_of_x
+        if self.activation_probabilities[current_base] > 1:
+          self.activation_probabilities[current_base] = 1
 
-        output_string = ""
-        for i in range(0, len(self), 500):
-            output_string += "{}\n".format(self.strand[i])
-
-        return output_string
-
-    def attach_transcriptions(self, interval):
-        """ Attach transcription machineries to the chromosome, respecting the transcription frequency. """
-
-        for transcription_region in self.transcription_regions:
-            fork = transcription_region.spawn_fork(interval=interval)
-            if fork is None:
-                continue
-
-            self.transcription_forks.append(fork)
-            fork.is_spawn_duplicated = self.is_base_replicated(base=fork.base)
-
-    def attach_replication(self, base, force=False):
-        """ Attach replication machineries to the chromosome, respecting the number of resources, the duplication
-        state of the base and the space to fit the machineries. """
-
-        if self.genome.resources < 2 or base + 1 >= self.length or self.strand[base] or self.strand[base + 1]\
-                or (random.random() >= self.activation_probabilities[base] and not force):
-            return
-
-        self.number_of_origins += 1
-        self.replication_forks[base] = ReplicationFork(base=base, direction=-1, speed=self.replication_speed)
-        self.replication_forks[base + 1] = ReplicationFork(base=base, direction=+1, speed=self.replication_speed)
-        self.genome.resources -= 2
+    def replicate(self, start, end, time):
+        if start == end:
+            self.number_of_origins += 1
 
     def advance_transcriptions(self, interval):
         """ Advance the transcription machineries AND deal with collisions with replication machineries. """
@@ -194,3 +191,9 @@ class Chromosome:
         """ Tests whether this chromosome is fully replicated. """
 
         return self.number_of_replicated_bases == len(self)
+
+
+    def get_code(self):
+        return self.code
+
+

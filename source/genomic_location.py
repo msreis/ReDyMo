@@ -15,14 +15,16 @@
 
 """
 
-import sys
-from math import sin, pi
+import random
 
-""" Generates a stream of numbers following a senoid, used to test the model. Deprecated. """
 
-n = float(sys.argv[2])/(2 * 64 * 8312)
-k = (2 * pi * n)/1000
-with open(sys.argv[1], 'w') as output_file:
-    for i in range(0, 1001):
-        value = max(10000 * sin(k * i + 1000/(4 * n)), 1)
-        output_file.write("{}\n".format(value))
+class GenomicLocation:
+    def __init__(self, base, chromosome):
+        self.base = base
+        self.chromosome = chromosome
+
+    def is_replicated(self):
+        return self.chromosome.base_is_replicated(base=self.base)
+
+    def will_activate(self):
+        return random.random() < self.chromosome.activation_probability(base=self.base)

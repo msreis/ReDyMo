@@ -1,14 +1,21 @@
 """ This file is part of ReDyMo.
 
+    Copyright (c) 2018  Gustavo Cayres and Marcelo Reis.
+
     ReDyMo is free software: you can redistribute it and/or modify it
     under the terms of the GNU General Public License as published by the
     Free Software Foundation, either version 3 of the License, or (at your
     option) any later version.
-
     ReDyMo is distributed in the hope that it will be useful, but WITHOUT
-    ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+    ANY WARRANTY; without even the implied warranty of MERCHANTABILITY ortra
     FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
     for more details.
+    You should have received a copy of the GNU General Public License along
+    with ReDyMo. If not, see <http://www.gnu.org/licenses/>.
+
+"""
+
+from random import Random
 
     You should have received a copy of the GNU General Public License along
     with ReDyMo. If not, see <http://www.gnu.org/licenses/>. """
@@ -87,5 +94,6 @@ class Genome:
     def advance_replication_forks(self, interval, time):
         """ Wrapper for replication movement. """
 
-        for chromosome in self:
-            self.resources += chromosome.advance_replications(interval=interval, time=time)
+        return number_of_replicated_bases_in_this_step
+
+

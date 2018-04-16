@@ -1,29 +1,30 @@
 """ This file is part of ReDyMo.
 
+    Copyright (c) 2018  Gustavo Cayres and Marcelo Reis.
+
     ReDyMo is free software: you can redistribute it and/or modify it
     under the terms of the GNU General Public License as published by the
     Free Software Foundation, either version 3 of the License, or (at your
     option) any later version.
-
     ReDyMo is distributed in the hope that it will be useful, but WITHOUT
     ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
     FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
     for more details.
-
     You should have received a copy of the GNU General Public License along
-    with ReDyMo. If not, see <http://www.gnu.org/licenses/>. """
+    with ReDyMo. If not, see <http://www.gnu.org/licenses/>.
+
+"""
 
 import sqlite3
 from math import ceil
 
 
 class DataManager:
-    """ Class responsible for reading external data and
-    parsing it for future object creation during the simulations. """
 
     def __init__(self, database_path, mfa_seq_folder_path):
         self.database_path = database_path
         self.mfa_seq_folder_path = mfa_seq_folder_path
+
 
     def select_chromosomes_from_database(self, **kwargs):
         """ Database selection wrapper. """
@@ -38,18 +39,6 @@ class DataManager:
         db.close()
         return chromosome_tuples
 
-    def select_transcription_regions_from_database(self, **kwargs):
-        """ Database selection wrapper. """
-
-        db = sqlite3.connect(self.database_path)
-        cursor = db.cursor()
-        for key, value in kwargs.items():
-            query = 'SELECT * FROM TranscriptionRegion WHERE ' + key + ' = ?'
-            cursor.execute(query, (value,))
-
-        transcription_tuples = cursor.fetchall()
-        db.close()
-        return transcription_tuples
 
     def probability_landscape(self, code, length):
         """ Generates the probability landscape for origin trigger from MFA-Seq data. """
@@ -73,6 +62,8 @@ class DataManager:
                     if j == length - 1:
                         return probability_landscape
 
+
+
     def chromosomes(self, organism):
         """ Final list of chromosome data that will be used by the simulation. """
 
@@ -85,5 +76,21 @@ class DataManager:
                                 'length': t[1],
                                 'probability_landscape': self.probability_landscape(code=t[0], length=t[1]),
                                 'transcription_regions': [{'start': d[0], 'end': d[1]} for d in transcription_tuples]})
-
         return chromosomes
+
+
+    # Load polycistronic regions location data
+    #
+    def select_transcription_regions_from_database(self, **kwargs):
+        """ Database selection wrapper. """
+
+        db = sqlite3.connect(self.database_path)
+        cursor = db.cursor()
+        for key, value in kwargs.items():
+            query = 'SELECT * FROM TranscriptionRegion WHERE ' + key + ' = ?'
+            cursor.execute(query, (value,))
+
+        transcription_tuples = cursor.fetchall()
+        db.close()
+        return transcription_tuples
+
