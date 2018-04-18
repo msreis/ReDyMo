@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 
 """ This file is part of ReDyMo.
-
     Copyright (c) 2018  Gustavo Cayres and Marcelo Reis.
-
     ReDyMo is free software: you can redistribute it and/or modify it
     under the terms of the GNU General Public License as published by the
     Free Software Foundation, either version 3 of the License, or (at your
@@ -14,7 +12,6 @@
     for more details.
     You should have received a copy of the GNU General Public License along
     with ReDyMo. If not, see <http://www.gnu.org/licenses/>.
-
 """
 
 
@@ -25,12 +22,9 @@ from multiprocessing import Pool
 
 from source.chromosome import Chromosome
 from source.data_manager import DataManager
+from source.fork_manager import ForkManager
 from source.genome import Genome
-from source.transcription_region import TranscriptionRegion
 
-""" Skeleton of the simulation process,
-    reads the input parameters from standard input,
-    starts the parallel simulations and write the results. """
 
 def output(simulation_number, resources, speed, time, iod, genome, period):
 
@@ -39,7 +33,7 @@ def output(simulation_number, resources, speed, time, iod, genome, period):
     directory = 'output_' + str(resources) + '_' + str(period) + '/'
 
     os.makedirs(directory, exist_ok=True)
-
+   
     simulation = 'simulation_{}/'.format(simulation_number)
 
     os.makedirs(directory + simulation)
@@ -56,9 +50,6 @@ def output(simulation_number, resources, speed, time, iod, genome, period):
         with open(directory + simulation + code, 'w') as output_file:
             output_file.write(str(chromosome))
 
-    transcription_period_range = (int(command_line_args[command_line_args.index('--period') + 1]),
-                                  int(command_line_args[command_line_args.index('--period') + 2]),
-                                  int(command_line_args[command_line_args.index('--period') + 3]))
 
 def main(args):
         chromosomes = [Chromosome(**d) for d in args['chromosome_data']]
@@ -115,8 +106,6 @@ def main(args):
                genome=genome,
                period=period)
 
-def main(args):
-    simulation_arguments = parse_parameters(command_line_args=args)
 
 if __name__ == '__main__':
 
@@ -127,17 +116,13 @@ if __name__ == '__main__':
     data_manager = DataManager(database_path='data/simulation.sqlite',
                                mfa_seq_folder_path='data/MFA-Seq_TBrucei_TREU927/')
 
-    number_of_resources_range = (int(sys.argv[sys.argv.index('--resources') + 1]),
-                                 int(sys.argv[sys.argv.index('--resources') + 2]),
-                                 int(sys.argv[sys.argv.index('--resources') + 3]))
+    number_of_resources = (int(sys.argv[sys.argv.index('--resources') + 1]))
 
-    replication_fork_speed_range = (int(sys.argv[sys.argv.index('--speed') + 1]),
-                                    int(sys.argv[sys.argv.index('--speed') + 2]),
-                                    int(sys.argv[sys.argv.index('--speed') + 3]))
+    replication_fork_speed = (int(sys.argv[sys.argv.index('--speed') + 1]))
 
     transcription_period = (int(sys.argv[sys.argv.index('--period') + 1]))
 
-    simulation_timeout = (int(sys.argv[sys.argv.index('--timout') + 1]))
+    simulation_timeout = (int(sys.argv[sys.argv.index('--timeout') + 1]))
 
 
     # 'False' or 'True'
@@ -159,9 +144,8 @@ if __name__ == '__main__':
 
     args_list = []
     l = 0
-    for i in range(*number_of_resources_range):
-        for j in range(*replication_fork_speed_range):
-            for k in range(number_of_repetitions):
+   
+    for k in range(number_of_repetitions):
                 
                 # Once the dormant origins assay modifies the probability 
                 # landscape, for that type of experiment we need to load
@@ -171,14 +155,13 @@ if __name__ == '__main__':
                   chromosome_data = data_manager.chromosomes(organism=organism)
 
                 args_list.append({'chromosome_data': chromosome_data,
-                                  'number_of_resources': i,
-                                  'replication_speed': j,
+                                  'number_of_resources': number_of_resources,
+                                  'replication_speed': replication_fork_speed,
                                   'simulation_number': l,
                                   'timeout': simulation_timeout,
                                   'has_dormant': dormant_flag,
                                   'transcription_period': transcription_period})
                 l += 1
 
-    Pool(processes=40).map(main, args_list)
-
+Pool(processes=40).map(main, args_list)
 

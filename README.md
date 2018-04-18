@@ -32,19 +32,14 @@ In this version of ReDyMo, all parameters are mandatory and are listed below:
 
 ### Running the simulation
 
-To run the program, use
-```sh
-$ cd ReDyMo
-$ ./main.py <parameters>
+To run the program, the syntax of the main simulator program is the following one:
 ```
-The syntax is the following one:
-```
-$ ./main.py --organism '*organism*' --resources *min* *max* *step* --speed *min* *max* *step* --cells *cells* --period *period* --timout *timeout* --dormant *dormant*
+$ ./main.py --organism 'organism' --resources resources_value --speed speed_value --cells numbe_of_cells --period period_value --timout timeout_value --dormant [True|False]
 ```
 
-For example, to run a simulation of seven cells of *T. brucei TREU927*, with 10 forks, replisome speed of 65 bp/sec, transcription frequency of 150 sec and no dormant origin firing:
+For example, to run a simulation of seven cells of *T. brucei TREU927*, with 10 forks, replisome speed of 65 bp/sec, transcription frequency of 150 sec, a timeout of one million iterations and no dormant origin firing:
 ```sh
-$ ./main.py --organism 'Trypanosoma brucei brucei TREU927' --resources 10 --speed 65 --period 150 --cells 7 --dormant False
+$ ./main.py --organism 'Trypanosoma brucei brucei TREU927' --resources 10 --speed 65 --period 150 --cells 7 --timeout 1000000 --dormant False
 ```
 
 The simulation results will be stored into a directory named *output_10_50*, which is "output_" concatenated with the number of resources plus an underline plus the transcription frequency.
@@ -61,6 +56,8 @@ For example, to aggregate the aforementioned example, one could just type:
 ```
 $ ./script/cell_output_aggregator.py output_10_150 aggregated.txt
 ```
+
+Where *output_10_150* is the output of the simulation and *aggregated.txt* is the file containing the result of the data aggregation.
 
    [SQLiteStudio]: <https://sqlitestudio.pl/index.rvt>
 
