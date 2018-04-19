@@ -22,7 +22,7 @@ The system uses a simple *SQLite* database. Python already has plenty of functio
 ### Parameters
 
 In this version of ReDyMo, all parameters are mandatory and are listed below:
- - *organism*: Name of the organism, as saved in the database (remember to add single quotation marks when using space-spearated names).
+ - *organism*: Organism name, as saved in the database (remember to add single quotation marks when using space-separated names).
  - *cells*: Number of independent simulations to be made.
  - *resources*: Number of available forks for the replication process.
  - *speed*: Movement speed of each replication machinery (in bases per second).
