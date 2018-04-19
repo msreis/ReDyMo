@@ -30,7 +30,7 @@ my $TIMEOUT = 100000000;
 # Number of simulations per set of parameters (i.e., each simulation is
 # considered to be the S-phase of an independent cell).
 #
-my $NUMBER_OF_CELLS = 2; 
+my $NUMBER_OF_CELLS = 10; 
 
 # Output path.
 #
@@ -41,11 +41,9 @@ my $PATH = "../output/";
 system ("rm -rf $PATH");
 system ("mkdir $PATH");
 
-for (my $F = 10; $F <= 20; $F += 10)
-#for (my $F = 10; $F <= 100; $F += 10)
+for (my $F = 10; $F <= 100; $F += 10)
 {
-  foreach my $period (0, 900)
-#  foreach my $period (0, 900, 750, 600, 450, 300, 150, 90)
+  foreach my $period (0, 900, 750, 600, 450, 300, 150, 90)
   {
     foreach my $has_dormant ('False', 'True')
     {
