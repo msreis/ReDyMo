@@ -47,7 +47,7 @@ The simulation results will be stored into a directory named *output/False_10_50
 
 ### Aggregating the simulation results
 
-If more the one cell is simulated at once, then the results may be averaged through an aggregator script, whose syntax is the following:
+If more than one cell is simulated at once, then the results may be averaged through the usage of an aggregator script, whose syntax is the following:
 ```
 $ cd script
 $ ./cell_output_aggregator.py *output_directory* > *aggregation_file_and_path*
