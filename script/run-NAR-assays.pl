@@ -66,6 +66,12 @@ for (my $F = 10; $F <= 100; $F += 10)
              "1> " . $PATH . $has_dormant . "_" . $F . "_" . $period . "_out ".
              "2> " . $PATH . $has_dormant . "_" . $F . "_" . $period . "_err");
 
+      # Aggregating the results.
+      # 
+      system("./cell_output_aggregator.py " . $PATH . $has_dormant . "_" . $F .
+             "_" . $period . " >> " . $PATH . $has_dormant . "_" . $period .
+             ".txt");
+   
       print "[done]\n";
     }
   }

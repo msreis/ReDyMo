@@ -40,25 +40,24 @@ for result_file_name in next(os.walk(sys.argv[1]))[1]:
       data[4] += 1
       aggregated_data[(int(N), int(speed))] = data
 
-with open(sys.argv[2], 'w') as output_file:
+# print("F\tspeed\ttime_avg\ttime_sd\tinter_avg\tinter_sd" +\
+# "\tmeasurements\t\n")
 
-  output_file.write("N\tspeed\ttime_avg\ttime_sd\tinter_avg\tinter_sd" +\
-  "\tmeasurements\t\n")
+for key, value in aggregated_data.items():
 
-  for key, value in aggregated_data.items():
-    time_avg = value[0]/value[4]
-    inter_avg = value[1]/value[4]
+  time_avg = value[0]/value[4]
+  inter_avg = value[1]/value[4]
 
-    time_sd = 0 if value[4] == 1 else ((value[2] / value[4] -\
-    (value[0] / value[4]) ** 2) * (value[4] / (value[4] - 1))) ** (1 / 2)
+  time_sd = 0 if value[4] == 1 else ((value[2] / value[4] -\
+  (value[0] / value[4]) ** 2) * (value[4] / (value[4] - 1))) ** (1 / 2)
 
-    inter_sd = 0 if value[4] == 1 else ((value[3] / value[4] -\
-    (value[1] / value[4]) ** 2) * (value[4] / (value[4] - 1))) ** (1 / 2)
+  inter_sd = 0 if value[4] == 1 else ((value[3] / value[4] -\
+  (value[1] / value[4]) ** 2) * (value[4] / (value[4] - 1))) ** (1 / 2)
 
-    line = "{}\t{}\t{}\t{}\t{}\t{}\t{}\t\n".format(key[0], key[1], time_avg,\
-    time_sd, inter_avg, inter_sd, value[4])
+  line = "{}\t{}\t{}\t{}\t{}\t{}\t{}".format(key[0], key[1], time_avg,\
+  time_sd, inter_avg, inter_sd, value[4])
 
-    output_file.write(line)
+  print(line)
 
 #-----------------------------------------------------------------------------#
 

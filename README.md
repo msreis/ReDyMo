@@ -50,13 +50,13 @@ The simulation results will be stored into a directory named *output/False_10_50
 If more the one cell is simulated at once, then the results may be averaged through an aggregator script, whose syntax is the following:
 ```
 $ cd script
-$ ./cell_output_aggregator.py *output_directory* *aggregation_file_and_path*
+$ ./cell_output_aggregator.py *output_directory* > *aggregation_file_and_path*
 ```
 
 For example, to aggregate the aforementioned example, one could just type:
 ```
 $ cd script
-$ ./cell_output_aggregator.py ../output/False_10_150 ../output/aggregated.txt
+$ ./cell_output_aggregator.py ../output/False_10_150 > ../output/aggregated.txt
 ```
 where *output_10_150* is the output of the simulation and *aggregation_file_and_path* is both the path and name for the file containing the result of data aggregation.
 
