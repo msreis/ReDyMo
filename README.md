@@ -37,27 +37,29 @@ To run the program, the syntax of the main simulator program is the following on
 $ ./main.py --organism 'organism' --resources resources_value --speed speed_value --cells numbe_of_cells --period period_value --timout timeout_value --dormant [True|False]
 ```
 
-For example, to run a simulation of seven cells of *T. brucei TREU927*, with 10 forks, replisome speed of 65 bp/sec, transcription frequency of 150 sec, a timeout of one million iterations and no dormant origin firing:
-```sh
+The command above must be executed within the "src" directory. For example, to run a simulation of seven cells of *T. brucei TREU927*, with 10 forks, replisome speed of 65 bp/sec, transcription frequency of 150 sec, a timeout of one million iterations and no dormant origin firing, one must type:
+```
+$ cd src
 $ ./main.py --organism 'Trypanosoma brucei brucei TREU927' --resources 10 --speed 65 --period 150 --cells 7 --timeout 1000000 --dormant False
 ```
-
-The simulation results will be stored into a directory named *output_10_50*, which is "output_" concatenated with the number of resources plus an underline plus the transcription frequency.
+The simulation results will be stored into a directory named *output/False_10_50/*, in which "output" is the outer directory name and the inner directory name of composed of the concatenation of the used parameter values for dormant origin firing, resources and period.
 
 
 ### Aggregating the simulation results
 
 If more the one cell is simulated at once, then the results may be averaged through an aggregator script, whose syntax is the following:
 ```
-$ ./script/cell_output_aggregator.py *output_directory* *aggregation_file*
+$ cd script
+$ ./cell_output_aggregator.py *output_directory* *aggregation_file_and_path*
 ```
 
 For example, to aggregate the aforementioned example, one could just type:
 ```
-$ ./script/cell_output_aggregator.py output_10_150 aggregated.txt
+$ cd script
+$ ./cell_output_aggregator.py ../output/False_10_150 ../output/aggregated.txt
 ```
+where *output_10_150* is the output of the simulation and *aggregation_file_and_path* is both the path and name for the file containing the result of data aggregation.
 
-Where *output_10_150* is the output of the simulation and *aggregated.txt* is the file containing the result of the data aggregation.
 
    [SQLiteStudio]: <https://sqlitestudio.pl/index.rvt>
 
