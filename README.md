@@ -34,7 +34,7 @@ In this version of ReDyMo, all parameters are mandatory and are listed below:
 
 To run the program, the syntax of the main simulator program is the following one:
 ```
-$ ./main.py --organism 'organism' --resources resources_value --speed speed_value --cells numbe_of_cells --period period_value --timout timeout_value --dormant [True|False]
+$ ./main.py --organism 'organism' --resources resources_value --speed speed_value --cells numbe_of_cells --period period_value --timeout timeout_value --dormant [True|False]
 ```
 
 The command above must be executed within the "src" directory. For example, to run a simulation of seven cells of *T. brucei TREU927*, with 10 forks, replisome speed of 65 bp/sec, transcription frequency of 150 sec, a timeout of one million iterations and no dormant origin firing, one must type:
