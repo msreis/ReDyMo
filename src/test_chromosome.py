@@ -31,8 +31,8 @@ class TestChromosome(unittest.TestCase):
         b.number_of_replicated_bases = 2
         a.strand = [0, 1, 1]
         a.number_of_replicated_bases = 2
-        self.assertFalse(a.is_replicated())
         self.assertTrue(b.is_replicated())
+        self.assertFalse(a.is_replicated())
 
     def test_activation_probability(self):
         a = Chromosome(1, 3, [1, 0.7, 0.5], None)
@@ -43,19 +43,17 @@ class TestChromosome(unittest.TestCase):
         self.assertAlmostEqual(a.activation_probability(1), 0.7)
         self.assertAlmostEqual(a.activation_probability(2), 0.5)
 
-    # REDO without function calls
     def test_replicate(self):
         a = Chromosome(1, 6, [1, 0.7, 0.5, 0.3, 0.8, 0.2], None)
         a.replicate(0, 4, 1)
         for i in range(6):
             if i in range(0, 5):
-                self.assertTrue(a.base_is_replicated(i))
+                self.assertNotEqual(a.strand[i], 0)
             else:
-                self.assertFalse(a.base_is_replicated(i))
+                self.assertEqual(a.strand[i], 0)
         self.assertEqual(a.number_of_replicated_bases, 5)
-        self.assertFalse(a.is_replicated())
-        a.replicate(0,5, 1)
-        self.assertFalse(a.is_replicated())
+        a.replicate(4, 5, 1)
+        self.assertEqual(a.length, a.number_of_replicated_bases)
 
 
 if __name__ == '__main__':
