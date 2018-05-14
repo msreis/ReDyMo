@@ -1,6 +1,0 @@
-.idea/
-/src/__pycache__/
-old/
-.gitignore
-cell_*
-output*
