@@ -18,7 +18,7 @@ import math
 
 
 
-## @package chromosome
+## @package ReDyMo.src.chromosome
 # Contains the class Chromosome.
 
 
