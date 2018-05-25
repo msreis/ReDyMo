@@ -12,7 +12,7 @@ from src.chromosome import Chromosome
 class TestChromosome(unittest.TestCase):
 
     ## Tests the construction of a Chromosome object.
-    def test_construction(self):
+    def test_constructor(self):
         chrm_1 = Chromosome(1, 3, [1, 0.7, 0.5], None)
         self.assertIsInstance(chrm_1, Chromosome)
         self.assertEqual(chrm_1.code, 1)
@@ -46,8 +46,8 @@ class TestChromosome(unittest.TestCase):
         self.assertTrue(chrm_2.is_replicated())
         self.assertFalse(chrm_1.is_replicated())
 
-    ## Tests by checking if the function response is the same passed to the
-    # constructor.
+    ## Tests by checking if the function return value is the same passed to 
+    # the constructor.
     def test_activation_probability(self):
         chrm_1 = Chromosome(1, 3, [1, 0.7, 0.5], None)
         chrm_2 = Chromosome(2, 2, [0.4, 0.8], None)
@@ -57,6 +57,8 @@ class TestChromosome(unittest.TestCase):
         self.assertAlmostEqual(chrm_1.activation_probability(1), 0.7)
         self.assertAlmostEqual(chrm_1.activation_probability(2), 0.5)
 
+    ## Tests the replication of a range of bases and checks number of bases
+    # replicated.
     def test_replicate(self):
         chrm_1 = Chromosome(1, 6, [1, 0.7, 0.5, 0.3, 0.8, 0.2], None)
         chrm_1.replicate(0, 4, 1)
@@ -69,6 +71,8 @@ class TestChromosome(unittest.TestCase):
         chrm_1.replicate(4, 5, 1)
         self.assertEqual(chrm_1.length, chrm_1.number_of_replicated_bases)
 
+    # Tests by comparing the sum of probabilities before and after applying
+    # the function.
     def test_set_dormant_origin_activation_probability(self):
         chrm_size = 300000
         chrm_1 = Chromosome(1, chrm_size, [0.5] * chrm_size, None)
