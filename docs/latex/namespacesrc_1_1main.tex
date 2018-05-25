@@ -1,0 +1,84 @@
+\hypertarget{namespacesrc_1_1main}{}\section{src.\+main Namespace Reference}
+\label{namespacesrc_1_1main}\index{src.\+main@{src.\+main}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{namespacesrc_1_1main_a9ceee1b996bca3c451b0616c425364a8}\label{namespacesrc_1_1main_a9ceee1b996bca3c451b0616c425364a8}} 
+def {\bfseries output} (simulation\+\_\+number, dormant, resources, speed, time, iod, genome, period)
+\item 
+\mbox{\Hypertarget{namespacesrc_1_1main_a122d385c098589d417a587e18a75ea7b}\label{namespacesrc_1_1main_a122d385c098589d417a587e18a75ea7b}} 
+def {\bfseries main} (args)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{namespacesrc_1_1main_ad7055b851474328b07fdb15ffcc8fa6f}\label{namespacesrc_1_1main_ad7055b851474328b07fdb15ffcc8fa6f}} 
+int {\bfseries number\+\_\+of\+\_\+processes} = 40
+\item 
+\mbox{\Hypertarget{namespacesrc_1_1main_a700532f7537efd12cb945947f22e0f1c}\label{namespacesrc_1_1main_a700532f7537efd12cb945947f22e0f1c}} 
+{\bfseries number\+\_\+of\+\_\+repetitions} = int(sys.\+argv\mbox{[}sys.\+argv.\+index(\textquotesingle{}-\/-\/cells\textquotesingle{}) + 1\mbox{]})
+\item 
+\mbox{\Hypertarget{namespacesrc_1_1main_a5fd6d2babe3089b4df469428d62272eb}\label{namespacesrc_1_1main_a5fd6d2babe3089b4df469428d62272eb}} 
+{\bfseries organism} = sys.\+argv\mbox{[}sys.\+argv.\+index(\textquotesingle{}-\/-\/organism\textquotesingle{}) + 1\mbox{]}
+\item 
+{\bfseries data\+\_\+manager}
+\item 
+\mbox{\Hypertarget{namespacesrc_1_1main_a9a0ab683fec31970f138645bb828d289}\label{namespacesrc_1_1main_a9a0ab683fec31970f138645bb828d289}} 
+tuple {\bfseries number\+\_\+of\+\_\+resources} = (int(sys.\+argv\mbox{[}sys.\+argv.\+index(\textquotesingle{}-\/-\/resources\textquotesingle{}) + 1\mbox{]}))
+\item 
+\mbox{\Hypertarget{namespacesrc_1_1main_a2dd950a94e374a513eac28ebf16e60c9}\label{namespacesrc_1_1main_a2dd950a94e374a513eac28ebf16e60c9}} 
+tuple {\bfseries replication\+\_\+fork\+\_\+speed} = (int(sys.\+argv\mbox{[}sys.\+argv.\+index(\textquotesingle{}-\/-\/speed\textquotesingle{}) + 1\mbox{]}))
+\item 
+\mbox{\Hypertarget{namespacesrc_1_1main_a3ee509430b5164e95ee66cc58d6a14ea}\label{namespacesrc_1_1main_a3ee509430b5164e95ee66cc58d6a14ea}} 
+tuple {\bfseries transcription\+\_\+period} = (int(sys.\+argv\mbox{[}sys.\+argv.\+index(\textquotesingle{}-\/-\/period\textquotesingle{}) + 1\mbox{]}))
+\item 
+\mbox{\Hypertarget{namespacesrc_1_1main_a7d9814ffd846fb5e0ed09d19207604ce}\label{namespacesrc_1_1main_a7d9814ffd846fb5e0ed09d19207604ce}} 
+tuple {\bfseries simulation\+\_\+timeout} = (int(sys.\+argv\mbox{[}sys.\+argv.\+index(\textquotesingle{}-\/-\/timeout\textquotesingle{}) + 1\mbox{]}))
+\item 
+\mbox{\Hypertarget{namespacesrc_1_1main_a2e4850a579504b3001fe3125a9c9705a}\label{namespacesrc_1_1main_a2e4850a579504b3001fe3125a9c9705a}} 
+bool {\bfseries dormant\+\_\+flag} = True
+\item 
+\mbox{\Hypertarget{namespacesrc_1_1main_a1b8ad1f617a3e804f6dc9e38044adc4b}\label{namespacesrc_1_1main_a1b8ad1f617a3e804f6dc9e38044adc4b}} 
+{\bfseries end}
+\item 
+\mbox{\Hypertarget{namespacesrc_1_1main_a3253b9b7a5258dfec715730d282495af}\label{namespacesrc_1_1main_a3253b9b7a5258dfec715730d282495af}} 
+{\bfseries chromosome\+\_\+data} = data\+\_\+manager.\+chromosomes(organism=organism)
+\item 
+\mbox{\Hypertarget{namespacesrc_1_1main_a38f60d8268ea1f907280e19d5b318c70}\label{namespacesrc_1_1main_a38f60d8268ea1f907280e19d5b318c70}} 
+list {\bfseries args\+\_\+list} = \mbox{[}$\,$\mbox{]}
+\item 
+\mbox{\Hypertarget{namespacesrc_1_1main_a2f6b63e92b8b2856c439c5775d0bed83}\label{namespacesrc_1_1main_a2f6b63e92b8b2856c439c5775d0bed83}} 
+{\bfseries processes}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyVerb}This file is part of ReDyMo.
+
+Copyright (c) 2018  Gustavo Cayres and Marcelo Reis.
+
+ReDyMo is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.
+ReDyMo is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
+for more details.
+You should have received a copy of the GNU General Public License along
+with ReDyMo. If not, see <http://www.gnu.org/licenses/>.
+\end{DoxyVerb}
+ 
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{namespacesrc_1_1main_a3f8136ff3533e538e524a1d27d4c46d2}\label{namespacesrc_1_1main_a3f8136ff3533e538e524a1d27d4c46d2}} 
+\index{src\+::main@{src\+::main}!data\+\_\+manager@{data\+\_\+manager}}
+\index{data\+\_\+manager@{data\+\_\+manager}!src\+::main@{src\+::main}}
+\subsubsection{\texorpdfstring{data\+\_\+manager}{data\_manager}}
+{\footnotesize\ttfamily src.\+main.\+data\+\_\+manager}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+1 =  DataManager(database\_path=\textcolor{stringliteral}{'../data/simulation.sqlite'},
+2                  mfa\_seq\_folder\_path=\textcolor{stringliteral}{'../data/MFA-Seq\_TBrucei\_TREU927/'})
+\end{DoxyCode}

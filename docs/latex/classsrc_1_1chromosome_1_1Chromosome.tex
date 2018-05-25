@@ -1,0 +1,247 @@
+\hypertarget{classsrc_1_1chromosome_1_1Chromosome}{}\section{src.\+chromosome.\+Chromosome Class Reference}
+\label{classsrc_1_1chromosome_1_1Chromosome}\index{src.\+chromosome.\+Chromosome@{src.\+chromosome.\+Chromosome}}
+
+
+This class represents a \mbox{\hyperlink{classsrc_1_1chromosome_1_1Chromosome}{Chromosome}}.  
+
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classsrc_1_1chromosome_1_1Chromosome_af61c9d25ac58a73cfd3805b0691c67d5}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, code, length, probability\+\_\+landscape, transcription\+\_\+regions)
+\begin{DoxyCompactList}\small\item\em The constructor for a \mbox{\hyperlink{classsrc_1_1chromosome_1_1Chromosome}{Chromosome}} object. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsrc_1_1chromosome_1_1Chromosome_ac99d604dbe5ec7582bcaabe791ce9767}{\+\_\+\+\_\+len\+\_\+\+\_\+}} (self)
+\begin{DoxyCompactList}\small\item\em Query the lenght of the \mbox{\hyperlink{classsrc_1_1chromosome_1_1Chromosome}{Chromosome}}. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsrc_1_1chromosome_1_1Chromosome_a22eb8d92cf80438304468a9a80c0ffe5}{\+\_\+\+\_\+str\+\_\+\+\_\+}} (self)
+\begin{DoxyCompactList}\small\item\em Print method for better visualization. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsrc_1_1chromosome_1_1Chromosome_a3f37683e2a0d2f50341c3d97f8344c73}{base\+\_\+is\+\_\+replicated}} (self, base)
+\item 
+def \mbox{\hyperlink{classsrc_1_1chromosome_1_1Chromosome_a8e82cfd0fb5a5ed11da3792fa759a72d}{activation\+\_\+probability}} (self, base)
+\begin{DoxyCompactList}\small\item\em Query the activation probabilty of a base. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsrc_1_1chromosome_1_1Chromosome_a9d9954253a26f26823b2d58ad3cf82ed}{set\+\_\+dormant\+\_\+origin\+\_\+activation\+\_\+probability}} (self, base)
+\begin{DoxyCompactList}\small\item\em This method changes the probability landscape around the location of a head-\/to-\/head collision. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsrc_1_1chromosome_1_1Chromosome_a038cd43cf60fc2ad2b5775ebe43b34de}{replicate}} (self, start, end, time)
+\begin{DoxyCompactList}\small\item\em This function replicates the genome inside a given interval of bases. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsrc_1_1chromosome_1_1Chromosome_a75f3d66aaaf16d67ebdfe03d6eff9d80}{is\+\_\+replicated}} (self)
+\begin{DoxyCompactList}\small\item\em Checks if the entire Cromosome is replicated. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsrc_1_1chromosome_1_1Chromosome_ab718a539f93dd0b2d7d5d299de3d9532}{get\+\_\+code}} (self)
+\begin{DoxyCompactList}\small\item\em Query the id of the \mbox{\hyperlink{classsrc_1_1chromosome_1_1Chromosome}{Chromosome}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classsrc_1_1chromosome_1_1Chromosome_ac4b2d2d0caad93b52fb76f65cc424663}\label{classsrc_1_1chromosome_1_1Chromosome_ac4b2d2d0caad93b52fb76f65cc424663}} 
+{\bfseries code}
+\item 
+\mbox{\Hypertarget{classsrc_1_1chromosome_1_1Chromosome_a368effa6f0bf8bd76593b5e14adf8c1c}\label{classsrc_1_1chromosome_1_1Chromosome_a368effa6f0bf8bd76593b5e14adf8c1c}} 
+{\bfseries length}
+\item 
+\mbox{\hyperlink{classsrc_1_1chromosome_1_1Chromosome_a0a465339e3b71993e96bd29898511028}{strand}}
+\begin{DoxyCompactList}\small\item\em Stores the time when each base was replicated. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classsrc_1_1chromosome_1_1Chromosome_ac9c71115a4d4a73febed9d3cf432bbc6}\label{classsrc_1_1chromosome_1_1Chromosome_ac9c71115a4d4a73febed9d3cf432bbc6}} 
+{\bfseries activation\+\_\+probabilities}
+\item 
+\mbox{\hyperlink{classsrc_1_1chromosome_1_1Chromosome_a10a051b6b89395ffd4eafed6e19d35b8}{number\+\_\+of\+\_\+replicated\+\_\+bases}}
+\begin{DoxyCompactList}\small\item\em Stores the number os bases already replicated in that \mbox{\hyperlink{classsrc_1_1chromosome_1_1Chromosome}{Chromosome}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classsrc_1_1chromosome_1_1Chromosome_ad8db71aebe26d3e87a717281b35f9856}\label{classsrc_1_1chromosome_1_1Chromosome_ad8db71aebe26d3e87a717281b35f9856}} 
+{\bfseries number\+\_\+of\+\_\+origins}
+\item 
+\mbox{\Hypertarget{classsrc_1_1chromosome_1_1Chromosome_ad959c1bf71f9a5d7853b898872445a9a}\label{classsrc_1_1chromosome_1_1Chromosome_ad959c1bf71f9a5d7853b898872445a9a}} 
+{\bfseries transcription\+\_\+regions}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class represents a \mbox{\hyperlink{classsrc_1_1chromosome_1_1Chromosome}{Chromosome}}. 
+
+It stores relevant data about a \mbox{\hyperlink{classsrc_1_1chromosome_1_1Chromosome}{Chromosome}}, such as lenght, number of replicated bases and has methods to query and modify the \mbox{\hyperlink{classsrc_1_1chromosome_1_1Chromosome}{Chromosome}}. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classsrc_1_1chromosome_1_1Chromosome_af61c9d25ac58a73cfd3805b0691c67d5}\label{classsrc_1_1chromosome_1_1Chromosome_af61c9d25ac58a73cfd3805b0691c67d5}} 
+\index{src\+::chromosome\+::\+Chromosome@{src\+::chromosome\+::\+Chromosome}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!src\+::chromosome\+::\+Chromosome@{src\+::chromosome\+::\+Chromosome}}
+\subsubsection{\texorpdfstring{\+\_\+\+\_\+init\+\_\+\+\_\+()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def src.\+chromosome.\+Chromosome.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{code,  }\item[{}]{length,  }\item[{}]{probability\+\_\+landscape,  }\item[{}]{transcription\+\_\+regions }\end{DoxyParamCaption})}
+
+
+
+The constructor for a \mbox{\hyperlink{classsrc_1_1chromosome_1_1Chromosome}{Chromosome}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em code} & The id of the \mbox{\hyperlink{classsrc_1_1chromosome_1_1Chromosome}{Chromosome}}. T\+O\+DO\+: \\
+\hline
+{\em lenght} & The lenght of the chromosome \\
+\hline
+{\em probabiliy\+\_\+landscape} & The probability of each base to be an \textbackslash{} activation point \\
+\hline
+{\em transcription\+\_\+regions} & Still dont know what it does T\+O\+DO\+: \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classsrc_1_1chromosome_1_1Chromosome_ac99d604dbe5ec7582bcaabe791ce9767}\label{classsrc_1_1chromosome_1_1Chromosome_ac99d604dbe5ec7582bcaabe791ce9767}} 
+\index{src\+::chromosome\+::\+Chromosome@{src\+::chromosome\+::\+Chromosome}!\+\_\+\+\_\+len\+\_\+\+\_\+@{\+\_\+\+\_\+len\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+len\+\_\+\+\_\+@{\+\_\+\+\_\+len\+\_\+\+\_\+}!src\+::chromosome\+::\+Chromosome@{src\+::chromosome\+::\+Chromosome}}
+\subsubsection{\texorpdfstring{\+\_\+\+\_\+len\+\_\+\+\_\+()}{\_\_len\_\_()}}
+{\footnotesize\ttfamily def src.\+chromosome.\+Chromosome.\+\_\+\+\_\+len\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Query the lenght of the \mbox{\hyperlink{classsrc_1_1chromosome_1_1Chromosome}{Chromosome}}. 
+
+\begin{DoxyReturn}{Returns}
+The lenght of the \mbox{\hyperlink{classsrc_1_1chromosome_1_1Chromosome}{Chromosome}}. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classsrc_1_1chromosome_1_1Chromosome_a22eb8d92cf80438304468a9a80c0ffe5}\label{classsrc_1_1chromosome_1_1Chromosome_a22eb8d92cf80438304468a9a80c0ffe5}} 
+\index{src\+::chromosome\+::\+Chromosome@{src\+::chromosome\+::\+Chromosome}!\+\_\+\+\_\+str\+\_\+\+\_\+@{\+\_\+\+\_\+str\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+str\+\_\+\+\_\+@{\+\_\+\+\_\+str\+\_\+\+\_\+}!src\+::chromosome\+::\+Chromosome@{src\+::chromosome\+::\+Chromosome}}
+\subsubsection{\texorpdfstring{\+\_\+\+\_\+str\+\_\+\+\_\+()}{\_\_str\_\_()}}
+{\footnotesize\ttfamily def src.\+chromosome.\+Chromosome.\+\_\+\+\_\+str\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Print method for better visualization. 
+
+\begin{DoxyReturn}{Returns}
+A string representation of the chromosome state. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classsrc_1_1chromosome_1_1Chromosome_a8e82cfd0fb5a5ed11da3792fa759a72d}\label{classsrc_1_1chromosome_1_1Chromosome_a8e82cfd0fb5a5ed11da3792fa759a72d}} 
+\index{src\+::chromosome\+::\+Chromosome@{src\+::chromosome\+::\+Chromosome}!activation\+\_\+probability@{activation\+\_\+probability}}
+\index{activation\+\_\+probability@{activation\+\_\+probability}!src\+::chromosome\+::\+Chromosome@{src\+::chromosome\+::\+Chromosome}}
+\subsubsection{\texorpdfstring{activation\+\_\+probability()}{activation\_probability()}}
+{\footnotesize\ttfamily def src.\+chromosome.\+Chromosome.\+activation\+\_\+probability (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{base }\end{DoxyParamCaption})}
+
+
+
+Query the activation probabilty of a base. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & base The index of a base to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The probability of a dormant origin to attach to the given base based on the probability\+\_\+landscape. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+probability\+\_\+landscape 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classsrc_1_1chromosome_1_1Chromosome_a3f37683e2a0d2f50341c3d97f8344c73}\label{classsrc_1_1chromosome_1_1Chromosome_a3f37683e2a0d2f50341c3d97f8344c73}} 
+\index{src\+::chromosome\+::\+Chromosome@{src\+::chromosome\+::\+Chromosome}!base\+\_\+is\+\_\+replicated@{base\+\_\+is\+\_\+replicated}}
+\index{base\+\_\+is\+\_\+replicated@{base\+\_\+is\+\_\+replicated}!src\+::chromosome\+::\+Chromosome@{src\+::chromosome\+::\+Chromosome}}
+\subsubsection{\texorpdfstring{base\+\_\+is\+\_\+replicated()}{base\_is\_replicated()}}
+{\footnotesize\ttfamily def src.\+chromosome.\+Chromosome.\+base\+\_\+is\+\_\+replicated (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{base }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & base The index of a base to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Ture if the given base was replicated. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classsrc_1_1chromosome_1_1Chromosome_ab718a539f93dd0b2d7d5d299de3d9532}\label{classsrc_1_1chromosome_1_1Chromosome_ab718a539f93dd0b2d7d5d299de3d9532}} 
+\index{src\+::chromosome\+::\+Chromosome@{src\+::chromosome\+::\+Chromosome}!get\+\_\+code@{get\+\_\+code}}
+\index{get\+\_\+code@{get\+\_\+code}!src\+::chromosome\+::\+Chromosome@{src\+::chromosome\+::\+Chromosome}}
+\subsubsection{\texorpdfstring{get\+\_\+code()}{get\_code()}}
+{\footnotesize\ttfamily def src.\+chromosome.\+Chromosome.\+get\+\_\+code (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Query the id of the \mbox{\hyperlink{classsrc_1_1chromosome_1_1Chromosome}{Chromosome}}. 
+
+\begin{DoxyReturn}{Returns}
+The code of the \mbox{\hyperlink{classsrc_1_1chromosome_1_1Chromosome}{Chromosome}}. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classsrc_1_1chromosome_1_1Chromosome_a75f3d66aaaf16d67ebdfe03d6eff9d80}\label{classsrc_1_1chromosome_1_1Chromosome_a75f3d66aaaf16d67ebdfe03d6eff9d80}} 
+\index{src\+::chromosome\+::\+Chromosome@{src\+::chromosome\+::\+Chromosome}!is\+\_\+replicated@{is\+\_\+replicated}}
+\index{is\+\_\+replicated@{is\+\_\+replicated}!src\+::chromosome\+::\+Chromosome@{src\+::chromosome\+::\+Chromosome}}
+\subsubsection{\texorpdfstring{is\+\_\+replicated()}{is\_replicated()}}
+{\footnotesize\ttfamily def src.\+chromosome.\+Chromosome.\+is\+\_\+replicated (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Checks if the entire Cromosome is replicated. 
+
+\begin{DoxyReturn}{Returns}
+True if all bases have been replicated. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classsrc_1_1chromosome_1_1Chromosome_a3f37683e2a0d2f50341c3d97f8344c73}{base\+\_\+is\+\_\+replicated}} 
+
+\mbox{\hyperlink{classsrc_1_1chromosome_1_1Chromosome_a038cd43cf60fc2ad2b5775ebe43b34de}{replicate}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classsrc_1_1chromosome_1_1Chromosome_a038cd43cf60fc2ad2b5775ebe43b34de}\label{classsrc_1_1chromosome_1_1Chromosome_a038cd43cf60fc2ad2b5775ebe43b34de}} 
+\index{src\+::chromosome\+::\+Chromosome@{src\+::chromosome\+::\+Chromosome}!replicate@{replicate}}
+\index{replicate@{replicate}!src\+::chromosome\+::\+Chromosome@{src\+::chromosome\+::\+Chromosome}}
+\subsubsection{\texorpdfstring{replicate()}{replicate()}}
+{\footnotesize\ttfamily def src.\+chromosome.\+Chromosome.\+replicate (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{start,  }\item[{}]{end,  }\item[{}]{time }\end{DoxyParamCaption})}
+
+
+
+This function replicates the genome inside a given interval of bases. 
+
+This sets all the bases in the interval as replicated, and increasing the number of replicated bases. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classsrc_1_1chromosome_1_1Chromosome_a10a051b6b89395ffd4eafed6e19d35b8}{number\+\_\+of\+\_\+replicated\+\_\+bases}}. 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em int} & start The index of the first base to replicate. \\
+\hline
+{\em int} & end The index of the last base to replicate. \\
+\hline
+{\em float} & time The time wher the treplication ocurre, I think. T\+O\+DO\+:  true if was a normal (non reverse) transcription. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classsrc_1_1chromosome_1_1Chromosome_a9d9954253a26f26823b2d58ad3cf82ed}\label{classsrc_1_1chromosome_1_1Chromosome_a9d9954253a26f26823b2d58ad3cf82ed}} 
+\index{src\+::chromosome\+::\+Chromosome@{src\+::chromosome\+::\+Chromosome}!set\+\_\+dormant\+\_\+origin\+\_\+activation\+\_\+probability@{set\+\_\+dormant\+\_\+origin\+\_\+activation\+\_\+probability}}
+\index{set\+\_\+dormant\+\_\+origin\+\_\+activation\+\_\+probability@{set\+\_\+dormant\+\_\+origin\+\_\+activation\+\_\+probability}!src\+::chromosome\+::\+Chromosome@{src\+::chromosome\+::\+Chromosome}}
+\subsubsection{\texorpdfstring{set\+\_\+dormant\+\_\+origin\+\_\+activation\+\_\+probability()}{set\_dormant\_origin\_activation\_probability()}}
+{\footnotesize\ttfamily def src.\+chromosome.\+Chromosome.\+set\+\_\+dormant\+\_\+origin\+\_\+activation\+\_\+probability (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{base }\end{DoxyParamCaption})}
+
+
+
+This method changes the probability landscape around the location of a head-\/to-\/head collision. 
+
+It sets the probability landscape with a Gaussian function centered on the collision location, with parameters (a,b,c)\+: height of the mean (a) = 1, mean (b) = 0 and deviation (c) = 10000 bp.
+
+Therefore, the parameterized Gaussian function is defined as\+: \begin{DoxyVerb}                                f(x) = a e^(-(x - b)^2 / (2 c^2))
+                                     = 1 e^(-(x - 0)^2 / (2 10000^2))
+                                     =   e^(-(x^2 / (2 10^8)).
+\end{DoxyVerb}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & base The index of the base around which the probability\+\_\+landscape will be changed. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classsrc_1_1chromosome_1_1Chromosome_a10a051b6b89395ffd4eafed6e19d35b8}\label{classsrc_1_1chromosome_1_1Chromosome_a10a051b6b89395ffd4eafed6e19d35b8}} 
+\index{src\+::chromosome\+::\+Chromosome@{src\+::chromosome\+::\+Chromosome}!number\+\_\+of\+\_\+replicated\+\_\+bases@{number\+\_\+of\+\_\+replicated\+\_\+bases}}
+\index{number\+\_\+of\+\_\+replicated\+\_\+bases@{number\+\_\+of\+\_\+replicated\+\_\+bases}!src\+::chromosome\+::\+Chromosome@{src\+::chromosome\+::\+Chromosome}}
+\subsubsection{\texorpdfstring{number\+\_\+of\+\_\+replicated\+\_\+bases}{number\_of\_replicated\_bases}}
+{\footnotesize\ttfamily src.\+chromosome.\+Chromosome.\+number\+\_\+of\+\_\+replicated\+\_\+bases}
+
+
+
+Stores the number os bases already replicated in that \mbox{\hyperlink{classsrc_1_1chromosome_1_1Chromosome}{Chromosome}}. 
+
+\mbox{\Hypertarget{classsrc_1_1chromosome_1_1Chromosome_a0a465339e3b71993e96bd29898511028}\label{classsrc_1_1chromosome_1_1Chromosome_a0a465339e3b71993e96bd29898511028}} 
+\index{src\+::chromosome\+::\+Chromosome@{src\+::chromosome\+::\+Chromosome}!strand@{strand}}
+\index{strand@{strand}!src\+::chromosome\+::\+Chromosome@{src\+::chromosome\+::\+Chromosome}}
+\subsubsection{\texorpdfstring{strand}{strand}}
+{\footnotesize\ttfamily src.\+chromosome.\+Chromosome.\+strand}
+
+
+
+Stores the time when each base was replicated. 
+
+T\+O\+DO\+: 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/chromosome.\+py\end{DoxyCompactItemize}
