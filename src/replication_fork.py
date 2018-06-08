@@ -14,8 +14,18 @@
     with ReDyMo. If not, see <http://www.gnu.org/licenses/>.
 """
 
+## @package ReDyMo.src.replication_fork
+# Contains the class ReplicationFork.
+
+
+## This class replresents a replication fork.
+# 
 class ReplicationFork:
 
+  ## The constructor.
+  # @param Genome genome The Genome to which this fork belongs to.
+  # @param int speed The speed, in bases per step, at which the
+  # fork replicates.
   def __init__(self, genome, speed):
     self.genome = genome
     self.speed = speed
@@ -24,7 +34,13 @@ class ReplicationFork:
     self.direction = None
 
 #-----------------------------------------------------------------------------#
-
+  ## This function assigns the fork to a given base and chromosome
+  # (genomic location) and replicates this base right away.
+  # @param GenomicLocation genomic_location This is the position to which the
+  # fork will attach.
+  # @param int direction The direction to which the fork should move
+  # (left or right) in a Chromosome.
+  # @param int time The time when this attachment ocuurs in the simulation.
   def attach(self, genomic_location, direction, time):
 
     if self.is_attached():
@@ -39,22 +55,23 @@ class ReplicationFork:
                                time = time)
 
 #-----------------------------------------------------------------------------#
-
+  ## Direction attribute getter.
   def get_direction(self):
     return self.direction
 
 #-----------------------------------------------------------------------------#
-
+  ## Base attribute getter.
   def get_base(self):
     return self.base
 
 #-----------------------------------------------------------------------------#
 
+  ## Chromosome attribute getter.
   def get_chromosome(self):
     return self.chromosome
 
 #-----------------------------------------------------------------------------#
-
+  ## Unbinds the fork from the position where it was.
   def unattach(self):
     self.base = None
     self.chromosome = None
@@ -62,6 +79,11 @@ class ReplicationFork:
 
 #-----------------------------------------------------------------------------#
 
+  ## Advances the fork proportionally to its speed and replicates the bases in
+  # the path.
+  # @param int time The time of the dimluation when these base replications
+  # happen.
+  # @return True if the replication went well.
   def advance(self, time):
     new_base = self.base + self.speed * self.direction
 
@@ -73,7 +95,8 @@ class ReplicationFork:
     return True
 
 #-----------------------------------------------------------------------------#
-
+  ## This function queries the attachment status of the fork.
+  # @return True if the fork is attached to some base in any chromosome.
   def is_attached(self):
     return self.base is not None
 
