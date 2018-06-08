@@ -31,7 +31,7 @@ class Chromosome:
     ## @var int number_of_replicated_bases
     # Stores the number os bases already replicated in that Chromosome.
     
-    ## @var int number_of_regions
+    ## @var int number_of_origins
     # Number of replication origins available for the Chromosome.
 
     ## @var vector strand

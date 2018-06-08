@@ -16,12 +16,19 @@
 
 from random import Random
 
-from genomic_location import GenomicLocation
+from src.genomic_location import GenomicLocation
 
+## @package ReDyMo.src.genome
+# Contains the class Genome.
+
+
+## This class replresents a Genome.
+# It stores a set of Chromosomes and has methods to 
 class Genome:
 
   rng = Random()
 
+  ## The constructor 
   def __init__(self, chromosomes):
     self.chromosomes = chromosomes
 
@@ -40,6 +47,10 @@ class Genome:
 
 #-----------------------------------------------------------------------------#
 
+  ## This function chooses a random base from a random Chromosome.
+  # It does this using random integers from an uniform distribution.
+  # @return A GenomicLocation object referencing the random base selected.
+  # @see GenomicLocation
   def random_genomic_location(self):
     random_chromosome = self.chromosomes[self.rng.randint(0,\
     len(self.chromosomes) - 1)]
@@ -48,11 +59,18 @@ class Genome:
 
 #-----------------------------------------------------------------------------#
 
+  ## Checks if the Genome is entirely replicated.
+  # It checks if all Chromosomes are completely replicated.
+  # @return True if all bases of all Chromosomes have been replicated.
+  # @see Chromosome
   def is_replicated(self):
     return all([chromosome.is_replicated() for chromosome in self.chromosomes])
 
 #-----------------------------------------------------------------------------#
 
+  ## This function calculates the average inter-origin distance across all
+  # Chromosomes in the Genome.
+  # @return The average inter-origin distance measured in number of bases.
   def average_interorigin_distance(self):
     number_of_interorigin_distances = 0
     for chromosome in self.chromosomes:
@@ -62,6 +80,9 @@ class Genome:
 
 #-----------------------------------------------------------------------------#
 
+## This functions calculates the total ammount of bases replicated in each
+# crhomosome.
+# @return The total number of bases replicated in recent step.
   def number_of_replicated_bases_in_this_step(self):
     number_of_replicated_bases_in_this_step = 0
     for chromosome in self.chromosomes:
