@@ -9,7 +9,7 @@ from src.genomic_location import GenomicLocation
 
 
 # @package ReDyMo.test.test_genome
-# Contains the Geneme test class
+# Contains the Genome test class
 
 # This class has tests for each Chromosome method.
 # @see Genome
