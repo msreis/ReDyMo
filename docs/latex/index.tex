@@ -1,0 +1,72 @@
+\subsubsection*{A dynamic model of the replication process in kinetoplastida}
+
+Re\+Dy\+Mo is a Python-\/coded, stochastic dynamic model simulator that reproduces the D\+NA replication process of cellular organisms belonging to the kinetoplastida group. Initially, we focused on {\itshape Trypanosoma brucei} strain {\itshape T\+R\+E\+U927}.
+
+This simulator is capable of\+:
+\begin{DoxyItemize}
+\item Calculation of various relevant properties about the replication process, including S-\/phase duration, mean inter-\/origin distance between replication origin sites, the achieved replication percentage given a time limit, etc.
+\item Storage of information about each step of the simulation, such as the replication stage at each model simulation iteration and whether any collisions happened during a given iteration.
+\item Storage of information regarding the replication timing program, that is, for each base pair it is recorded at which simulation iteration it was replicated.
+\item Simulation of replication-\/transcription conflicts with a variety of input parameters like replication machinery speed and transcription frequency.
+\item Simulation of dormant origins firing.
+\end{DoxyItemize}
+
+\subsubsection*{Requirements}
+
+To run Re\+Dy\+Mo, you only need a system with Python3 installed, which is done by default in most Linux distributions.
+
+\subsubsection*{Database}
+
+The system uses a simple {\itshape S\+Q\+Lite} database. Python already has plenty of functionalities to access and modify {\itshape S\+Q\+Lite} databases. However, if it is necessary to visualize the data in a more intuitive fashion, we recommend the usage of a third-\/party software such as \href{https://sqlitestudio.pl/index.rvt>}{\tt S\+Q\+Lite\+Studio}.
+
+\subsubsection*{Parameters}
+
+In this version of Re\+Dy\+Mo, all parameters are mandatory and are listed below\+:
+\begin{DoxyItemize}
+\item {\itshape organism}\+: Organism name, as saved in the database (remember to add single quotation marks when using space-\/separated names).
+\item {\itshape cells}\+: Number of independent simulations to be made.
+\item {\itshape resources}\+: Number of available forks for the replication process.
+\item {\itshape speed}\+: Movement speed of each replication machinery (in bases per second).
+\item {\itshape period}\+: Time between consecutive activations of a transcription region (in seconds).
+\item {\itshape timeout}\+: Maximum allowed number of iterations of a simulation; if this value is reached, then a simulation is ended even if D\+NA replication is not completed yet.
+\item {\itshape dormant}\+: Flag that either activates (\textquotesingle{}True\textquotesingle{}) or disables (\textquotesingle{}False\textquotesingle{}) the firing of dormant origins.
+\end{DoxyItemize}
+
+\subsubsection*{Running the simulation}
+
+To run the program, the syntax of the main simulator program is the following one\+: 
+\begin{DoxyCode}
+$ ./main.py --organism 'organism' --resources resources\_value --speed speed\_value --cells numbe\_of\_cells
+       --period period\_value --timeout timeout\_value --dormant [True|False]
+\end{DoxyCode}
+
+
+The command above must be executed within the \char`\"{}src\char`\"{} directory. For example, to run a simulation of seven cells of {\itshape T. brucei T\+R\+E\+U927}, with 10 forks, replisome speed of 65 bp/sec, transcription frequency of 150 sec, a timeout of one million iterations and no dormant origin firing, one must type\+: 
+\begin{DoxyCode}
+$ cd src
+$ ./main.py --organism 'Trypanosoma brucei brucei TREU927' --resources 10 --speed 65 --period 150 --cells 7
+       --timeout 1000000 --dormant False
+\end{DoxyCode}
+ The simulation results will be stored into a directory named {\itshape output/\+False\+\_\+10\+\_\+50/}, in which \char`\"{}output\char`\"{} is the outer directory name and the inner directory name of composed of the concatenation of the used parameter values for dormant origin firing, resources and period.
+
+\subsubsection*{Aggregating the simulation results}
+
+If more than one cell is simulated at once, then the results may be averaged through the usage of an aggregator script, whose syntax is the following\+: 
+\begin{DoxyCode}
+$ cd script
+$ ./cell\_output\_aggregator.py *output\_directory* > *aggregation\_file\_and\_path*
+\end{DoxyCode}
+ where {\itshape output\+\_\+directory} is the output directory of the simulation and {\itshape aggregation\+\_\+file\+\_\+and\+\_\+path} is both the path and name for the file containing the result of data aggregation. For example, to aggregate the aforementioned example, one could just type\+: 
+\begin{DoxyCode}
+$ cd script
+$ ./cell\_output\_aggregator.py ../output/False\_10\_150 > ../output/aggregated.txt
+\end{DoxyCode}
+
+
+\subsubsection*{Bug report and contact}
+
+If you have any bug report and/or want to contact for other subjects (e.\+g., to collaborate in this project), please do not hesitate to contact us!
+
+Please, address your message to\+:
+
+msreis at butantan dot gov dot br. 

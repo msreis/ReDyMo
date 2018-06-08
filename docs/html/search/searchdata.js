@@ -1,10 +1,11 @@
 var indexSectionsWithContent =
 {
-  0: "_abcdfginrs",
-  1: "cdfgr",
-  2: "cgs",
-  3: "_abgirs",
-  4: "ns"
+  0: "_abcdfginrst",
+  1: "cdfgrt",
+  2: "r",
+  3: "_abginrst",
+  4: "ns",
+  5: "r"
 };
 
 var indexSectionNames =
@@ -13,7 +14,8 @@ var indexSectionNames =
   1: "classes",
   2: "namespaces",
   3: "functions",
-  4: "variables"
+  4: "variables",
+  5: "pages"
 };
 
 var indexSectionLabels =
@@ -22,6 +24,7 @@ var indexSectionLabels =
   1: "Classes",
   2: "Namespaces",
   3: "Functions",
-  4: "Variables"
+  4: "Variables",
+  5: "Pages"
 };
 

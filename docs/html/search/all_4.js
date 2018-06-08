@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['datamanager',['DataManager',['../classsrc_1_1data__manager_1_1DataManager.html',1,'src::data_manager']]]
+  ['datamanager',['DataManager',['../classReDyMo_1_1src_1_1data__manager_1_1DataManager.html',1,'ReDyMo::src::data_manager']]]
 ];

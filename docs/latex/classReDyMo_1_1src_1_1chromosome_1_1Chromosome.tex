@@ -1,0 +1,256 @@
+\hypertarget{classReDyMo_1_1src_1_1chromosome_1_1Chromosome}{}\section{Re\+Dy\+Mo.\+src.\+chromosome.\+Chromosome Class Reference}
+\label{classReDyMo_1_1src_1_1chromosome_1_1Chromosome}\index{Re\+Dy\+Mo.\+src.\+chromosome.\+Chromosome@{Re\+Dy\+Mo.\+src.\+chromosome.\+Chromosome}}
+
+
+This class represents a \mbox{\hyperlink{classReDyMo_1_1src_1_1chromosome_1_1Chromosome}{Chromosome}}.  
+
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_a23a1edc86d3d3cd3d8284911a66271f5}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, code, length, probability\+\_\+landscape, transcription\+\_\+regions)
+\begin{DoxyCompactList}\small\item\em The constructor for a \mbox{\hyperlink{classReDyMo_1_1src_1_1chromosome_1_1Chromosome}{Chromosome}} object. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_a2af2acd01f59ca72cdfc8e714f9bc3f8}{\+\_\+\+\_\+len\+\_\+\+\_\+}} (self)
+\begin{DoxyCompactList}\small\item\em Query the lenght of the \mbox{\hyperlink{classReDyMo_1_1src_1_1chromosome_1_1Chromosome}{Chromosome}}. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_a95d9a66f3651a2e6ac0f7141f966c17d}{\+\_\+\+\_\+str\+\_\+\+\_\+}} (self)
+\begin{DoxyCompactList}\small\item\em Print method for better visualization. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_a1dba7152914a8f8006a5ddfcaad82c31}{base\+\_\+is\+\_\+replicated}} (self, base)
+\item 
+def \mbox{\hyperlink{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_ae1793cc7315be7cffaf4c1ab9385ba89}{activation\+\_\+probability}} (self, base)
+\begin{DoxyCompactList}\small\item\em Query the activation probabilty of a base. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_a693010ebf7c4b74df6b1a70f39ab245d}{set\+\_\+dormant\+\_\+origin\+\_\+activation\+\_\+probability}} (self, base)
+\begin{DoxyCompactList}\small\item\em This method changes the probability landscape around the location of a head-\/to-\/head collision. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_aac8462677b62589ca8f103c047c5c014}{replicate}} (self, start, end, time)
+\begin{DoxyCompactList}\small\item\em This function replicates the genome inside a given interval of bases. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_af22490836eb322b1dc55eaf10d14c7bb}{is\+\_\+replicated}} (self)
+\begin{DoxyCompactList}\small\item\em Checks if the entire Cromosome is replicated. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_a8fc8b953b0ba394a0dfc80fcdbcd274e}{get\+\_\+code}} (self)
+\begin{DoxyCompactList}\small\item\em Query the id of the \mbox{\hyperlink{classReDyMo_1_1src_1_1chromosome_1_1Chromosome}{Chromosome}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_abdbb8d3dd6cd16474a044a7d33e5f674}\label{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_abdbb8d3dd6cd16474a044a7d33e5f674}} 
+{\bfseries code}
+\item 
+\mbox{\Hypertarget{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_ac53ec626e86706cfc4d5ee66ecb49c0d}\label{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_ac53ec626e86706cfc4d5ee66ecb49c0d}} 
+{\bfseries length}
+\item 
+\mbox{\hyperlink{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_ad6b5e4f18b081ac4cf8271d1ec216141}{strand}}
+\begin{DoxyCompactList}\small\item\em Stores the time when each base was replicated. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_a53c0e03a5e99b3e93ef03134de6a9222}\label{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_a53c0e03a5e99b3e93ef03134de6a9222}} 
+{\bfseries activation\+\_\+probabilities}
+\item 
+\mbox{\hyperlink{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_a0ce8da5c0773f1d5d6e668b26d498875}{number\+\_\+of\+\_\+replicated\+\_\+bases}}
+\begin{DoxyCompactList}\small\item\em Stores the number os bases already replicated in that \mbox{\hyperlink{classReDyMo_1_1src_1_1chromosome_1_1Chromosome}{Chromosome}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_ab8d8356cc5954967b754feb3c5da8c16}{number\+\_\+of\+\_\+origins}}
+\begin{DoxyCompactList}\small\item\em Number of replication origins available for the \mbox{\hyperlink{classReDyMo_1_1src_1_1chromosome_1_1Chromosome}{Chromosome}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_a32067e4ed445a5d5b425cca7bb9f7f9d}\label{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_a32067e4ed445a5d5b425cca7bb9f7f9d}} 
+{\bfseries transcription\+\_\+regions}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class represents a \mbox{\hyperlink{classReDyMo_1_1src_1_1chromosome_1_1Chromosome}{Chromosome}}. 
+
+It stores relevant data about a \mbox{\hyperlink{classReDyMo_1_1src_1_1chromosome_1_1Chromosome}{Chromosome}}, such as lenght, number of replicated bases and has methods to query and modify the \mbox{\hyperlink{classReDyMo_1_1src_1_1chromosome_1_1Chromosome}{Chromosome}}. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_a23a1edc86d3d3cd3d8284911a66271f5}\label{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_a23a1edc86d3d3cd3d8284911a66271f5}} 
+\index{Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome@{Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome@{Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome}}
+\subsubsection{\texorpdfstring{\+\_\+\+\_\+init\+\_\+\+\_\+()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def Re\+Dy\+Mo.\+src.\+chromosome.\+Chromosome.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{code,  }\item[{}]{length,  }\item[{}]{probability\+\_\+landscape,  }\item[{}]{transcription\+\_\+regions }\end{DoxyParamCaption})}
+
+
+
+The constructor for a \mbox{\hyperlink{classReDyMo_1_1src_1_1chromosome_1_1Chromosome}{Chromosome}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em code} & The id of the \mbox{\hyperlink{classReDyMo_1_1src_1_1chromosome_1_1Chromosome}{Chromosome}}. T\+O\+DO\+: \\
+\hline
+{\em lenght} & The lenght of the chromosome \\
+\hline
+{\em probabiliy\+\_\+landscape} & The probability of each base to be an \textbackslash{} activation point \\
+\hline
+{\em transcription\+\_\+regions} & Still dont know what it does T\+O\+DO\+: \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_a2af2acd01f59ca72cdfc8e714f9bc3f8}\label{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_a2af2acd01f59ca72cdfc8e714f9bc3f8}} 
+\index{Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome@{Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome}!\+\_\+\+\_\+len\+\_\+\+\_\+@{\+\_\+\+\_\+len\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+len\+\_\+\+\_\+@{\+\_\+\+\_\+len\+\_\+\+\_\+}!Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome@{Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome}}
+\subsubsection{\texorpdfstring{\+\_\+\+\_\+len\+\_\+\+\_\+()}{\_\_len\_\_()}}
+{\footnotesize\ttfamily def Re\+Dy\+Mo.\+src.\+chromosome.\+Chromosome.\+\_\+\+\_\+len\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Query the lenght of the \mbox{\hyperlink{classReDyMo_1_1src_1_1chromosome_1_1Chromosome}{Chromosome}}. 
+
+\begin{DoxyReturn}{Returns}
+The lenght of the \mbox{\hyperlink{classReDyMo_1_1src_1_1chromosome_1_1Chromosome}{Chromosome}}. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_a95d9a66f3651a2e6ac0f7141f966c17d}\label{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_a95d9a66f3651a2e6ac0f7141f966c17d}} 
+\index{Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome@{Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome}!\+\_\+\+\_\+str\+\_\+\+\_\+@{\+\_\+\+\_\+str\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+str\+\_\+\+\_\+@{\+\_\+\+\_\+str\+\_\+\+\_\+}!Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome@{Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome}}
+\subsubsection{\texorpdfstring{\+\_\+\+\_\+str\+\_\+\+\_\+()}{\_\_str\_\_()}}
+{\footnotesize\ttfamily def Re\+Dy\+Mo.\+src.\+chromosome.\+Chromosome.\+\_\+\+\_\+str\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Print method for better visualization. 
+
+\begin{DoxyReturn}{Returns}
+A string representation of the chromosome state. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_ae1793cc7315be7cffaf4c1ab9385ba89}\label{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_ae1793cc7315be7cffaf4c1ab9385ba89}} 
+\index{Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome@{Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome}!activation\+\_\+probability@{activation\+\_\+probability}}
+\index{activation\+\_\+probability@{activation\+\_\+probability}!Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome@{Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome}}
+\subsubsection{\texorpdfstring{activation\+\_\+probability()}{activation\_probability()}}
+{\footnotesize\ttfamily def Re\+Dy\+Mo.\+src.\+chromosome.\+Chromosome.\+activation\+\_\+probability (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{base }\end{DoxyParamCaption})}
+
+
+
+Query the activation probabilty of a base. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & base The index of a base to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The probability of a dormant origin to attach to the given base based on the probability\+\_\+landscape. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+probability\+\_\+landscape 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_a1dba7152914a8f8006a5ddfcaad82c31}\label{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_a1dba7152914a8f8006a5ddfcaad82c31}} 
+\index{Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome@{Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome}!base\+\_\+is\+\_\+replicated@{base\+\_\+is\+\_\+replicated}}
+\index{base\+\_\+is\+\_\+replicated@{base\+\_\+is\+\_\+replicated}!Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome@{Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome}}
+\subsubsection{\texorpdfstring{base\+\_\+is\+\_\+replicated()}{base\_is\_replicated()}}
+{\footnotesize\ttfamily def Re\+Dy\+Mo.\+src.\+chromosome.\+Chromosome.\+base\+\_\+is\+\_\+replicated (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{base }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & base The index of a base to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Ture if the given base was replicated. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_a8fc8b953b0ba394a0dfc80fcdbcd274e}\label{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_a8fc8b953b0ba394a0dfc80fcdbcd274e}} 
+\index{Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome@{Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome}!get\+\_\+code@{get\+\_\+code}}
+\index{get\+\_\+code@{get\+\_\+code}!Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome@{Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome}}
+\subsubsection{\texorpdfstring{get\+\_\+code()}{get\_code()}}
+{\footnotesize\ttfamily def Re\+Dy\+Mo.\+src.\+chromosome.\+Chromosome.\+get\+\_\+code (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Query the id of the \mbox{\hyperlink{classReDyMo_1_1src_1_1chromosome_1_1Chromosome}{Chromosome}}. 
+
+\begin{DoxyReturn}{Returns}
+The code of the \mbox{\hyperlink{classReDyMo_1_1src_1_1chromosome_1_1Chromosome}{Chromosome}}. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_af22490836eb322b1dc55eaf10d14c7bb}\label{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_af22490836eb322b1dc55eaf10d14c7bb}} 
+\index{Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome@{Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome}!is\+\_\+replicated@{is\+\_\+replicated}}
+\index{is\+\_\+replicated@{is\+\_\+replicated}!Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome@{Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome}}
+\subsubsection{\texorpdfstring{is\+\_\+replicated()}{is\_replicated()}}
+{\footnotesize\ttfamily def Re\+Dy\+Mo.\+src.\+chromosome.\+Chromosome.\+is\+\_\+replicated (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Checks if the entire Cromosome is replicated. 
+
+\begin{DoxyReturn}{Returns}
+True if all bases have been replicated. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_a1dba7152914a8f8006a5ddfcaad82c31}{base\+\_\+is\+\_\+replicated}} 
+
+\mbox{\hyperlink{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_aac8462677b62589ca8f103c047c5c014}{replicate}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_aac8462677b62589ca8f103c047c5c014}\label{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_aac8462677b62589ca8f103c047c5c014}} 
+\index{Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome@{Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome}!replicate@{replicate}}
+\index{replicate@{replicate}!Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome@{Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome}}
+\subsubsection{\texorpdfstring{replicate()}{replicate()}}
+{\footnotesize\ttfamily def Re\+Dy\+Mo.\+src.\+chromosome.\+Chromosome.\+replicate (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{start,  }\item[{}]{end,  }\item[{}]{time }\end{DoxyParamCaption})}
+
+
+
+This function replicates the genome inside a given interval of bases. 
+
+This sets all the bases in the interval as replicated, and increasing the number of replicated bases. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_a0ce8da5c0773f1d5d6e668b26d498875}{number\+\_\+of\+\_\+replicated\+\_\+bases}}. 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em int} & start The index of the first base to replicate. \\
+\hline
+{\em int} & end The index of the last base to replicate. \\
+\hline
+{\em float} & time The time wher the treplication ocurre, I think. T\+O\+DO\+:  true if was a normal (non reverse) transcription. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_a693010ebf7c4b74df6b1a70f39ab245d}\label{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_a693010ebf7c4b74df6b1a70f39ab245d}} 
+\index{Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome@{Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome}!set\+\_\+dormant\+\_\+origin\+\_\+activation\+\_\+probability@{set\+\_\+dormant\+\_\+origin\+\_\+activation\+\_\+probability}}
+\index{set\+\_\+dormant\+\_\+origin\+\_\+activation\+\_\+probability@{set\+\_\+dormant\+\_\+origin\+\_\+activation\+\_\+probability}!Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome@{Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome}}
+\subsubsection{\texorpdfstring{set\+\_\+dormant\+\_\+origin\+\_\+activation\+\_\+probability()}{set\_dormant\_origin\_activation\_probability()}}
+{\footnotesize\ttfamily def Re\+Dy\+Mo.\+src.\+chromosome.\+Chromosome.\+set\+\_\+dormant\+\_\+origin\+\_\+activation\+\_\+probability (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{base }\end{DoxyParamCaption})}
+
+
+
+This method changes the probability landscape around the location of a head-\/to-\/head collision. 
+
+It sets the probability landscape with a Gaussian function centered on the collision location, with parameters (a,b,c)\+: height of the mean (a) = 1, mean (b) = 0 and deviation (c) = 10000 bp.
+
+Therefore, the parameterized Gaussian function is defined as\+: \begin{DoxyVerb}                                f(x) = a e^(-(x - b)^2 / (2 c^2))
+                                     = 1 e^(-(x - 0)^2 / (2 10000^2))
+                                     =   e^(-(x^2 / (2 10^8)).
+\end{DoxyVerb}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & base The index of the base around which the probability\+\_\+landscape will be changed. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_ab8d8356cc5954967b754feb3c5da8c16}\label{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_ab8d8356cc5954967b754feb3c5da8c16}} 
+\index{Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome@{Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome}!number\+\_\+of\+\_\+origins@{number\+\_\+of\+\_\+origins}}
+\index{number\+\_\+of\+\_\+origins@{number\+\_\+of\+\_\+origins}!Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome@{Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome}}
+\subsubsection{\texorpdfstring{number\+\_\+of\+\_\+origins}{number\_of\_origins}}
+{\footnotesize\ttfamily Re\+Dy\+Mo.\+src.\+chromosome.\+Chromosome.\+number\+\_\+of\+\_\+origins}
+
+
+
+Number of replication origins available for the \mbox{\hyperlink{classReDyMo_1_1src_1_1chromosome_1_1Chromosome}{Chromosome}}. 
+
+\mbox{\Hypertarget{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_a0ce8da5c0773f1d5d6e668b26d498875}\label{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_a0ce8da5c0773f1d5d6e668b26d498875}} 
+\index{Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome@{Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome}!number\+\_\+of\+\_\+replicated\+\_\+bases@{number\+\_\+of\+\_\+replicated\+\_\+bases}}
+\index{number\+\_\+of\+\_\+replicated\+\_\+bases@{number\+\_\+of\+\_\+replicated\+\_\+bases}!Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome@{Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome}}
+\subsubsection{\texorpdfstring{number\+\_\+of\+\_\+replicated\+\_\+bases}{number\_of\_replicated\_bases}}
+{\footnotesize\ttfamily Re\+Dy\+Mo.\+src.\+chromosome.\+Chromosome.\+number\+\_\+of\+\_\+replicated\+\_\+bases}
+
+
+
+Stores the number os bases already replicated in that \mbox{\hyperlink{classReDyMo_1_1src_1_1chromosome_1_1Chromosome}{Chromosome}}. 
+
+\mbox{\Hypertarget{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_ad6b5e4f18b081ac4cf8271d1ec216141}\label{classReDyMo_1_1src_1_1chromosome_1_1Chromosome_ad6b5e4f18b081ac4cf8271d1ec216141}} 
+\index{Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome@{Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome}!strand@{strand}}
+\index{strand@{strand}!Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome@{Re\+Dy\+Mo\+::src\+::chromosome\+::\+Chromosome}}
+\subsubsection{\texorpdfstring{strand}{strand}}
+{\footnotesize\ttfamily Re\+Dy\+Mo.\+src.\+chromosome.\+Chromosome.\+strand}
+
+
+
+Stores the time when each base was replicated. 
+
+T\+O\+DO\+: 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/chromosome.\+py\end{DoxyCompactItemize}

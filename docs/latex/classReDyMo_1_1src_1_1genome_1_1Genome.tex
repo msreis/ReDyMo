@@ -1,0 +1,95 @@
+\hypertarget{classReDyMo_1_1src_1_1genome_1_1Genome}{}\section{Re\+Dy\+Mo.\+src.\+genome.\+Genome Class Reference}
+\label{classReDyMo_1_1src_1_1genome_1_1Genome}\index{Re\+Dy\+Mo.\+src.\+genome.\+Genome@{Re\+Dy\+Mo.\+src.\+genome.\+Genome}}
+
+
+This class replresents a \mbox{\hyperlink{classReDyMo_1_1src_1_1genome_1_1Genome}{Genome}}.  
+
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classReDyMo_1_1src_1_1genome_1_1Genome_a2b10f0f1f2fab2f4247abcb2cb778f3c}\label{classReDyMo_1_1src_1_1genome_1_1Genome_a2b10f0f1f2fab2f4247abcb2cb778f3c}} 
+def \mbox{\hyperlink{classReDyMo_1_1src_1_1genome_1_1Genome_a2b10f0f1f2fab2f4247abcb2cb778f3c}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, chromosomes)
+\begin{DoxyCompactList}\small\item\em The constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classReDyMo_1_1src_1_1genome_1_1Genome_a740e2b6724ec98af5c42c31575816815}\label{classReDyMo_1_1src_1_1genome_1_1Genome_a740e2b6724ec98af5c42c31575816815}} 
+def {\bfseries \+\_\+\+\_\+len\+\_\+\+\_\+} (self)
+\item 
+\mbox{\Hypertarget{classReDyMo_1_1src_1_1genome_1_1Genome_a7e9435861195e29ecb2130430ec909ef}\label{classReDyMo_1_1src_1_1genome_1_1Genome_a7e9435861195e29ecb2130430ec909ef}} 
+def {\bfseries \+\_\+\+\_\+iter\+\_\+\+\_\+} (self)
+\item 
+def \mbox{\hyperlink{classReDyMo_1_1src_1_1genome_1_1Genome_a52ff5976c29d7f3308634d1806f0e6e5}{random\+\_\+genomic\+\_\+location}} (self)
+\begin{DoxyCompactList}\small\item\em This function chooses a random base from a random Chromosome. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classReDyMo_1_1src_1_1genome_1_1Genome_a8351b706fc6f5c0f218c1dab6c04da46}{is\+\_\+replicated}} (self)
+\begin{DoxyCompactList}\small\item\em Checks if the \mbox{\hyperlink{classReDyMo_1_1src_1_1genome_1_1Genome}{Genome}} is entirely replicated. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classReDyMo_1_1src_1_1genome_1_1Genome_a1c933cf2a91ad7dddeed4bc940c47ad2}{average\+\_\+interorigin\+\_\+distance}} (self)
+\begin{DoxyCompactList}\small\item\em This function calculates the average inter-\/origin distance across all Chromosomes in the \mbox{\hyperlink{classReDyMo_1_1src_1_1genome_1_1Genome}{Genome}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classReDyMo_1_1src_1_1genome_1_1Genome_a90aa6bae9a3b2eeb3c9f63dd52e17ca6}\label{classReDyMo_1_1src_1_1genome_1_1Genome_a90aa6bae9a3b2eeb3c9f63dd52e17ca6}} 
+{\bfseries chromosomes}
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classReDyMo_1_1src_1_1genome_1_1Genome_a08e3ad3e0d245d003407891178177ad5}\label{classReDyMo_1_1src_1_1genome_1_1Genome_a08e3ad3e0d245d003407891178177ad5}} 
+{\bfseries rng} = Random()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class replresents a \mbox{\hyperlink{classReDyMo_1_1src_1_1genome_1_1Genome}{Genome}}. 
+
+It stores a set of Chromosomes and has methods to 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classReDyMo_1_1src_1_1genome_1_1Genome_a1c933cf2a91ad7dddeed4bc940c47ad2}\label{classReDyMo_1_1src_1_1genome_1_1Genome_a1c933cf2a91ad7dddeed4bc940c47ad2}} 
+\index{Re\+Dy\+Mo\+::src\+::genome\+::\+Genome@{Re\+Dy\+Mo\+::src\+::genome\+::\+Genome}!average\+\_\+interorigin\+\_\+distance@{average\+\_\+interorigin\+\_\+distance}}
+\index{average\+\_\+interorigin\+\_\+distance@{average\+\_\+interorigin\+\_\+distance}!Re\+Dy\+Mo\+::src\+::genome\+::\+Genome@{Re\+Dy\+Mo\+::src\+::genome\+::\+Genome}}
+\subsubsection{\texorpdfstring{average\+\_\+interorigin\+\_\+distance()}{average\_interorigin\_distance()}}
+{\footnotesize\ttfamily def Re\+Dy\+Mo.\+src.\+genome.\+Genome.\+average\+\_\+interorigin\+\_\+distance (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+This function calculates the average inter-\/origin distance across all Chromosomes in the \mbox{\hyperlink{classReDyMo_1_1src_1_1genome_1_1Genome}{Genome}}. 
+
+\begin{DoxyReturn}{Returns}
+The average inter-\/origin distance measured in number of bases. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classReDyMo_1_1src_1_1genome_1_1Genome_a8351b706fc6f5c0f218c1dab6c04da46}\label{classReDyMo_1_1src_1_1genome_1_1Genome_a8351b706fc6f5c0f218c1dab6c04da46}} 
+\index{Re\+Dy\+Mo\+::src\+::genome\+::\+Genome@{Re\+Dy\+Mo\+::src\+::genome\+::\+Genome}!is\+\_\+replicated@{is\+\_\+replicated}}
+\index{is\+\_\+replicated@{is\+\_\+replicated}!Re\+Dy\+Mo\+::src\+::genome\+::\+Genome@{Re\+Dy\+Mo\+::src\+::genome\+::\+Genome}}
+\subsubsection{\texorpdfstring{is\+\_\+replicated()}{is\_replicated()}}
+{\footnotesize\ttfamily def Re\+Dy\+Mo.\+src.\+genome.\+Genome.\+is\+\_\+replicated (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Checks if the \mbox{\hyperlink{classReDyMo_1_1src_1_1genome_1_1Genome}{Genome}} is entirely replicated. 
+
+It checks if all Chromosomes are completely replicated. \begin{DoxyReturn}{Returns}
+True if all bases of all Chromosomes have been replicated. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+Chromosome 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classReDyMo_1_1src_1_1genome_1_1Genome_a52ff5976c29d7f3308634d1806f0e6e5}\label{classReDyMo_1_1src_1_1genome_1_1Genome_a52ff5976c29d7f3308634d1806f0e6e5}} 
+\index{Re\+Dy\+Mo\+::src\+::genome\+::\+Genome@{Re\+Dy\+Mo\+::src\+::genome\+::\+Genome}!random\+\_\+genomic\+\_\+location@{random\+\_\+genomic\+\_\+location}}
+\index{random\+\_\+genomic\+\_\+location@{random\+\_\+genomic\+\_\+location}!Re\+Dy\+Mo\+::src\+::genome\+::\+Genome@{Re\+Dy\+Mo\+::src\+::genome\+::\+Genome}}
+\subsubsection{\texorpdfstring{random\+\_\+genomic\+\_\+location()}{random\_genomic\_location()}}
+{\footnotesize\ttfamily def Re\+Dy\+Mo.\+src.\+genome.\+Genome.\+random\+\_\+genomic\+\_\+location (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+This function chooses a random base from a random Chromosome. 
+
+It does this using random integers from an uniform distribution. \begin{DoxyReturn}{Returns}
+A Genomic\+Location object referencing the random base selected. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+Genomic\+Location 
+\end{DoxySeeAlso}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/genome.\+py\end{DoxyCompactItemize}
