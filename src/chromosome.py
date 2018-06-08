@@ -82,7 +82,7 @@ class Chromosome:
 #-----------------------------------------------------------------------------#
 
     ## Query the activation probabilty of a base. 
-    # @param int base The index of a base to check.
+    # @param int base The index of a base to check. Note that it starts at 0.
     # @return The probability of a dormant origin to attach to the given
     # base based on the probability_landscape. 
     # @see probability_landscape
@@ -103,7 +103,7 @@ class Chromosome:
     #                                          =   e^(-(x^2 / (2 10^8)).
     #
     # @param int base The index of the base around which the
-    # probability_landscape will be changed.
+    # probability_landscape will be changed. Note that it starts at 0.
     def set_dormant_origin_activation_probability(self, base):
         c = 10000
         leftmost_base = base - 2 * c    # 2 deviations left

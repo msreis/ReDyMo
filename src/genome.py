@@ -23,7 +23,8 @@ from src.genomic_location import GenomicLocation
 
 
 ## This class replresents a Genome.
-# It stores a set of Chromosomes and has methods to 
+# It stores a set of Chromosomes and has methods to manipulate, replicate and 
+# verify a Genome.
 class Genome:
 
   rng = Random()

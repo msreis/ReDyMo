@@ -18,19 +18,34 @@
 import random
 
 
+## @package ReDyMo.src.genomic_location
+# Contains the class GenomicLocation.
+
+
+## This class replresents a base from a chromosome called a Genomic Location.
+# It stores a set of Chromosomes and has methods to check and query a base 
+# from a Genome.
 class GenomicLocation:
 
+  ## The constructor.
+  # @param int base The index of the base that this location represents.
+  # @param Chromosome chromosome The Chromosome which contains the given base.
+  # @see Chromosome
   def __init__(self, base, chromosome):
     self.base = base
     self.chromosome = chromosome
 
 #-----------------------------------------------------------------------------#
 
+  ## Queries if the particular base has been replicated.
+  # @return True if the base is replicated.
   def is_replicated(self):
     return self.chromosome.base_is_replicated(base=self.base)
 
 #-----------------------------------------------------------------------------#
 
+  ## Tests the probability of the base to be activated
+  # @return True if the base will be activated
   def will_activate(self):
     return random.random() < self.chromosome.activation_probability\
     (base=self.base)
