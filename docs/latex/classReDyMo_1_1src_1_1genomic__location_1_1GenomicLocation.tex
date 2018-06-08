@@ -1,17 +1,19 @@
 \hypertarget{classReDyMo_1_1src_1_1genomic__location_1_1GenomicLocation}{}\section{Re\+Dy\+Mo.\+src.\+genomic\+\_\+location.\+Genomic\+Location Class Reference}
 \label{classReDyMo_1_1src_1_1genomic__location_1_1GenomicLocation}\index{Re\+Dy\+Mo.\+src.\+genomic\+\_\+location.\+Genomic\+Location@{Re\+Dy\+Mo.\+src.\+genomic\+\_\+location.\+Genomic\+Location}}
+
+
+This class replresents a base from a chromosome called a Genomic Location.  
+
+
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classReDyMo_1_1src_1_1genomic__location_1_1GenomicLocation_ad2fc819130c39efcd02df0b35e6305b3}\label{classReDyMo_1_1src_1_1genomic__location_1_1GenomicLocation_ad2fc819130c39efcd02df0b35e6305b3}} 
-def {\bfseries \+\_\+\+\_\+init\+\_\+\+\_\+} (self, base, chromosome)
-\item 
-\mbox{\Hypertarget{classReDyMo_1_1src_1_1genomic__location_1_1GenomicLocation_a4f524b6f975b0b22af1b82aad57af0b3}\label{classReDyMo_1_1src_1_1genomic__location_1_1GenomicLocation_a4f524b6f975b0b22af1b82aad57af0b3}} 
-def {\bfseries is\+\_\+replicated} (self)
-\item 
-\mbox{\Hypertarget{classReDyMo_1_1src_1_1genomic__location_1_1GenomicLocation_a2cabef230d8c2b1278a92e0e4ff24267}\label{classReDyMo_1_1src_1_1genomic__location_1_1GenomicLocation_a2cabef230d8c2b1278a92e0e4ff24267}} 
-def {\bfseries will\+\_\+activate} (self)
-\end{DoxyCompactItemize}
+def \mbox{\hyperlink{classReDyMo_1_1src_1_1genomic__location_1_1GenomicLocation_ad2fc819130c39efcd02df0b35e6305b3}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, base, chromosome)
+\begin{DoxyCompactList}\small\item\em The constructor. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classReDyMo_1_1src_1_1genomic__location_1_1GenomicLocation_a4f524b6f975b0b22af1b82aad57af0b3}{is\+\_\+replicated}} (self)
+\begin{DoxyCompactList}\small\item\em Queries if the particular base has been replicated. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classReDyMo_1_1src_1_1genomic__location_1_1GenomicLocation_a2cabef230d8c2b1278a92e0e4ff24267}{will\+\_\+activate}} (self)
+\begin{DoxyCompactList}\small\item\em Tests the probability of the base to be activated. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -21,6 +23,63 @@ def {\bfseries will\+\_\+activate} (self)
 \mbox{\Hypertarget{classReDyMo_1_1src_1_1genomic__location_1_1GenomicLocation_abb84c133360e933e46305c2c48aac776}\label{classReDyMo_1_1src_1_1genomic__location_1_1GenomicLocation_abb84c133360e933e46305c2c48aac776}} 
 {\bfseries chromosome}
 \end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class replresents a base from a chromosome called a Genomic Location. 
+
+It stores a set of Chromosomes and has methods to check and query a base from a Genome. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classReDyMo_1_1src_1_1genomic__location_1_1GenomicLocation_ad2fc819130c39efcd02df0b35e6305b3}\label{classReDyMo_1_1src_1_1genomic__location_1_1GenomicLocation_ad2fc819130c39efcd02df0b35e6305b3}} 
+\index{Re\+Dy\+Mo\+::src\+::genomic\+\_\+location\+::\+Genomic\+Location@{Re\+Dy\+Mo\+::src\+::genomic\+\_\+location\+::\+Genomic\+Location}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!Re\+Dy\+Mo\+::src\+::genomic\+\_\+location\+::\+Genomic\+Location@{Re\+Dy\+Mo\+::src\+::genomic\+\_\+location\+::\+Genomic\+Location}}
+\subsubsection{\texorpdfstring{\+\_\+\+\_\+init\+\_\+\+\_\+()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def Re\+Dy\+Mo.\+src.\+genomic\+\_\+location.\+Genomic\+Location.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{base,  }\item[{}]{chromosome }\end{DoxyParamCaption})}
+
+
+
+The constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & base The index of the base that this location represents. \\
+\hline
+{\em Chromosome} & chromosome The Chromosome which contains the given base. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+Chromosome 
+\end{DoxySeeAlso}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classReDyMo_1_1src_1_1genomic__location_1_1GenomicLocation_a4f524b6f975b0b22af1b82aad57af0b3}\label{classReDyMo_1_1src_1_1genomic__location_1_1GenomicLocation_a4f524b6f975b0b22af1b82aad57af0b3}} 
+\index{Re\+Dy\+Mo\+::src\+::genomic\+\_\+location\+::\+Genomic\+Location@{Re\+Dy\+Mo\+::src\+::genomic\+\_\+location\+::\+Genomic\+Location}!is\+\_\+replicated@{is\+\_\+replicated}}
+\index{is\+\_\+replicated@{is\+\_\+replicated}!Re\+Dy\+Mo\+::src\+::genomic\+\_\+location\+::\+Genomic\+Location@{Re\+Dy\+Mo\+::src\+::genomic\+\_\+location\+::\+Genomic\+Location}}
+\subsubsection{\texorpdfstring{is\+\_\+replicated()}{is\_replicated()}}
+{\footnotesize\ttfamily def Re\+Dy\+Mo.\+src.\+genomic\+\_\+location.\+Genomic\+Location.\+is\+\_\+replicated (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Queries if the particular base has been replicated. 
+
+\begin{DoxyReturn}{Returns}
+True if the base is replicated. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classReDyMo_1_1src_1_1genomic__location_1_1GenomicLocation_a2cabef230d8c2b1278a92e0e4ff24267}\label{classReDyMo_1_1src_1_1genomic__location_1_1GenomicLocation_a2cabef230d8c2b1278a92e0e4ff24267}} 
+\index{Re\+Dy\+Mo\+::src\+::genomic\+\_\+location\+::\+Genomic\+Location@{Re\+Dy\+Mo\+::src\+::genomic\+\_\+location\+::\+Genomic\+Location}!will\+\_\+activate@{will\+\_\+activate}}
+\index{will\+\_\+activate@{will\+\_\+activate}!Re\+Dy\+Mo\+::src\+::genomic\+\_\+location\+::\+Genomic\+Location@{Re\+Dy\+Mo\+::src\+::genomic\+\_\+location\+::\+Genomic\+Location}}
+\subsubsection{\texorpdfstring{will\+\_\+activate()}{will\_activate()}}
+{\footnotesize\ttfamily def Re\+Dy\+Mo.\+src.\+genomic\+\_\+location.\+Genomic\+Location.\+will\+\_\+activate (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Tests the probability of the base to be activated. 
+
+\begin{DoxyReturn}{Returns}
+True if the base will be activated 
+\end{DoxyReturn}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
