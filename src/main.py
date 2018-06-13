@@ -21,6 +21,8 @@ import shutil
 import sys
 from multiprocessing import Pool
 
+sys.path.append('/home/msreis/projects/ReDyMo/')
+
 from chromosome import Chromosome
 from data_manager import DataManager
 from fork_manager import ForkManager
@@ -31,14 +33,14 @@ from genome import Genome
 def output(simulation_number,dormant,resources,speed,time,iod,genome,period):
 
   # Prepare directories for this simulation.
-  #   
+  #
   os.makedirs('../output', exist_ok=True)
 
   directory = '../output/' + str(dormant) + '_' +\
               str(resources) + '_' + str(period) + '/'
 
   os.makedirs(directory, exist_ok=True)
-   
+
   simulation = 'simulation_{}/'.format(simulation_number)
 
   os.makedirs(directory + simulation)
@@ -62,9 +64,13 @@ def main(args):
   period = args['transcription_period']
   simulation_timeout = args['timeout']
   dormant = args['has_dormant']
-  
+
+  # Parameter that specifies the number of iterations between two
+  # different attempts of origin firing (default value == 1).
+  #
+  alpha = 1
   time = 0
-       
+
   number_of_collisions = 0
 
   print('Starting simulation...', end='')
@@ -87,14 +93,19 @@ def main(args):
       fork_manager.check_replication_transcription_conflicts\
       (time=time, period=period, has_dormant=dormant)
 
-    # One attempt for each unattached fork (this number can be changed)
+    # At an alpha iteration, it makes one attempt for each unattached fork.
     #
-    for attempt in range(fork_manager.number_of_free_forks):
-      genomic_location = genome.random_genomic_location()
-      if not genomic_location.is_replicated()\
-      and genomic_location.will_activate()\
-      and fork_manager.number_of_free_forks >= 2:
-        fork_manager.attach_forks(genomic_location=genomic_location, time=time)
+    if time % alpha == 0 and not genome.is_replicated():
+    
+      for attempt in range(fork_manager.number_of_free_forks):
+ 
+        genomic_location = genome.random_genomic_location()
+        # genomic_location = genome.random_unreplicated_genomic_location()
+ 
+        if not genomic_location.is_replicated()\
+        and genomic_location.will_activate()\
+        and fork_manager.number_of_free_forks >= 2:
+          fork_manager.attach_forks(genomic_location=genomic_location,time=time)
 
   print('[done]')
   print('Number of head-to-head collisions: ' + str(number_of_collisions))
@@ -113,7 +124,7 @@ def main(args):
 #-----------------------------------------------------------------------------#
 
 if __name__ == '__main__':
-  
+
   # Maximum number of processes during the parallelized code execution.
   #
   number_of_processes = 40
@@ -148,10 +159,10 @@ if __name__ == '__main__':
   sys.stdout.flush()
 
   args_list = []
-   
+
   for k in range(number_of_repetitions):
-            
-    # Once the dormant origins assay modifies the probability 
+
+    # Once the dormant origins assay modifies the probability
     # landscape, for that type of experiment we need to load
     # the original landscape again.
     #

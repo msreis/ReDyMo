@@ -60,6 +60,22 @@ class Genome:
 
 #-----------------------------------------------------------------------------#
 
+  ## This function chooses a random UNREPLICATED base from a random Chromosome.
+  # It assumes that the genome is not completely replicated yet.
+  # It does this using random integers from an uniform distribution.
+  # @return A GenomicLocation object referencing the random base selected.
+  # @see GenomicLocation
+  def random_unreplicated_genomic_location(self):
+    while 1:
+      random_chromosome = self.chromosomes[self.rng.randint(0,\
+                                           len(self.chromosomes) - 1)]
+      random_base = self.rng.randint(0, len(random_chromosome) - 1)
+      if not GenomicLocation(base=random_base,\
+                             chromosome=random_chromosome).is_replicated():
+        return GenomicLocation(base=random_base, chromosome=random_chromosome)
+
+#-----------------------------------------------------------------------------#
+
   ## Checks if the Genome is entirely replicated.
   # It checks if all Chromosomes are completely replicated.
   # @return True if all bases of all Chromosomes have been replicated.

@@ -43,7 +43,8 @@ class Chromosome:
     # @param probabiliy_landscape The probability of each base to be an \
     # activation point
     # @param transcription_regions Still dont know what it does TODO:
-    def __init__(self, code, length, probability_landscape, transcription_regions):
+    def __init__(self, code, length, probability_landscape,\
+                 transcription_regions):
         self.code = code
         self.length = length
         self.strand = [0] * self.length
@@ -118,11 +119,12 @@ class Chromosome:
             #
             # For debug purposes.
             #
-            # print('x = ' + str(x) + ', f(x) = ' + str(Gaussian_function_of_x) +\
-            # ', current probability = ' +\
+            # print('x = ' + str(x) + ', f(x) = ' +\
+            # str(Gaussian_function_of_x) + ', current probability = ' +\
             # str(self.activation_probabilities[current_base])   + '\n')
             #
-            self.activation_probabilities[current_base] += Gaussian_function_of_x
+            self.activation_probabilities[current_base] +=\
+                                                        Gaussian_function_of_x
             if self.activation_probabilities[current_base] > 1:
                 self.activation_probabilities[current_base] = 1
 
