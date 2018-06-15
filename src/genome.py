@@ -16,7 +16,7 @@
 
 from random import Random
 
-from src.genomic_location import GenomicLocation
+from ReDyMo.src.genomic_location import GenomicLocation
 
 ## @package ReDyMo.src.genome
 # Contains the class Genome.

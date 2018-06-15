@@ -15,7 +15,7 @@
 
 """
 
-from replication_fork import ReplicationFork
+from ReDyMo.src.replication_fork import ReplicationFork
 
 from array import *
 

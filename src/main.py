@@ -21,12 +21,12 @@ import shutil
 import sys
 from multiprocessing import Pool
 
-sys.path.append('/home/msreis/projects/ReDyMo/')
+sys.path.append('../')
 
-from chromosome import Chromosome
-from data_manager import DataManager
-from fork_manager import ForkManager
-from genome import Genome
+from ReDyMo.src.chromosome import Chromosome
+from ReDyMo.src.data_manager import DataManager
+from ReDyMo.src.fork_manager import ForkManager
+from ReDyMo.src.genome import Genome
 
 #-----------------------------------------------------------------------------#
 
