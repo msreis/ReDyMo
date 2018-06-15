@@ -1,6 +1,6 @@
 import unittest
 import sys
-sys.path.append('/home/brunobbs/Documents/IC/ReDyMo/')
+sys.path.append('../')
 from src.chromosome import Chromosome
 
 

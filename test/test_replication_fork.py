@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import MagicMock
 from unittest.mock import Mock
 import sys
-sys.path.append('/home/brunobbs/Documents/IC/ReDyMo/')
+sys.path.append('../')
 from src.replication_fork import ReplicationFork
 from src.genome import Genome
 from src.chromosome import Chromosome
