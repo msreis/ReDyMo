@@ -8,10 +8,10 @@ from src.chromosome import Chromosome
 from src.genomic_location import GenomicLocation
 
 
-# @package ReDyMo.test.test_genome
+## @package ReDyMo.test.test_genome
 # Contains the Genome test class
 
-# This class has tests for each Chromosome method.
+## This class has tests for each Genome method.
 # @see Genome
 class TestGenome(unittest.TestCase):
 

@@ -7,10 +7,10 @@ from src.genome import Genome
 from src.chromosome import Chromosome
 from src.genomic_location import GenomicLocation
 
-# @package ReDyMo.test.test_genomic_location
+## @package ReDyMo.test.test_genomic_location
 # Contains the Genomic Location test class
 
-# This class has tests for each Genomic Location method.
+## This class has tests for each Genomic Location method.
 # @see Genomic Location
 class TestGenomicLocation(unittest.TestCase):
 

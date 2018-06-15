@@ -9,10 +9,10 @@ from src.chromosome import Chromosome
 from src.genomic_location import GenomicLocation
 
 
-# @package ReDyMo.test.test_replication_fork
+## @package ReDyMo.test.test_replication_fork
 # Contains the Genomic Location test class
 
-# This class has tests for each Genomic Location method.
+## This class has tests for each Genomic Location method.
 # @see Genomic Location
 class test_replication_fork(unittest.TestCase):
 
