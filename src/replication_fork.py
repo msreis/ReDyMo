@@ -18,7 +18,7 @@
 # Contains the class ReplicationFork.
 
 
-## This class replresents a replication fork.
+## This class represents a replication fork.
 # 
 class ReplicationFork:
 
@@ -40,7 +40,7 @@ class ReplicationFork:
   # fork will attach.
   # @param int direction The direction to which the fork should move
   # (left or right) in a Chromosome.
-  # @param int time The time when this attachment ocuurs in the simulation.
+  # @param int time The time when this attachment occurs in the simulation.
   def attach(self, genomic_location, direction, time):
 
     if self.is_attached():
@@ -81,7 +81,7 @@ class ReplicationFork:
 
   ## Advances the fork proportionally to its speed and replicates the bases in
   # the path.
-  # @param int time The time of the dimluation when these base replications
+  # @param int time The time of the simulation when these base replications
   # happen.
   # @return True if the replication went well.
   def advance(self, time):

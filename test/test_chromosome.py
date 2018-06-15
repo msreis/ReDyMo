@@ -35,7 +35,7 @@ class TestChromosome(unittest.TestCase):
         self.assertTrue(chrm_2.base_is_replicated(1))
 
     ## Tests the function by manually changing the number of replicated bases
-    # and checking what the functon returns.
+    # and checking what the function returns.
     def test_is_replicated(self):
         chrm_1 = Chromosome(1, 3, [1, 0.7, 0.5], None)
         chrm_2 = Chromosome(2, 2, [0.7, 0.5], None)

@@ -22,7 +22,7 @@ import random
 # Contains the class GenomicLocation.
 
 
-## This class replresents a base from a chromosome called a Genomic Location.
+## This class represents a base from a chromosome called a Genomic Location.
 # It stores a set of Chromosomes and has methods to check and query a base 
 # from a Genome.
 class GenomicLocation:

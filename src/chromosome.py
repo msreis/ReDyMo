@@ -24,7 +24,7 @@ import math
 
 ## This class represents a Chromosome.
 # 
-# It stores relevant data about a Chromosome, such as lenght, number of
+# It stores relevant data about a Chromosome, such as length, number of
 # replicated bases and has methods to query and modify the Chromosome.
 class Chromosome:
 
@@ -39,8 +39,8 @@ class Chromosome:
 
     ## The constructor for a Chromosome object.
     # @param code The id of the Chromosome. TODO:
-    # @param lenght The lenght of the chromosome
-    # @param probabiliy_landscape The probability of each base to be an \
+    # @param length The length of the chromosome
+    # @param probability_landscape The probability of each base to be an \
     # activation point
     # @param transcription_regions Still dont know what it does TODO:
     def __init__(self, code, length, probability_landscape,\
@@ -55,8 +55,8 @@ class Chromosome:
 
 #-----------------------------------------------------------------------------#
 
-    ## Query the lenght of the Chromosome.
-    # @return The lenght of the Chromosome.
+    ## Query the length of the Chromosome.
+    # @return The length of the Chromosome.
     
     def __len__(self):
       return self.length
@@ -76,13 +76,13 @@ class Chromosome:
 
     ## 
     # @param int base The index of a base to check.
-    # @return Ture if the given base was replicated.
+    # @return True if the given base was replicated.
     def base_is_replicated(self, base):
         return True if self.strand[base] else False
 
 #-----------------------------------------------------------------------------#
 
-    ## Query the activation probabilty of a base. 
+    ## Query the activation probability of a base. 
     # @param int base The index of a base to check. Note that it starts at 0.
     # @return The probability of a dormant origin to attach to the given
     # base based on the probability_landscape. 
@@ -136,8 +136,8 @@ class Chromosome:
     # @see number_of_replicated_bases.
     # @param int start The index of the first base to replicate.
     # @param int end The index of the last base to replicate.
-    # @param float time The time wher the treplication ocurre, I think. TODO:
-    # @retiurn true if was a normal (non reverse) transcription.
+    # @param float time The time when the replication occur, I think. TODO:
+    # @return true if was a normal (non reverse) transcription.
     def replicate(self, start, end, time):
         if start == end:
             self.number_of_origins += 1
@@ -166,7 +166,7 @@ class Chromosome:
 
 #-----------------------------------------------------------------------------#
 
-    ## Checks if the entire Cromosome is replicated.
+    ## Checks if the entire Chromosome is replicated.
     # @return True if all bases have been replicated.
     # @see base_is_replicated
     # @see replicate

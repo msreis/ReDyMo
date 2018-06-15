@@ -22,7 +22,7 @@ from ReDyMo.src.genomic_location import GenomicLocation
 # Contains the class Genome.
 
 
-## This class replresents a Genome.
+## This class represents a Genome.
 # It stores a set of Chromosomes and has methods to manipulate, replicate and 
 # verify a Genome.
 class Genome:
@@ -97,8 +97,8 @@ class Genome:
 
 #-----------------------------------------------------------------------------#
 
-## This functions calculates the total ammount of bases replicated in each
-# crhomosome.
+## This functions calculates the total amount of bases replicated in each
+# chromosome.
 # @return The total number of bases replicated in recent step.
   def number_of_replicated_bases_in_this_step(self):
     number_of_replicated_bases_in_this_step = 0

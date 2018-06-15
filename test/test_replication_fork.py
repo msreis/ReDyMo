@@ -44,7 +44,7 @@ class test_replication_fork(unittest.TestCase):
 
         chrms[0].replicate.assert_called_with(start=1, end=1, time=3)
 
-    ## Test if the fork will reset its variables when it unataches.
+    ## Test if the fork will reset its variables when it unattaches.
     def test_unattach(self):
         rep_fork = ReplicationFork(Mock(), 1)
         rep_fork.base = 1

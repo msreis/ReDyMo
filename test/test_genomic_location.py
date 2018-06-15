@@ -47,7 +47,8 @@ class TestGenomicLocation(unittest.TestCase):
         self.assertTrue(gen_loc_1.is_replicated())
         self.assertTrue(gen_loc_2.is_replicated())
 
-    ## Tests by comaparing 
+    ## Tests by comaparing the proportion of times the function returns true
+    # with the probability to return true. 
     def test_will_activate(self):
         chrms = [Chromosome(1, 3, [0.5, 1, 0.4], None),
                  Chromosome(3, 2, [0.0, 0.4], None)]
@@ -67,7 +68,7 @@ class TestGenomicLocation(unittest.TestCase):
             if gen_loc_2.will_activate():
                 times_true += 1
         
-        # Compares the number of times it was acivated with its activation
+        # Compares the number of times it was activated with its activation
         # probability.
         self.assertAlmostEqual(times_true/50000, 0.4, 2)
 
