@@ -1,23 +1,23 @@
 \hypertarget{classReDyMo_1_1src_1_1data__manager_1_1DataManager}{}\section{Re\+Dy\+Mo.\+src.\+data\+\_\+manager.\+Data\+Manager Class Reference}
 \label{classReDyMo_1_1src_1_1data__manager_1_1DataManager}\index{Re\+Dy\+Mo.\+src.\+data\+\_\+manager.\+Data\+Manager@{Re\+Dy\+Mo.\+src.\+data\+\_\+manager.\+Data\+Manager}}
+
+
+The \mbox{\hyperlink{classReDyMo_1_1src_1_1data__manager_1_1DataManager}{Data\+Manager}} class handles all input and loading of data.  
+
+
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classReDyMo_1_1src_1_1data__manager_1_1DataManager_a27b99e0e717df27a816eb1d2db550847}\label{classReDyMo_1_1src_1_1data__manager_1_1DataManager_a27b99e0e717df27a816eb1d2db550847}} 
-def {\bfseries \+\_\+\+\_\+init\+\_\+\+\_\+} (self, database\+\_\+path, mfa\+\_\+seq\+\_\+folder\+\_\+path)
-\item 
-\mbox{\Hypertarget{classReDyMo_1_1src_1_1data__manager_1_1DataManager_afc9590b6ec6ab95c33bfa2f44b0da404}\label{classReDyMo_1_1src_1_1data__manager_1_1DataManager_afc9590b6ec6ab95c33bfa2f44b0da404}} 
-def {\bfseries select\+\_\+chromosomes\+\_\+from\+\_\+database} (self, kwargs)
-\item 
-\mbox{\Hypertarget{classReDyMo_1_1src_1_1data__manager_1_1DataManager_ac8933073eed38e7669e162884d89cda8}\label{classReDyMo_1_1src_1_1data__manager_1_1DataManager_ac8933073eed38e7669e162884d89cda8}} 
-def {\bfseries probability\+\_\+landscape} (self, code, length)
-\item 
-\mbox{\Hypertarget{classReDyMo_1_1src_1_1data__manager_1_1DataManager_ae36fd09e981be096578336def0a04069}\label{classReDyMo_1_1src_1_1data__manager_1_1DataManager_ae36fd09e981be096578336def0a04069}} 
-def {\bfseries chromosomes} (self, organism)
-\item 
-\mbox{\Hypertarget{classReDyMo_1_1src_1_1data__manager_1_1DataManager_acfb4a6c0196739c8afc556269ce9ab47}\label{classReDyMo_1_1src_1_1data__manager_1_1DataManager_acfb4a6c0196739c8afc556269ce9ab47}} 
-def {\bfseries select\+\_\+transcription\+\_\+regions\+\_\+from\+\_\+database} (self, kwargs)
-\end{DoxyCompactItemize}
+def \mbox{\hyperlink{classReDyMo_1_1src_1_1data__manager_1_1DataManager_a27b99e0e717df27a816eb1d2db550847}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, database\+\_\+path, mfa\+\_\+seq\+\_\+folder\+\_\+path)
+\begin{DoxyCompactList}\small\item\em The constructor. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classReDyMo_1_1src_1_1data__manager_1_1DataManager_afc9590b6ec6ab95c33bfa2f44b0da404}{select\+\_\+chromosomes\+\_\+from\+\_\+database}} (self, kwargs)
+\begin{DoxyCompactList}\small\item\em Fetches all chromosomes from database that match the filters in kwargs. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classReDyMo_1_1src_1_1data__manager_1_1DataManager_ac8933073eed38e7669e162884d89cda8}{probability\+\_\+landscape}} (self, code, length)
+\begin{DoxyCompactList}\small\item\em Generates the probability landscape for replication origin activation. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classReDyMo_1_1src_1_1data__manager_1_1DataManager_ae36fd09e981be096578336def0a04069}{chromosomes}} (self, organism)
+\begin{DoxyCompactList}\small\item\em Assembles the final Chromosomes by appending all data about it. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classReDyMo_1_1src_1_1data__manager_1_1DataManager_acfb4a6c0196739c8afc556269ce9ab47}{select\+\_\+transcription\+\_\+regions\+\_\+from\+\_\+database}} (self, kwargs)
+\begin{DoxyCompactList}\small\item\em Queries the database and gathers transcription regions according to the arguments. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -27,6 +27,102 @@ def {\bfseries select\+\_\+transcription\+\_\+regions\+\_\+from\+\_\+database} (
 \mbox{\Hypertarget{classReDyMo_1_1src_1_1data__manager_1_1DataManager_ad2ca521773db409a2e8032c788970b4f}\label{classReDyMo_1_1src_1_1data__manager_1_1DataManager_ad2ca521773db409a2e8032c788970b4f}} 
 {\bfseries mfa\+\_\+seq\+\_\+folder\+\_\+path}
 \end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \mbox{\hyperlink{classReDyMo_1_1src_1_1data__manager_1_1DataManager}{Data\+Manager}} class handles all input and loading of data. 
+
+It stores Chromosome data, activation probabilities of replication origins and information about Transcription Regions. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classReDyMo_1_1src_1_1data__manager_1_1DataManager_a27b99e0e717df27a816eb1d2db550847}\label{classReDyMo_1_1src_1_1data__manager_1_1DataManager_a27b99e0e717df27a816eb1d2db550847}} 
+\index{Re\+Dy\+Mo\+::src\+::data\+\_\+manager\+::\+Data\+Manager@{Re\+Dy\+Mo\+::src\+::data\+\_\+manager\+::\+Data\+Manager}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!Re\+Dy\+Mo\+::src\+::data\+\_\+manager\+::\+Data\+Manager@{Re\+Dy\+Mo\+::src\+::data\+\_\+manager\+::\+Data\+Manager}}
+\subsubsection{\texorpdfstring{\+\_\+\+\_\+init\+\_\+\+\_\+()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def Re\+Dy\+Mo.\+src.\+data\+\_\+manager.\+Data\+Manager.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{database\+\_\+path,  }\item[{}]{mfa\+\_\+seq\+\_\+folder\+\_\+path }\end{DoxyParamCaption})}
+
+
+
+The constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em database\+\_\+path} & The path to the sqlite3 database file containing chromosome and transcription region data. \\
+\hline
+{\em mfa\+\_\+seq\+\_\+folder\+\_\+path} & Path for the M\+F\+A-\/\+Seq data on the replication origin activation probability landscape. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classReDyMo_1_1src_1_1data__manager_1_1DataManager_ae36fd09e981be096578336def0a04069}\label{classReDyMo_1_1src_1_1data__manager_1_1DataManager_ae36fd09e981be096578336def0a04069}} 
+\index{Re\+Dy\+Mo\+::src\+::data\+\_\+manager\+::\+Data\+Manager@{Re\+Dy\+Mo\+::src\+::data\+\_\+manager\+::\+Data\+Manager}!chromosomes@{chromosomes}}
+\index{chromosomes@{chromosomes}!Re\+Dy\+Mo\+::src\+::data\+\_\+manager\+::\+Data\+Manager@{Re\+Dy\+Mo\+::src\+::data\+\_\+manager\+::\+Data\+Manager}}
+\subsubsection{\texorpdfstring{chromosomes()}{chromosomes()}}
+{\footnotesize\ttfamily def Re\+Dy\+Mo.\+src.\+data\+\_\+manager.\+Data\+Manager.\+chromosomes (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{organism }\end{DoxyParamCaption})}
+
+
+
+Assembles the final Chromosomes by appending all data about it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em organism} & The organism which to pick chromosome data from the database and M\+F\+A-\/\+Seq. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An array of chromosomes stored as tuples. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classReDyMo_1_1src_1_1data__manager_1_1DataManager_ac8933073eed38e7669e162884d89cda8}\label{classReDyMo_1_1src_1_1data__manager_1_1DataManager_ac8933073eed38e7669e162884d89cda8}} 
+\index{Re\+Dy\+Mo\+::src\+::data\+\_\+manager\+::\+Data\+Manager@{Re\+Dy\+Mo\+::src\+::data\+\_\+manager\+::\+Data\+Manager}!probability\+\_\+landscape@{probability\+\_\+landscape}}
+\index{probability\+\_\+landscape@{probability\+\_\+landscape}!Re\+Dy\+Mo\+::src\+::data\+\_\+manager\+::\+Data\+Manager@{Re\+Dy\+Mo\+::src\+::data\+\_\+manager\+::\+Data\+Manager}}
+\subsubsection{\texorpdfstring{probability\+\_\+landscape()}{probability\_landscape()}}
+{\footnotesize\ttfamily def Re\+Dy\+Mo.\+src.\+data\+\_\+manager.\+Data\+Manager.\+probability\+\_\+landscape (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{code,  }\item[{}]{length }\end{DoxyParamCaption})}
+
+
+
+Generates the probability landscape for replication origin activation. 
+
+It reads the M\+F\+A-\/\+Seq files correspondent to the given code. 
+\begin{DoxyParams}{Parameters}
+{\em code} & Code to find the appropriate M\+F\+A-\/\+Seq score file. \\
+\hline
+{\em length} & The length of the chromosome that this probability landscape belongs to. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classReDyMo_1_1src_1_1data__manager_1_1DataManager_afc9590b6ec6ab95c33bfa2f44b0da404}\label{classReDyMo_1_1src_1_1data__manager_1_1DataManager_afc9590b6ec6ab95c33bfa2f44b0da404}} 
+\index{Re\+Dy\+Mo\+::src\+::data\+\_\+manager\+::\+Data\+Manager@{Re\+Dy\+Mo\+::src\+::data\+\_\+manager\+::\+Data\+Manager}!select\+\_\+chromosomes\+\_\+from\+\_\+database@{select\+\_\+chromosomes\+\_\+from\+\_\+database}}
+\index{select\+\_\+chromosomes\+\_\+from\+\_\+database@{select\+\_\+chromosomes\+\_\+from\+\_\+database}!Re\+Dy\+Mo\+::src\+::data\+\_\+manager\+::\+Data\+Manager@{Re\+Dy\+Mo\+::src\+::data\+\_\+manager\+::\+Data\+Manager}}
+\subsubsection{\texorpdfstring{select\+\_\+chromosomes\+\_\+from\+\_\+database()}{select\_chromosomes\_from\_database()}}
+{\footnotesize\ttfamily def Re\+Dy\+Mo.\+src.\+data\+\_\+manager.\+Data\+Manager.\+select\+\_\+chromosomes\+\_\+from\+\_\+database (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{kwargs }\end{DoxyParamCaption})}
+
+
+
+Fetches all chromosomes from database that match the filters in kwargs. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em kwargs} & Array of key-\/value pairs to filter the data. Only tuples where property key = value will be retrieved. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classReDyMo_1_1src_1_1data__manager_1_1DataManager_acfb4a6c0196739c8afc556269ce9ab47}\label{classReDyMo_1_1src_1_1data__manager_1_1DataManager_acfb4a6c0196739c8afc556269ce9ab47}} 
+\index{Re\+Dy\+Mo\+::src\+::data\+\_\+manager\+::\+Data\+Manager@{Re\+Dy\+Mo\+::src\+::data\+\_\+manager\+::\+Data\+Manager}!select\+\_\+transcription\+\_\+regions\+\_\+from\+\_\+database@{select\+\_\+transcription\+\_\+regions\+\_\+from\+\_\+database}}
+\index{select\+\_\+transcription\+\_\+regions\+\_\+from\+\_\+database@{select\+\_\+transcription\+\_\+regions\+\_\+from\+\_\+database}!Re\+Dy\+Mo\+::src\+::data\+\_\+manager\+::\+Data\+Manager@{Re\+Dy\+Mo\+::src\+::data\+\_\+manager\+::\+Data\+Manager}}
+\subsubsection{\texorpdfstring{select\+\_\+transcription\+\_\+regions\+\_\+from\+\_\+database()}{select\_transcription\_regions\_from\_database()}}
+{\footnotesize\ttfamily def Re\+Dy\+Mo.\+src.\+data\+\_\+manager.\+Data\+Manager.\+select\+\_\+transcription\+\_\+regions\+\_\+from\+\_\+database (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{kwargs }\end{DoxyParamCaption})}
+
+
+
+Queries the database and gathers transcription regions according to the arguments. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em kwargs} & Array of key-\/value pairs to filter the queried data. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An array of transcriptin regions stored as tuples. 
+\end{DoxyReturn}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
