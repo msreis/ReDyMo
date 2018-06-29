@@ -18,15 +18,30 @@
 import sqlite3
 from math import ceil
 
+## @package ReDyMo.src.data_manager
+# Contains the class DataManager.
 
+
+## The DataManager class handles all input and loading of data.
+# 
+# It stores Chromosome data, activation probabilities of replication origins
+# and information about Transcription Regions.
 class DataManager:
 
+  ## The constructor.
+  # @param database_path The path to the sqlite3 database file containing
+  # chromosome and transcription region data.
+  # @param mfa_seq_folder_path Path for the MFA-Seq data on the replication
+  # origin activation probability landscape.
   def __init__(self, database_path, mfa_seq_folder_path):
     self.database_path = database_path
     self.mfa_seq_folder_path = mfa_seq_folder_path
 
 #-----------------------------------------------------------------------------#
 
+  ## Fetches all chromosomes from database that match the filters in kwargs.
+  # @param kwargs Array of key-value pairs to filter the data. Only tuples
+  # where property key = value will be retrieved.
   def select_chromosomes_from_database(self, **kwargs):
 
     db = sqlite3.connect(self.database_path)
@@ -43,6 +58,11 @@ class DataManager:
 
   """ Generates the probability landscape for origin trigger from MFA-Seq data.
   """
+  ## Generates the probability landscape for replication origin activation.
+  # It reads the MFA-Seq files correspondent to the given code.
+  # @param code Code to find the appropriate MFA-Seq score file.
+  # @param length The length of the chromosome that this probability landscape
+  # belongs to.
   def probability_landscape(self, code, length):
 
     scores = []
@@ -69,7 +89,10 @@ class DataManager:
 #-----------------------------------------------------------------------------#
 
   """ Final list of chromosome data that will be used by the simulation. """
-
+  ## Assembles the final Chromosomes by appending all data about it.
+  # @param organism The organism which to pick chromosome data from the
+  # database and MFA-Seq.
+  # @return An array of chromosomes stored as tuples.
   def chromosomes(self, organism):
 
     chromosomes = []
@@ -89,8 +112,10 @@ class DataManager:
 
 #-----------------------------------------------------------------------------#
 
-  # Load polycistronic regions location data.
-  #
+  ## Queries the database and gathers transcription regions according to the
+  # arguments.
+  # @param kwargs Array of key-value pairs to filter the queried data.
+  # @return An array of transcriptin regions stored as tuples.
   def select_transcription_regions_from_database(self, **kwargs):  
     
     db = sqlite3.connect(self.database_path)
