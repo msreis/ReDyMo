@@ -10,7 +10,7 @@ from src.data_manager import DataManager
 
 ## This class has tests for each DataManager method.
 # @see DataManager
-class TestGenome(unittest.TestCase):
+class TestDataManager(unittest.TestCase):
 
     # All tests will use the dummy data stored in here
     db_path = "data/simulation.sqlite"
