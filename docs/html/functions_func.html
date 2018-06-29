@@ -66,6 +66,7 @@ $(function() {
 <h3><a id="index__"></a>- _ -</h3><ul>
 <li>__init__()
 : <a class="el" href="classReDyMo_1_1src_1_1chromosome_1_1Chromosome.html#a23a1edc86d3d3cd3d8284911a66271f5">ReDyMo.src.chromosome.Chromosome</a>
+, <a class="el" href="classReDyMo_1_1src_1_1fork__manager_1_1ForkManager.html#a199088d11b6ef93913a4dc3db2086e90">ReDyMo.src.fork_manager.ForkManager</a>
 , <a class="el" href="classReDyMo_1_1src_1_1genome_1_1Genome.html#a2b10f0f1f2fab2f4247abcb2cb778f3c">ReDyMo.src.genome.Genome</a>
 , <a class="el" href="classReDyMo_1_1src_1_1genomic__location_1_1GenomicLocation.html#ad2fc819130c39efcd02df0b35e6305b3">ReDyMo.src.genomic_location.GenomicLocation</a>
 , <a class="el" href="classReDyMo_1_1src_1_1replication__fork_1_1ReplicationFork.html#a33deb5c1f40c77b4c2d0ad873865ae20">ReDyMo.src.replication_fork.ReplicationFork</a>
@@ -86,8 +87,14 @@ $(function() {
 <li>advance()
 : <a class="el" href="classReDyMo_1_1src_1_1replication__fork_1_1ReplicationFork.html#acda54ba4aba3f2a9c02036626e20aa73">ReDyMo.src.replication_fork.ReplicationFork</a>
 </li>
+<li>advance_attached_forks()
+: <a class="el" href="classReDyMo_1_1src_1_1fork__manager_1_1ForkManager.html#a78145066ccb9f6b3d86bb0c08aed2bb6">ReDyMo.src.fork_manager.ForkManager</a>
+</li>
 <li>attach()
 : <a class="el" href="classReDyMo_1_1src_1_1replication__fork_1_1ReplicationFork.html#a616af5a3e5cb32dfad3023df09dffee2">ReDyMo.src.replication_fork.ReplicationFork</a>
+</li>
+<li>attach_forks()
+: <a class="el" href="classReDyMo_1_1src_1_1fork__manager_1_1ForkManager.html#a8cf93e36729878575dfecba9978f357a">ReDyMo.src.fork_manager.ForkManager</a>
 </li>
 <li>average_interorigin_distance()
 : <a class="el" href="classReDyMo_1_1src_1_1genome_1_1Genome.html#a1c933cf2a91ad7dddeed4bc940c47ad2">ReDyMo.src.genome.Genome</a>
@@ -98,6 +105,13 @@ $(function() {
 <h3><a id="index_b"></a>- b -</h3><ul>
 <li>base_is_replicated()
 : <a class="el" href="classReDyMo_1_1src_1_1chromosome_1_1Chromosome.html#a1dba7152914a8f8006a5ddfcaad82c31">ReDyMo.src.chromosome.Chromosome</a>
+</li>
+</ul>
+
+
+<h3><a id="index_c"></a>- c -</h3><ul>
+<li>check_replication_transcription_conflicts()
+: <a class="el" href="classReDyMo_1_1src_1_1fork__manager_1_1ForkManager.html#a1a5940ebd74e69fefb9f7cc00ab79737">ReDyMo.src.fork_manager.ForkManager</a>
 </li>
 </ul>
 
@@ -134,6 +148,9 @@ $(function() {
 <li>random_genomic_location()
 : <a class="el" href="classReDyMo_1_1src_1_1genome_1_1Genome.html#a52ff5976c29d7f3308634d1806f0e6e5">ReDyMo.src.genome.Genome</a>
 </li>
+<li>random_unreplicated_genomic_location()
+: <a class="el" href="classReDyMo_1_1src_1_1genome_1_1Genome.html#a5ccf7050477245b02282b76b2cf72030">ReDyMo.src.genome.Genome</a>
+</li>
 <li>replicate()
 : <a class="el" href="classReDyMo_1_1src_1_1chromosome_1_1Chromosome.html#aac8462677b62589ca8f103c047c5c014">ReDyMo.src.chromosome.Chromosome</a>
 </li>
@@ -154,8 +171,14 @@ $(function() {
 <li>test_advance()
 : <a class="el" href="classReDyMo_1_1test_1_1test__replication__fork_1_1test__replication__fork.html#a29b0f8fb24e51bb7de864e4fee8da905">ReDyMo.test.test_replication_fork.test_replication_fork</a>
 </li>
+<li>test_advance_attached_forks()
+: <a class="el" href="classReDyMo_1_1test_1_1test__fork__manager_1_1TestForkManager.html#ab5acb3bdc477230a7ae59631d0e98827">ReDyMo.test.test_fork_manager.TestForkManager</a>
+</li>
 <li>test_attach()
 : <a class="el" href="classReDyMo_1_1test_1_1test__replication__fork_1_1test__replication__fork.html#a318f9d99694530a49fd031659d016e20">ReDyMo.test.test_replication_fork.test_replication_fork</a>
+</li>
+<li>test_attach_forks()
+: <a class="el" href="classReDyMo_1_1test_1_1test__fork__manager_1_1TestForkManager.html#ae621827af6f1101fd22b62b1deaea084">ReDyMo.test.test_fork_manager.TestForkManager</a>
 </li>
 <li>test_average_interorigin_distance()
 : <a class="el" href="classReDyMo_1_1test_1_1test__genome_1_1TestGenome.html#ac5570c5ae42eea415ec9086ae5e2c80e">ReDyMo.test.test_genome.TestGenome</a>
@@ -163,8 +186,12 @@ $(function() {
 <li>test_base_is_replicated()
 : <a class="el" href="classReDyMo_1_1test_1_1test__chromosome_1_1TestChromosome.html#af729347cc1469bd0043cdba714f4f04c">ReDyMo.test.test_chromosome.TestChromosome</a>
 </li>
+<li>test_check_replication_transcription_conflicts()
+: <a class="el" href="classReDyMo_1_1test_1_1test__fork__manager_1_1TestForkManager.html#a8bc2159fd040cc64a9615f7803bdc3e9">ReDyMo.test.test_fork_manager.TestForkManager</a>
+</li>
 <li>test_constructor()
 : <a class="el" href="classReDyMo_1_1test_1_1test__chromosome_1_1TestChromosome.html#a1399201440b0c37de8d1b6fce870f57b">ReDyMo.test.test_chromosome.TestChromosome</a>
+, <a class="el" href="classReDyMo_1_1test_1_1test__fork__manager_1_1TestForkManager.html#a0cc1b12c6ffc4a4eceea4d1f20c9f00b">ReDyMo.test.test_fork_manager.TestForkManager</a>
 , <a class="el" href="classReDyMo_1_1test_1_1test__genome_1_1TestGenome.html#ab20586dfa32d303107488319f9012d9a">ReDyMo.test.test_genome.TestGenome</a>
 , <a class="el" href="classReDyMo_1_1test_1_1test__genomic__location_1_1TestGenomicLocation.html#add11474b7703287f0d310ccb016cfec0">ReDyMo.test.test_genomic_location.TestGenomicLocation</a>
 , <a class="el" href="classReDyMo_1_1test_1_1test__replication__fork_1_1test__replication__fork.html#a56e666d191e78294a72a90804a4e70b0">ReDyMo.test.test_replication_fork.test_replication_fork</a>

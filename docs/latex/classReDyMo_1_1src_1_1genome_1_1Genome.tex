@@ -2,7 +2,7 @@
 \label{classReDyMo_1_1src_1_1genome_1_1Genome}\index{Re\+Dy\+Mo.\+src.\+genome.\+Genome@{Re\+Dy\+Mo.\+src.\+genome.\+Genome}}
 
 
-This class replresents a \mbox{\hyperlink{classReDyMo_1_1src_1_1genome_1_1Genome}{Genome}}.  
+This class represents a \mbox{\hyperlink{classReDyMo_1_1src_1_1genome_1_1Genome}{Genome}}.  
 
 
 \subsection*{Public Member Functions}
@@ -19,6 +19,8 @@ def {\bfseries \+\_\+\+\_\+iter\+\_\+\+\_\+} (self)
 \item 
 def \mbox{\hyperlink{classReDyMo_1_1src_1_1genome_1_1Genome_a52ff5976c29d7f3308634d1806f0e6e5}{random\+\_\+genomic\+\_\+location}} (self)
 \begin{DoxyCompactList}\small\item\em This function chooses a random base from a random Chromosome. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classReDyMo_1_1src_1_1genome_1_1Genome_a5ccf7050477245b02282b76b2cf72030}{random\+\_\+unreplicated\+\_\+genomic\+\_\+location}} (self)
+\begin{DoxyCompactList}\small\item\em This function chooses a random U\+N\+R\+E\+P\+L\+I\+C\+A\+T\+ED base from a random Chromosome. \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{classReDyMo_1_1src_1_1genome_1_1Genome_a8351b706fc6f5c0f218c1dab6c04da46}{is\+\_\+replicated}} (self)
 \begin{DoxyCompactList}\small\item\em Checks if the \mbox{\hyperlink{classReDyMo_1_1src_1_1genome_1_1Genome}{Genome}} is entirely replicated. \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{classReDyMo_1_1src_1_1genome_1_1Genome_a1c933cf2a91ad7dddeed4bc940c47ad2}{average\+\_\+interorigin\+\_\+distance}} (self)
@@ -38,7 +40,7 @@ def \mbox{\hyperlink{classReDyMo_1_1src_1_1genome_1_1Genome_a1c933cf2a91ad7dddee
 
 
 \subsection{Detailed Description}
-This class replresents a \mbox{\hyperlink{classReDyMo_1_1src_1_1genome_1_1Genome}{Genome}}. 
+This class represents a \mbox{\hyperlink{classReDyMo_1_1src_1_1genome_1_1Genome}{Genome}}. 
 
 It stores a set of Chromosomes and has methods to manipulate, replicate and verify a \mbox{\hyperlink{classReDyMo_1_1src_1_1genome_1_1Genome}{Genome}}. 
 
@@ -83,6 +85,22 @@ Chromosome
 This function chooses a random base from a random Chromosome. 
 
 It does this using random integers from an uniform distribution. \begin{DoxyReturn}{Returns}
+A Genomic\+Location object referencing the random base selected. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+Genomic\+Location 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classReDyMo_1_1src_1_1genome_1_1Genome_a5ccf7050477245b02282b76b2cf72030}\label{classReDyMo_1_1src_1_1genome_1_1Genome_a5ccf7050477245b02282b76b2cf72030}} 
+\index{Re\+Dy\+Mo\+::src\+::genome\+::\+Genome@{Re\+Dy\+Mo\+::src\+::genome\+::\+Genome}!random\+\_\+unreplicated\+\_\+genomic\+\_\+location@{random\+\_\+unreplicated\+\_\+genomic\+\_\+location}}
+\index{random\+\_\+unreplicated\+\_\+genomic\+\_\+location@{random\+\_\+unreplicated\+\_\+genomic\+\_\+location}!Re\+Dy\+Mo\+::src\+::genome\+::\+Genome@{Re\+Dy\+Mo\+::src\+::genome\+::\+Genome}}
+\subsubsection{\texorpdfstring{random\+\_\+unreplicated\+\_\+genomic\+\_\+location()}{random\_unreplicated\_genomic\_location()}}
+{\footnotesize\ttfamily def Re\+Dy\+Mo.\+src.\+genome.\+Genome.\+random\+\_\+unreplicated\+\_\+genomic\+\_\+location (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+This function chooses a random U\+N\+R\+E\+P\+L\+I\+C\+A\+T\+ED base from a random Chromosome. 
+
+It assumes that the genome is not completely replicated yet. It does this using random integers from an uniform distribution. \begin{DoxyReturn}{Returns}
 A Genomic\+Location object referencing the random base selected. 
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See also}

@@ -1,20 +1,22 @@
 \hypertarget{classReDyMo_1_1src_1_1fork__manager_1_1ForkManager}{}\section{Re\+Dy\+Mo.\+src.\+fork\+\_\+manager.\+Fork\+Manager Class Reference}
 \label{classReDyMo_1_1src_1_1fork__manager_1_1ForkManager}\index{Re\+Dy\+Mo.\+src.\+fork\+\_\+manager.\+Fork\+Manager@{Re\+Dy\+Mo.\+src.\+fork\+\_\+manager.\+Fork\+Manager}}
+
+
+This class manages all forks from a genome.  
+
+
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{classReDyMo_1_1src_1_1fork__manager_1_1ForkManager_a199088d11b6ef93913a4dc3db2086e90}\label{classReDyMo_1_1src_1_1fork__manager_1_1ForkManager_a199088d11b6ef93913a4dc3db2086e90}} 
-def {\bfseries \+\_\+\+\_\+init\+\_\+\+\_\+} (self, size, genome, speed)
-\item 
-\mbox{\Hypertarget{classReDyMo_1_1src_1_1fork__manager_1_1ForkManager_a1a5940ebd74e69fefb9f7cc00ab79737}\label{classReDyMo_1_1src_1_1fork__manager_1_1ForkManager_a1a5940ebd74e69fefb9f7cc00ab79737}} 
-def {\bfseries check\+\_\+replication\+\_\+transcription\+\_\+conflicts} (self, time, period, has\+\_\+dormant)
-\item 
-\mbox{\Hypertarget{classReDyMo_1_1src_1_1fork__manager_1_1ForkManager_a78145066ccb9f6b3d86bb0c08aed2bb6}\label{classReDyMo_1_1src_1_1fork__manager_1_1ForkManager_a78145066ccb9f6b3d86bb0c08aed2bb6}} 
-def {\bfseries advance\+\_\+attached\+\_\+forks} (self, time)
-\item 
-\mbox{\Hypertarget{classReDyMo_1_1src_1_1fork__manager_1_1ForkManager_a8cf93e36729878575dfecba9978f357a}\label{classReDyMo_1_1src_1_1fork__manager_1_1ForkManager_a8cf93e36729878575dfecba9978f357a}} 
-def {\bfseries attach\+\_\+forks} (self, genomic\+\_\+location, time)
-\end{DoxyCompactItemize}
+def \mbox{\hyperlink{classReDyMo_1_1src_1_1fork__manager_1_1ForkManager_a199088d11b6ef93913a4dc3db2086e90}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, size, genome, speed)
+\begin{DoxyCompactList}\small\item\em The class constructor. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classReDyMo_1_1src_1_1fork__manager_1_1ForkManager_a1a5940ebd74e69fefb9f7cc00ab79737}{check\+\_\+replication\+\_\+transcription\+\_\+conflicts}} (self, time, period, has\+\_\+dormant)
+\begin{DoxyCompactList}\small\item\em This function checks if there is any fork (replication) colliding with any R\+N\+AP (transcription) and handles the collision by rainsing the collision counter, changing the activation probability landscape around the base affected and unattaching the affected fork. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classReDyMo_1_1src_1_1fork__manager_1_1ForkManager_a78145066ccb9f6b3d86bb0c08aed2bb6}{advance\+\_\+attached\+\_\+forks}} (self, time)
+\begin{DoxyCompactList}\small\item\em This function moves all forks that are attached and prepares forks just unattached that were not treated and makes the available as free forks. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classReDyMo_1_1src_1_1fork__manager_1_1ForkManager_a8cf93e36729878575dfecba9978f357a}{attach\+\_\+forks}} (self, genomic\+\_\+location, time)
+\begin{DoxyCompactList}\small\item\em This function attaches available forks to a given genomic location. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -27,6 +29,68 @@ def {\bfseries attach\+\_\+forks} (self, genomic\+\_\+location, time)
 \mbox{\Hypertarget{classReDyMo_1_1src_1_1fork__manager_1_1ForkManager_a1f453944009a835815c3600293961cd5}\label{classReDyMo_1_1src_1_1fork__manager_1_1ForkManager_a1f453944009a835815c3600293961cd5}} 
 {\bfseries just\+\_\+unattached}
 \end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class manages all forks from a genome. 
+
+It stores the replicaton forks and handles attachments, transcription conflicts and fork motion. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classReDyMo_1_1src_1_1fork__manager_1_1ForkManager_a78145066ccb9f6b3d86bb0c08aed2bb6}\label{classReDyMo_1_1src_1_1fork__manager_1_1ForkManager_a78145066ccb9f6b3d86bb0c08aed2bb6}} 
+\index{Re\+Dy\+Mo\+::src\+::fork\+\_\+manager\+::\+Fork\+Manager@{Re\+Dy\+Mo\+::src\+::fork\+\_\+manager\+::\+Fork\+Manager}!advance\+\_\+attached\+\_\+forks@{advance\+\_\+attached\+\_\+forks}}
+\index{advance\+\_\+attached\+\_\+forks@{advance\+\_\+attached\+\_\+forks}!Re\+Dy\+Mo\+::src\+::fork\+\_\+manager\+::\+Fork\+Manager@{Re\+Dy\+Mo\+::src\+::fork\+\_\+manager\+::\+Fork\+Manager}}
+\subsubsection{\texorpdfstring{advance\+\_\+attached\+\_\+forks()}{advance\_attached\_forks()}}
+{\footnotesize\ttfamily def Re\+Dy\+Mo.\+src.\+fork\+\_\+manager.\+Fork\+Manager.\+advance\+\_\+attached\+\_\+forks (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{time }\end{DoxyParamCaption})}
+
+
+
+This function moves all forks that are attached and prepares forks just unattached that were not treated and makes the available as free forks. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em time} & The time in the simulation when the forks were advanced. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classReDyMo_1_1src_1_1fork__manager_1_1ForkManager_a8cf93e36729878575dfecba9978f357a}\label{classReDyMo_1_1src_1_1fork__manager_1_1ForkManager_a8cf93e36729878575dfecba9978f357a}} 
+\index{Re\+Dy\+Mo\+::src\+::fork\+\_\+manager\+::\+Fork\+Manager@{Re\+Dy\+Mo\+::src\+::fork\+\_\+manager\+::\+Fork\+Manager}!attach\+\_\+forks@{attach\+\_\+forks}}
+\index{attach\+\_\+forks@{attach\+\_\+forks}!Re\+Dy\+Mo\+::src\+::fork\+\_\+manager\+::\+Fork\+Manager@{Re\+Dy\+Mo\+::src\+::fork\+\_\+manager\+::\+Fork\+Manager}}
+\subsubsection{\texorpdfstring{attach\+\_\+forks()}{attach\_forks()}}
+{\footnotesize\ttfamily def Re\+Dy\+Mo.\+src.\+fork\+\_\+manager.\+Fork\+Manager.\+attach\+\_\+forks (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{genomic\+\_\+location,  }\item[{}]{time }\end{DoxyParamCaption})}
+
+
+
+This function attaches available forks to a given genomic location. 
+
+If there are not enough forks, the just one or none is attached. 
+\begin{DoxyParams}{Parameters}
+{\em \mbox{\hyperlink{namespaceReDyMo_1_1src_1_1genomic__location}{genomic\+\_\+location}}} & The location where the fork will be attached. \\
+\hline
+{\em time} & The simulation time when the attachment was done. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+Genomic\+Location 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classReDyMo_1_1src_1_1fork__manager_1_1ForkManager_a1a5940ebd74e69fefb9f7cc00ab79737}\label{classReDyMo_1_1src_1_1fork__manager_1_1ForkManager_a1a5940ebd74e69fefb9f7cc00ab79737}} 
+\index{Re\+Dy\+Mo\+::src\+::fork\+\_\+manager\+::\+Fork\+Manager@{Re\+Dy\+Mo\+::src\+::fork\+\_\+manager\+::\+Fork\+Manager}!check\+\_\+replication\+\_\+transcription\+\_\+conflicts@{check\+\_\+replication\+\_\+transcription\+\_\+conflicts}}
+\index{check\+\_\+replication\+\_\+transcription\+\_\+conflicts@{check\+\_\+replication\+\_\+transcription\+\_\+conflicts}!Re\+Dy\+Mo\+::src\+::fork\+\_\+manager\+::\+Fork\+Manager@{Re\+Dy\+Mo\+::src\+::fork\+\_\+manager\+::\+Fork\+Manager}}
+\subsubsection{\texorpdfstring{check\+\_\+replication\+\_\+transcription\+\_\+conflicts()}{check\_replication\_transcription\_conflicts()}}
+{\footnotesize\ttfamily def Re\+Dy\+Mo.\+src.\+fork\+\_\+manager.\+Fork\+Manager.\+check\+\_\+replication\+\_\+transcription\+\_\+conflicts (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{time,  }\item[{}]{period,  }\item[{}]{has\+\_\+dormant }\end{DoxyParamCaption})}
+
+
+
+This function checks if there is any fork (replication) colliding with any R\+N\+AP (transcription) and handles the collision by rainsing the collision counter, changing the activation probability landscape around the base affected and unattaching the affected fork. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em time} & The simulation time when it was checked. \\
+\hline
+{\em period} & The period of the R\+N\+AP carousel. \\
+\hline
+{\em has\+\_\+dormant} & Indication if the chromosome has dormant replication origins. \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

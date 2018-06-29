@@ -73,20 +73,24 @@ $(function() {
 <div class="title">ReDyMo.src.fork_manager.ForkManager Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>This class manages all forks from a genome.  
+ <a href="classReDyMo_1_1src_1_1fork__manager_1_1ForkManager.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a199088d11b6ef93913a4dc3db2086e90"><td class="memItemLeft" align="right" valign="top"><a id="a199088d11b6ef93913a4dc3db2086e90"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><b>__init__</b> (self, size, genome, speed)</td></tr>
+def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classReDyMo_1_1src_1_1fork__manager_1_1ForkManager.html#a199088d11b6ef93913a4dc3db2086e90">__init__</a> (self, size, genome, speed)</td></tr>
+<tr class="memdesc:a199088d11b6ef93913a4dc3db2086e90"><td class="mdescLeft">&#160;</td><td class="mdescRight">The class constructor. <br /></td></tr>
 <tr class="separator:a199088d11b6ef93913a4dc3db2086e90"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a5940ebd74e69fefb9f7cc00ab79737"><td class="memItemLeft" align="right" valign="top"><a id="a1a5940ebd74e69fefb9f7cc00ab79737"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><b>check_replication_transcription_conflicts</b> (self, time, period, has_dormant)</td></tr>
+<tr class="memitem:a1a5940ebd74e69fefb9f7cc00ab79737"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classReDyMo_1_1src_1_1fork__manager_1_1ForkManager.html#a1a5940ebd74e69fefb9f7cc00ab79737">check_replication_transcription_conflicts</a> (self, time, period, has_dormant)</td></tr>
+<tr class="memdesc:a1a5940ebd74e69fefb9f7cc00ab79737"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function checks if there is any fork (replication) colliding with any RNAP (transcription) and handles the collision by rainsing the collision counter, changing the activation probability landscape around the base affected and unattaching the affected fork.  <a href="#a1a5940ebd74e69fefb9f7cc00ab79737">More...</a><br /></td></tr>
 <tr class="separator:a1a5940ebd74e69fefb9f7cc00ab79737"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a78145066ccb9f6b3d86bb0c08aed2bb6"><td class="memItemLeft" align="right" valign="top"><a id="a78145066ccb9f6b3d86bb0c08aed2bb6"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><b>advance_attached_forks</b> (self, time)</td></tr>
+<tr class="memitem:a78145066ccb9f6b3d86bb0c08aed2bb6"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classReDyMo_1_1src_1_1fork__manager_1_1ForkManager.html#a78145066ccb9f6b3d86bb0c08aed2bb6">advance_attached_forks</a> (self, time)</td></tr>
+<tr class="memdesc:a78145066ccb9f6b3d86bb0c08aed2bb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function moves all forks that are attached and prepares forks just unattached that were not treated and makes the available as free forks.  <a href="#a78145066ccb9f6b3d86bb0c08aed2bb6">More...</a><br /></td></tr>
 <tr class="separator:a78145066ccb9f6b3d86bb0c08aed2bb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8cf93e36729878575dfecba9978f357a"><td class="memItemLeft" align="right" valign="top"><a id="a8cf93e36729878575dfecba9978f357a"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><b>attach_forks</b> (self, genomic_location, time)</td></tr>
+<tr class="memitem:a8cf93e36729878575dfecba9978f357a"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classReDyMo_1_1src_1_1fork__manager_1_1ForkManager.html#a8cf93e36729878575dfecba9978f357a">attach_forks</a> (self, genomic_location, time)</td></tr>
+<tr class="memdesc:a8cf93e36729878575dfecba9978f357a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function attaches available forks to a given genomic location.  <a href="#a8cf93e36729878575dfecba9978f357a">More...</a><br /></td></tr>
 <tr class="separator:a8cf93e36729878575dfecba9978f357a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -101,6 +105,140 @@ Public Attributes</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>just_unattached</b></td></tr>
 <tr class="separator:a1f453944009a835815c3600293961cd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This class manages all forks from a genome. </p>
+<p>It stores the replicaton forks and handles attachments, transcription conflicts and fork motion. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a78145066ccb9f6b3d86bb0c08aed2bb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78145066ccb9f6b3d86bb0c08aed2bb6">&#9670;&nbsp;</a></span>advance_attached_forks()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def ReDyMo.src.fork_manager.ForkManager.advance_attached_forks </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>time</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function moves all forks that are attached and prepares forks just unattached that were not treated and makes the available as free forks. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">time</td><td>The time in the simulation when the forks were advanced. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8cf93e36729878575dfecba9978f357a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8cf93e36729878575dfecba9978f357a">&#9670;&nbsp;</a></span>attach_forks()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def ReDyMo.src.fork_manager.ForkManager.attach_forks </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>genomic_location</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>time</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function attaches available forks to a given genomic location. </p>
+<p>If there are not enough forks, the just one or none is attached. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"><a class="el" href="namespaceReDyMo_1_1src_1_1genomic__location.html" title="Contains the class GenomicLocation. ">genomic_location</a></td><td>The location where the fork will be attached. </td></tr>
+    <tr><td class="paramname">time</td><td>The simulation time when the attachment was done. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd>GenomicLocation </dd></dl>
+
+</div>
+</div>
+<a id="a1a5940ebd74e69fefb9f7cc00ab79737"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a5940ebd74e69fefb9f7cc00ab79737">&#9670;&nbsp;</a></span>check_replication_transcription_conflicts()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def ReDyMo.src.fork_manager.ForkManager.check_replication_transcription_conflicts </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>period</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>has_dormant</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function checks if there is any fork (replication) colliding with any RNAP (transcription) and handles the collision by rainsing the collision counter, changing the activation probability landscape around the base affected and unattaching the affected fork. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">time</td><td>The simulation time when it was checked. </td></tr>
+    <tr><td class="paramname">period</td><td>The period of the RNAP carousel. </td></tr>
+    <tr><td class="paramname">has_dormant</td><td>Indication if the chromosome has dormant replication origins. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/fork_manager.py</li>
 </ul>
