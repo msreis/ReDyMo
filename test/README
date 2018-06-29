@@ -1,15 +1,2 @@
-
-TODO: include one test file per class. Each test file must
-contain k unit tests, in which class methods' correctness
-are assessed.
-
 To run all the tests form ReDyMo's root:
 $ python -m unittest discover test
-
-Classes:
-  * Chromosome
-    Data Manager
-    Fork Manager
-  * Genome
-  * Genomic Location
-  * Replication Fork
