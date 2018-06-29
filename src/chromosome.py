@@ -38,11 +38,12 @@ class Chromosome:
     # Stores the time when each base was replicated. TODO:
 
     ## The constructor for a Chromosome object.
-    # @param code The id of the Chromosome. TODO:
+    # @param code The id of the Chromosome.
     # @param length The length of the chromosome
     # @param probability_landscape The probability of each base to be an \
     # activation point
-    # @param transcription_regions Still dont know what it does TODO:
+    # @param transcription_regions List of the transcription regions of the
+    # Chromosome.
     def __init__(self, code, length, probability_landscape,\
                  transcription_regions):
         self.code = code
@@ -137,7 +138,7 @@ class Chromosome:
     # @param int start The index of the first base to replicate.
     # @param int end The index of the last base to replicate.
     # @param float time The time when the replication occur, I think. TODO:
-    # @return true if was a normal (non reverse) transcription.
+    # @return true if was a normal (not at the very end) transcription.
     def replicate(self, start, end, time):
         if start == end:
             self.number_of_origins += 1

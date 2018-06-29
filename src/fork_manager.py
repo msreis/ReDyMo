@@ -7,7 +7,7 @@
     Free Software Foundation, either version 3 of the License, or (at your
     option) any later version.
     ReDyMo is distributed in the hope that it will be useful, but WITHOUT
-    ANY WARRANTY; without even the implied warranty of MERCHANTABILITY ortra
+    ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
     FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
     for more details.
     You should have received a copy of the GNU General Public License along
@@ -20,8 +20,17 @@ from ReDyMo.src.replication_fork import ReplicationFork
 from array import *
 
 
+## @package ReDyMo.src.fork_manager
+# Contains the class ForkManager.
+
+
+## This class manages all forks from a genome.
+# 
+# It stores the replicaton forks and handles attachments, transcription 
+# conflicts and fork motion.
 class ForkManager:
 
+  ## The class constructor
   def __init__(self, size, genome, speed):
     self.number_of_free_forks = size
     self.replication_forks = list()
@@ -33,6 +42,13 @@ class ForkManager:
 
 #-----------------------------------------------------------------------------#
 
+  ## This function checks if there is any fork (replication) colliding with
+  # any RNAP (transcription) and handles the collision by rainsing the 
+  # collision counter, changing the activation probability landscape around the
+  # base affected and unattaching the affected fork.
+  # @param time The simulation time when it was checked.
+  # @param period The period of the RNAP carousel.
+  # @param has_dormant Indication if the chromosome has dormant replication origins. 
   def check_replication_transcription_conflicts(self,time,period,has_dormant):
 
     number_of_collisions = 0
@@ -56,9 +72,10 @@ class ForkManager:
           region_size = 0
           RNAP_direction = 0
 
-          # Checks whether the current fork is within the current region;
-          # if it is, then it retrieves the RNAP direction, otherwise it
-          # it continues to the next iteration of the inner loop.
+          # Checks whether the current replication fork is within the current
+          # transcription region; if it is, then it retrieves the RNAP
+          # direction, otherwise it continues to the next iteration of the
+          # inner loop.
           #
           if (region['start'] < region['end']):
             if replication_fork.get_base() < region['start']\
@@ -112,6 +129,9 @@ class ForkManager:
 
 #-----------------------------------------------------------------------------#
 
+  ## This function moves all forks that are attached and prepares forks just
+  # unattached that were not treated and makes the available as free forks.
+  # @param time The time in the simulation when the forks were advanced.
   def advance_attached_forks(self, time):
     for fork in self.replication_forks:
       if self.just_unattached[fork]:
@@ -124,6 +144,11 @@ class ForkManager:
 
 #-----------------------------------------------------------------------------#
 
+  ## This function attaches available forks to a given genomic location. If
+  # there are not enough forks, the just one or none is attached.
+  # @param genomic_location The location where the fork will be attached.
+  # @param time The simulation time when the attachment was done.
+  # @see GenomicLocation
   def attach_forks(self, genomic_location, time):
     number_of_forks_attached_to_this_location = 0
     direction = 1
