@@ -199,15 +199,11 @@ sub get_alpha
     elsif (($ref_chr->[$i] != 1) && ($within_sense_CDS == 1))
     {
       $within_sense_CDS = 0;
-      ($sense_period > $max_period) and $max_period = $sense_period;
     }
+
+    ($sense_period > $max_period) and $max_period = $sense_period;
   }
 
-  if ($within_sense_CDS == 1)
-  {
-    ($sense_period > $max_period) and $max_period = $sense_period;
-  }  
-  
   return $max_period;
 }
 
@@ -253,14 +249,10 @@ sub get_beta
     elsif (($ref_chr->[$i] != -1) && ($within_antisense_CDS == 1))
     {
       $within_antisense_CDS = 0;
-      ($antisense_period > $max_period) and $max_period = $antisense_period;
     }
-  }
 
-  if ($within_antisense_CDS == 1)
-  {
     ($antisense_period > $max_period) and $max_period = $antisense_period;
-  }  
+  }
   
   return $max_period;
 }
@@ -308,13 +300,13 @@ sub get_alpha_and_beta
     elsif (($ref_chr->[$i] == -1) && ($within_antisense_CDS == 1))
     {
       $antisense_period++;    
-      ($antisense_period > $max_period) and $max_period = $antisense_period;
     }
     elsif (($ref_chr->[$i] != -1) && ($within_antisense_CDS == 1))
     {
       $within_antisense_CDS = 0;
-      ($antisense_period > $max_period) and $max_period = $antisense_period;
     }
+
+    ($antisense_period > $max_period) and $max_period = $antisense_period;
 
     $forward_stretch[$i - $s + 1] = $max_period; 
   }
@@ -337,13 +329,13 @@ sub get_alpha_and_beta
     elsif (($ref_chr->[$i] == 1) && ($within_sense_CDS == 1))
     {
       $sense_period++;    
-      ($sense_period > $max_period) and $max_period = $sense_period;
     }
     elsif (($ref_chr->[$i] != 1) && ($within_sense_CDS == 1))
     {
       $within_sense_CDS = 0;
-      ($sense_period > $max_period) and $max_period = $sense_period;
     }
+
+    ($sense_period > $max_period) and $max_period = $sense_period;
 
     $backward_stretch[$i - $s + 1] = $max_period; 
   }
