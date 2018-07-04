@@ -17,7 +17,7 @@
 #
 #
 
-# Using replisome speed of T. brucei TREU927 (61.66 bp/sec).
+# Using replisome speed measured for T. brucei TREU927 (61.66 bp/sec).
 #
 ./calculate_lower_bound_time.pl 61.66 1064672 1
 
@@ -42,7 +42,7 @@
 ./calculate_lower_bound_time.pl 61.66 5223313 11
 
 
-# Using replisome speed of T. brucei Lister427 (30.66 bp/sec).
+# Using replisome speed measured for T. brucei Lister427 (30.66 bp/sec).
 # However, the chromosome lengths used here are the ones from TREU927, since
 # the MFA-seq data employed in this study were produced for the latter species.
 # Nonetheless, chromosome lengths of both species are similar to each other.

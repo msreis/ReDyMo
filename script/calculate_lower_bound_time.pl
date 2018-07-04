@@ -63,16 +63,18 @@ my @Theta = ([],
 #
 my $T = 0;
 
+
+# These two lines include a pair of origins, each one located 10 Kbp from 
+# each chromosome extremity. The assumption here is that all subtelomeric
+# regions contain a replication origin. 
+#
+unshift @{$Theta[$j]}, 10000;
+push @{$Theta[$j]}, $N - 10000;
+
+
 foreach my $i (0..(scalar @{$Theta[$j]}))
 {
   my $monomial;
-
-  # These two lines include a pair of origins, each one located 200 Kbp from 
-  # each chromosome extremity. The assumption here is that all subtelomeric
-  # regions contain a replication origin. 
-  #
-  push @{$Theta[$j]}, 200000;
-  push @{$Theta[$j]}, $N - 200000;
 
   if ($i == 0)
   {
