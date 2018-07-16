@@ -68,8 +68,8 @@ my $T = 0;
 # each chromosome extremity. The assumption here is that all subtelomeric
 # regions contain a replication origin. 
 #
-unshift @{$Theta[$j]}, 10000;
-push @{$Theta[$j]}, $N - 10000;
+#unshift @{$Theta[$j]}, 10000;
+#push @{$Theta[$j]}, $N - 10000;
 
 
 foreach my $i (0..(scalar @{$Theta[$j]}))

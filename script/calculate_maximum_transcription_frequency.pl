@@ -53,7 +53,7 @@ my $DEBUG = 0;
 
 # Set this variable as 1 to include two origins into subtelomeric regions.
 #
-my $SUBTELOMERIC_ORIGINS = 0;
+my $SUBTELOMERIC_ORIGINS = 1;
 
 
 # First, we define the set of putative constitutive origins (Theta); these
@@ -81,7 +81,7 @@ my @Theta = ([],
 #
 if ($SUBTELOMERIC_ORIGINS == 1)
 {
-  push @{$Theta[$j]}, 10000;
+  unshift @{$Theta[$j]}, 10000;
   push @{$Theta[$j]}, $N - 10000;
 }
 
@@ -282,7 +282,7 @@ sub get_alpha_and_beta
   
   my $max_period = 0;
 
-  # Array to store the maximum sense period of a given position.
+  # Array to store the maximum sense period of a given position (B_i^j).
   #
   my @forward_stretch;
   $forward_stretch[$_] = 0 foreach 1..($e - $s + 1); 
@@ -311,6 +311,8 @@ sub get_alpha_and_beta
     $forward_stretch[$i - $s + 1] = $max_period; 
   }
 
+  # Array to store the maximum antisense period of a given position (A_i^j).
+  #
   my @backward_stretch;
   $backward_stretch[$_] = 0 foreach 1..($e - $s + 1); 
   
@@ -342,17 +344,34 @@ sub get_alpha_and_beta
   
   $max_period = 0;
 
+  my $min_period = $e - $s + 2;
+
+  # Finally, we minimize the maximum between two elements of the two arrays 
+  # such that these two elements have the same index.
+  #
   for (my $i = $s; $i <= $e; $i++)
   {
-    my $current_minimum = $backward_stretch[$i - $s + 1];
-    
+    # Maximin problem.
+    #
+    my $current_minimum = $backward_stretch[$i - $s + 1];    
     ($forward_stretch[$i - $s + 1] < $current_minimum)
       and $current_minimum = $forward_stretch[$i - $s + 1];
-    
     ($current_minimum > $max_period) and $max_period = $current_minimum;
+
+    # The equivalent minimax problem.
+    #
+    my $current_maximum = $backward_stretch[$i - $s + 1];
+    ($forward_stretch[$i - $s + 1] > $current_minimum)
+      and $current_maximum = $forward_stretch[$i - $s + 1];
+    ($current_maximum < $min_period) and $min_period = $current_maximum;
+  }
+  
+  if ($min_period != $max_period)
+  {
+    print "Error! Minimax solution is different of the maximin one!\n";
   }
 
-  return $max_period;
+  return $min_period;
 }
 
 
