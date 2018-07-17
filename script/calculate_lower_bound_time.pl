@@ -40,6 +40,12 @@ my $N = $ARGV[1];
 
 my $j = $ARGV[2];
 
+
+# Set this variable as 1 to include two origins into subtelomeric regions.
+#
+my $SUBTELOMERIC_ORIGINS = 1;
+
+
 # First, we define the set of putative constitutive origins (Theta); these
 # values are for T. brucei TREU927 and were extracted from MFA-seq data 
 # presented in Figure 4 of Tiengwe et al. (2012).
@@ -64,12 +70,18 @@ my @Theta = ([],
 my $T = 0;
 
 
-# These two lines include a pair of origins, each one located 10 Kbp from 
+# These two pushes include a pair of origins, each one located 50 Kbp from 
 # each chromosome extremity. The assumption here is that all subtelomeric
 # regions contain a replication origin. 
 #
-#unshift @{$Theta[$j]}, 10000;
-#push @{$Theta[$j]}, $N - 10000;
+if ($SUBTELOMERIC_ORIGINS == 1)
+{
+  unshift @{$Theta[$j]}, 50000;
+  push @{$Theta[$j]}, $N - 50000;
+
+  @{$Theta[$j]} = sort {$a <=> $b} @{$Theta[$j]};
+}
+
 
 
 foreach my $i (0..(scalar @{$Theta[$j]}))

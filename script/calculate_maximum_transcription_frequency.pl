@@ -75,14 +75,16 @@ my @Theta = ([],
             );
 
 
-# These two pushes include a pair of origins, each one located 10 Kbp from 
+# These two pushes include a pair of origins, each one located 50 Kbp from 
 # each chromosome extremity. The assumption here is that all subtelomeric
 # regions contain a replication origin. 
 #
 if ($SUBTELOMERIC_ORIGINS == 1)
 {
-  unshift @{$Theta[$j]}, 10000;
-  push @{$Theta[$j]}, $N - 10000;
+  unshift @{$Theta[$j]}, 50000;
+  push @{$Theta[$j]}, $N - 50000;
+
+  @{$Theta[$j]} = sort {$a <=> $b} @{$Theta[$j]};
 }
 
 # Load CDS data.
