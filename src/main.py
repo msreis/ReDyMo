@@ -21,7 +21,10 @@ import shutil
 import sys
 from multiprocessing import Pool
 
-sys.path.append('../')
+# TODO: must fix the requirement of absolute paths in order to work
+# the module dependences!
+#
+sys.path.append('/home/msreis/projects')
 
 from ReDyMo.src.chromosome import Chromosome
 from ReDyMo.src.data_manager import DataManager

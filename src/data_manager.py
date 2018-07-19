@@ -97,8 +97,13 @@ class DataManager:
 
     chromosomes = []
     chromosome_tuples =self.select_chromosomes_from_database(organism=organism)
+
     for t in chromosome_tuples:
+
       transcription_tuples = self.select_transcription_regions_from_database\
+      (chromosome_code=t[0])
+
+      constitutive_origins = self.select_constitutive_origins_from_database\
       (chromosome_code=t[0])
 
       chromosomes.append({'code': t[0],
@@ -106,7 +111,8 @@ class DataManager:
          'probability_landscape': self.probability_landscape(code = t[0],\
                                                            length = t[1]),
          'transcription_regions': [{'start': d[0], 'end': d[1]}\
-         for d in transcription_tuples]})
+         for d in transcription_tuples],
+         'constitutive_origins' : constitutive_origins})
 
     return chromosomes
 
@@ -115,7 +121,7 @@ class DataManager:
   ## Queries the database and gathers transcription regions according to the
   # arguments.
   # @param kwargs Array of key-value pairs to filter the queried data.
-  # @return An array of transcriptin regions stored as tuples.
+  # @return An array of transcription regions stored as tuples.
   def select_transcription_regions_from_database(self, **kwargs):  
     
     db = sqlite3.connect(self.database_path)
@@ -127,7 +133,28 @@ class DataManager:
 
     transcription_tuples = cursor.fetchall()
     db.close()
+
     return transcription_tuples
+
+#-----------------------------------------------------------------------------#
+
+  ## Queries the database and gathers constitutive origins according to the
+  # arguments.
+  # @param kwargs Array of key-value pairs to filter the queried data.
+  # @return An array of constitutive origins stored as tuples.
+  def select_constitutive_origins_from_database(self, **kwargs):  
+    
+    db = sqlite3.connect(self.database_path)
+    cursor = db.cursor()
+    
+    for key, value in kwargs.items():
+      query = 'SELECT position FROM ReplicationOrigin WHERE ' + key + ' = ?'
+      cursor.execute(query, (value,))
+
+    constitutive_origins = cursor.fetchall()
+    db.close()
+
+    return constitutive_origins
 
 #-----------------------------------------------------------------------------#
 

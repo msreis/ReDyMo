@@ -45,7 +45,7 @@ class Chromosome:
     # @param transcription_regions List of the transcription regions of the
     # Chromosome.
     def __init__(self, code, length, probability_landscape,\
-                 transcription_regions):
+                 transcription_regions, constitutive_origins):
         self.code                       = code
         self.length                     = length
         self.strand                     = [0] * self.length
@@ -53,8 +53,7 @@ class Chromosome:
         self.number_of_replicated_bases = 0
         self.number_of_origins          = 0
         self.transcription_regions      = transcription_regions
-        
-        # TODO: include the constitutive origins stored in 'ReplicationOrigin'.
+        self.constitutive_origins       = constitutive_origins
 
 #-----------------------------------------------------------------------------#
 
