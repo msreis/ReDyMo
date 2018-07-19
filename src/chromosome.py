@@ -35,8 +35,8 @@ class Chromosome:
     # Number of replication origins available for the Chromosome.
 
     ## @var vector strand
-    # Stores the time when each base was replicated. TODO:
-
+    # Stores the time when each base was replicated.
+    
     ## The constructor for a Chromosome object.
     # @param code The id of the Chromosome.
     # @param length The length of the chromosome
@@ -46,13 +46,15 @@ class Chromosome:
     # Chromosome.
     def __init__(self, code, length, probability_landscape,\
                  transcription_regions):
-        self.code = code
-        self.length = length
-        self.strand = [0] * self.length
-        self.activation_probabilities = probability_landscape
+        self.code                       = code
+        self.length                     = length
+        self.strand                     = [0] * self.length
+        self.activation_probabilities   = probability_landscape
         self.number_of_replicated_bases = 0
-        self.number_of_origins = 0
-        self.transcription_regions = transcription_regions
+        self.number_of_origins          = 0
+        self.transcription_regions      = transcription_regions
+        
+        # TODO: include the constitutive origins stored in 'ReplicationOrigin'.
 
 #-----------------------------------------------------------------------------#
 
