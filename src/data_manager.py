@@ -40,15 +40,15 @@ class DataManager:
 #-----------------------------------------------------------------------------#
 
   ## Fetches all chromosomes from database that match the filters in kwargs.
-  # @param kwargs Array of key-value pairs to filter the data. Only tuples
-  # where property key = value will be retrieved.
+  # @param kwargs Array of organism-name pairs to filter the data. Only tuples
+  # where property organism == name will be retrieved.
   def select_chromosomes_from_database(self, **kwargs):
 
     db = sqlite3.connect(self.database_path)
     cursor = db.cursor()
-    for key, value in kwargs.items():
-      query = 'SELECT * FROM Chromosome WHERE ' + key + ' = ?'
-      cursor.execute(query, (value,))
+    for organism, name in kwargs.items():
+      query = 'SELECT * FROM Chromosome WHERE ' + organism + ' = ?'
+      cursor.execute(query, (name,))
 
     chromosome_tuples = cursor.fetchall()
     db.close()
@@ -120,16 +120,16 @@ class DataManager:
 
   ## Queries the database and gathers transcription regions according to the
   # arguments.
-  # @param kwargs Array of key-value pairs to filter the queried data.
+  # @param kwargs Array of  pairs to filter the queried data.
   # @return An array of transcription regions stored as tuples.
   def select_transcription_regions_from_database(self, **kwargs):  
     
     db = sqlite3.connect(self.database_path)
     cursor = db.cursor()
     
-    for key, value in kwargs.items():
-      query = 'SELECT * FROM TranscriptionRegion WHERE ' + key + ' = ?'
-      cursor.execute(query, (value,))
+    for chromosome_code, code in kwargs.items():
+      query = 'SELECT * FROM TranscriptionRegion WHERE ' + chromosome_code + ' = ?'
+      cursor.execute(query, (code,))
 
     transcription_tuples = cursor.fetchall()
     db.close()
@@ -140,16 +140,16 @@ class DataManager:
 
   ## Queries the database and gathers constitutive origins according to the
   # arguments.
-  # @param kwargs Array of key-value pairs to filter the queried data.
+  # @param kwargs Array of chromosome_code-code pairs to filter the queried data.
   # @return An array of constitutive origins stored as tuples.
   def select_constitutive_origins_from_database(self, **kwargs):  
     
     db = sqlite3.connect(self.database_path)
     cursor = db.cursor()
     
-    for key, value in kwargs.items():
-      query = 'SELECT position FROM ReplicationOrigin WHERE ' + key + ' = ?'
-      cursor.execute(query, (value,))
+    for chromosome_code, code in kwargs.items():
+      query = 'SELECT position FROM ReplicationOrigin WHERE ' + chromosome_code + ' = ?'
+      cursor.execute(query, (code,))
 
     constitutive_origins = cursor.fetchall()
     db.close()

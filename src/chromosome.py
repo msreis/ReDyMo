@@ -138,7 +138,8 @@ class Chromosome:
     # @see number_of_replicated_bases.
     # @param int start The index of the first base to replicate.
     # @param int end The index of the last base to replicate.
-    # @param float time The time when the replication occur, I think. TODO:
+    # @param float time The simulation iteration (time) when the replication 
+    # occurr
     # @return true if was a normal (not at the very end) transcription.
     def replicate(self, start, end, time):
         if start == end:
