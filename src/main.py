@@ -21,10 +21,7 @@ import shutil
 import sys
 from multiprocessing import Pool
 
-# TODO: must fix the requirement of absolute paths in order to work
-# the module dependences!
-#
-sys.path.append('/home/msreis/projects')
+sys.path.append('../')
 
 from ReDyMo.src.chromosome import Chromosome
 from ReDyMo.src.data_manager import DataManager
@@ -37,9 +34,9 @@ def output(simulation_number,dormant,resources,speed,time,iod,genome,period):
 
   # Prepare directories for this simulation.
   #
-  os.makedirs('../output', exist_ok=True)
+  os.makedirs('output', exist_ok=True)
 
-  directory = '../output/' + str(dormant) + '_' +\
+  directory = 'output/' + str(dormant) + '_' +\
               str(resources) + '_' + str(period) + '/'
 
   os.makedirs(directory, exist_ok=True)
@@ -134,8 +131,8 @@ if __name__ == '__main__':
 
   number_of_repetitions = int(sys.argv[sys.argv.index('--cells') + 1])
   organism = sys.argv[sys.argv.index('--organism') + 1]
-  data_manager = DataManager(database_path='../data/simulation.sqlite',
-                 mfa_seq_folder_path='../data/MFA-Seq_TBrucei_TREU927/')
+  data_manager = DataManager(database_path='data/simulation.sqlite',
+                 mfa_seq_folder_path='data/MFA-Seq_TBrucei_TREU927/')
   number_of_resources = (int(sys.argv[sys.argv.index('--resources') + 1]))
   replication_fork_speed = (int(sys.argv[sys.argv.index('--speed') + 1]))
   transcription_period = (int(sys.argv[sys.argv.index('--period') + 1]))

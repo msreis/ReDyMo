@@ -3,6 +3,8 @@ import sys
 sys.path.append('../')
 from src.chromosome import Chromosome
 
+# FIXME: Change Chromosome object construction to comply with new class
+# arguments. 
 
 ## @package ReDyMo.test.test_chromosome
 # Contains the Chromosome test class

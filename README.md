@@ -34,13 +34,12 @@ In this version of ReDyMo, all parameters are mandatory and are listed below:
 
 To run the program, the syntax of the main simulator program is the following one:
 ```
-$ ./main.py --organism 'organism' --resources resources_value --speed speed_value --cells numbe_of_cells --period period_value --timeout timeout_value --dormant [True|False]
+$ ./src/main.py --organism 'organism' --resources resources_value --speed speed_value --cells numbe_of_cells --period period_value --timeout timeout_value --dormant [True|False]
 ```
 
-The command above must be executed within the "src" directory. For example, to run a simulation of seven cells of *T. brucei TREU927*, with 10 forks, replisome speed of 65 bp/sec, transcription frequency of 150 sec, a timeout of one million iterations and no dormant origin firing, one must type:
+The command above must be executed within the project main directory. For example, to run a simulation of seven cells of *T. brucei TREU927*, with 10 forks, replisome speed of 65 bp/sec, transcription frequency of 150 sec, a timeout of one million iterations and no dormant origin firing, one must type at the project main directory:
 ```
-$ cd src
-$ ./main.py --organism 'Trypanosoma brucei brucei TREU927' --resources 10 --speed 65 --period 150 --cells 7 --timeout 1000000 --dormant False
+$ ./src/main.py --organism 'Trypanosoma brucei brucei TREU927' --resources 10 --speed 65 --period 150 --cells 7 --timeout 1000000 --dormant False
 ```
 The simulation results will be stored into a directory named *output/False_10_50/*, in which "output" is the outer directory name and the inner directory name of composed of the concatenation of the used parameter values for dormant origin firing, resources and period.
 
