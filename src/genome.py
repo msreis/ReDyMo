@@ -97,9 +97,9 @@ class Genome:
 
 #-----------------------------------------------------------------------------#
 
-## This functions calculates the total amount of bases replicated in each
-# chromosome.
-# @return The total number of bases replicated in recent step.
+  ## This functions calculates the total amount of bases replicated in each
+  # chromosome.
+  # @return The total number of bases replicated in recent step.
   def number_of_replicated_bases_in_this_step(self):
     number_of_replicated_bases_in_this_step = 0
     for chromosome in self.chromosomes:
@@ -109,4 +109,16 @@ class Genome:
     return number_of_replicated_bases_in_this_step
 
 #-----------------------------------------------------------------------------#
+
+  ## Retrieve the number of constitutive origins in the whole genome.
+  # @return The number of constitutive origins in the whole genome.
+  def number_of_constitutive_origins(self):
+    n = 0
+    for chromosome in self.chromosomes:
+      n += chromosome.number_of_constitutive_origins()
+    return n
+
+#-----------------------------------------------------------------------------#
+
+
 

@@ -45,10 +45,23 @@ class GenomicLocation:
 #-----------------------------------------------------------------------------#
 
   ## Tests the probability of the base to be activated
+  # @param Boolean use_constitutive_origins True if uses this type of origin.
   # @return True if the base will be activated
-  def will_activate(self):
-    return random.random() < self.chromosome.activation_probability\
-    (base=self.base)
+  def will_activate(self, use_constitutive_origins):
+  
+    if (not use_constitutive_origins):  
+      return random.random() < self.chromosome.activation_probability\
+      (base=self.base)
+
+    # We define a range of 500 Kb upstream and downstream the constitutive
+    # origin that can be activated (total 1000 Kb).
+    #
+    range = 500000
+    for origin in self.chromosome.constitutive_origins:  
+      if (self.base >= (origin - range)) and (self.base <= (origin + range)):
+        return True
+  
+    return False
 
 #-----------------------------------------------------------------------------#
 

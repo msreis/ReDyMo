@@ -112,7 +112,7 @@ class DataManager:
                                                            length = t[1]),
          'transcription_regions': [{'start': d[0], 'end': d[1]}\
          for d in transcription_tuples],
-         'constitutive_origins' : constitutive_origins})
+         'constitutive_origins' : [d[0] for d in constitutive_origins]})
 
     return chromosomes
 
@@ -120,7 +120,7 @@ class DataManager:
 
   ## Queries the database and gathers transcription regions according to the
   # arguments.
-  # @param kwargs Array of  pairs to filter the queried data.
+  # @param kwargs Array of chromosome_code-code pairs to filter the query.
   # @return An array of transcription regions stored as tuples.
   def select_transcription_regions_from_database(self, **kwargs):  
     
@@ -128,7 +128,8 @@ class DataManager:
     cursor = db.cursor()
     
     for chromosome_code, code in kwargs.items():
-      query = 'SELECT * FROM TranscriptionRegion WHERE ' + chromosome_code + ' = ?'
+      query = 'SELECT * FROM TranscriptionRegion WHERE ' +\
+       chromosome_code + ' = ?'
       cursor.execute(query, (code,))
 
     transcription_tuples = cursor.fetchall()
@@ -140,7 +141,7 @@ class DataManager:
 
   ## Queries the database and gathers constitutive origins according to the
   # arguments.
-  # @param kwargs Array of chromosome_code-code pairs to filter the queried data.
+  # @param kwargs Array of chromosome_code-code pairs to filter the query.
   # @return An array of constitutive origins stored as tuples.
   def select_constitutive_origins_from_database(self, **kwargs):  
     
@@ -148,7 +149,8 @@ class DataManager:
     cursor = db.cursor()
     
     for chromosome_code, code in kwargs.items():
-      query = 'SELECT position FROM ReplicationOrigin WHERE ' + chromosome_code + ' = ?'
+      query = 'SELECT position FROM ReplicationOrigin WHERE ' +\
+       chromosome_code + ' = ?'
       cursor.execute(query, (code,))
 
     constitutive_origins = cursor.fetchall()

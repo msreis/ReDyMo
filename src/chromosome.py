@@ -161,7 +161,7 @@ class Chromosome:
                 self.strand[i] = time
                 self.number_of_replicated_bases += 1
 
-            elif i != start:               # The start position is always duplicated!
+            elif i != start:        # The start position is always duplicated!
                 is_normal_transcription = False
                 break
 
@@ -184,3 +184,12 @@ class Chromosome:
         return self.code
 
 #-----------------------------------------------------------------------------#
+
+    ## Retrieve the number of constitutive origins of this chromosome.
+    # @return The number of constitutive origins.
+    def number_of_constitutive_origins(self):
+      return len(self.constitutive_origins)
+
+#-----------------------------------------------------------------------------#
+
+

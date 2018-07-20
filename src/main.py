@@ -57,6 +57,7 @@ def output(simulation_number,dormant,resources,speed,time,iod,genome,period):
 #-----------------------------------------------------------------------------#
 
 def main(args):
+
   chromosomes = [Chromosome(**d) for d in args['chromosome_data']]
   genome = Genome(chromosomes=chromosomes)
   fork_manager = ForkManager(size=args['number_of_resources'],\
@@ -71,12 +72,23 @@ def main(args):
   alpha = 1
   time = 0
 
+  # Get the number of constitutive origins in the whole genome
+  #
+  number_of_constitutive_origins = genome.number_of_constitutive_origins()
+
+  # Counter of the total number of head-to-head collisions during a simulation.
+  #
   number_of_collisions = 0
 
   print('Starting simulation...', end='')
   sys.stdout.flush()
+  
+  # TODO: set this flag with an argument.
+  #
+  use_constitutive_origins = True
 
-  while not genome.is_replicated() and simulation_timeout > 0:
+  while not genome.is_replicated() and simulation_timeout > 0\
+                                   and number_of_constitutive_origins > 0:
 
     time += 1
 
@@ -100,12 +112,22 @@ def main(args):
       for attempt in range(fork_manager.number_of_free_forks):
  
         genomic_location = genome.random_genomic_location()
+
+        # This is an alternative to the procedure above, and changes the
+        # dynamics of the simulation.
+        #
         # genomic_location = genome.random_unreplicated_genomic_location()
  
         if not genomic_location.is_replicated()\
-        and genomic_location.will_activate()\
+        and genomic_location.will_activate(use_constitutive_origins)\
         and fork_manager.number_of_free_forks >= 2:
+
           fork_manager.attach_forks(genomic_location=genomic_location,time=time)
+
+          if use_constitutive_origins == True:
+            number_of_constitutive_origins -= 1
+
+
 
   print('[done]')
   print('Number of head-to-head collisions: ' + str(number_of_collisions))
