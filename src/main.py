@@ -43,7 +43,7 @@ def output(simulation_number,dormant,resources,speed,time,iod,genome,period):
 
   simulation = 'simulation_{}/'.format(simulation_number)
 
-  os.makedirs(directory + simulation)
+  os.makedirs(directory + simulation, exist_ok=True)
 
   with open(directory + simulation + '/cell.txt', 'w')\
   as output_file:
@@ -65,6 +65,7 @@ def main(args):
   period = args['transcription_period']
   simulation_timeout = args['timeout']
   dormant = args['has_dormant']
+  origins_range = args['origins_range']
 
   # Parameter that specifies the number of iterations between two
   # different attempts of origin firing (default value == 1).
@@ -80,16 +81,20 @@ def main(args):
   #
   number_of_collisions = 0
 
+  # Set the flag of constitutive origins.
+  #
+  use_constitutive_origins = False
+  if origins_range > 0:
+    use_constitutive_origins = True
+
+
   print('Starting simulation...', end='')
   sys.stdout.flush()
-  
-  # TODO: set this flag with an argument.
-  #
-  use_constitutive_origins = True
 
   while not genome.is_replicated() and simulation_timeout > 0\
-                                   and number_of_constitutive_origins > 0:
-
+  and not (number_of_constitutive_origins == 0 and \
+  fork_manager.number_of_free_forks == fork_manager.number_of_forks):
+  
     time += 1
 
     simulation_timeout -= 1
@@ -119,18 +124,34 @@ def main(args):
         # genomic_location = genome.random_unreplicated_genomic_location()
  
         if not genomic_location.is_replicated()\
-        and genomic_location.will_activate(use_constitutive_origins)\
-        and fork_manager.number_of_free_forks >= 2:
+        and fork_manager.number_of_free_forks >= 2\
+        and genomic_location.will_activate(use_constitutive_origins,\
+                                           origins_range):
+
+          origin = genomic_location.get_constitutive_origin(origins_range)
+
+          if genomic_location.put_fired_constitutive_origin(origin) == False:
+            print('Error in putting fired constitutive origin!')         
 
           fork_manager.attach_forks(genomic_location=genomic_location,time=time)
 
           if use_constitutive_origins == True:
             number_of_constitutive_origins -= 1
 
+          # print('Available origins: ' + str(number_of_constitutive_origins) + ' Unattached forks: ' + str(fork_manager.number_of_free_forks))
+
 
 
   print('[done]')
+  if genome.is_replicated():
+    print('Genome was successfully duplicated!')
+  elif simulation_timeout == 0:
+    print('WARNING: Simulation timeout reached!')
   print('Number of head-to-head collisions: ' + str(number_of_collisions))
+  if use_constitutive_origins == True:
+    print('Number of constitutive origins that did not fire: ' +\
+    str(number_of_constitutive_origins))
+
   print ('\n')
   sys.stdout.flush()
 
@@ -159,6 +180,13 @@ if __name__ == '__main__':
   replication_fork_speed = (int(sys.argv[sys.argv.index('--speed') + 1]))
   transcription_period = (int(sys.argv[sys.argv.index('--period') + 1]))
   simulation_timeout = (int(sys.argv[sys.argv.index('--timeout') + 1]))
+  
+  # origins_range > 0 means that in this simulation it will be used 
+  # constitutive origins only, with a range of 'origins_range' Kb per origin.
+  #
+  origins_range = 0
+  if '--constitutive' in sys.argv[1:]:
+    origins_range = (int(sys.argv[sys.argv.index('--constitutive') + 1]))
 
   # 'False' or 'True'
   #
@@ -191,7 +219,8 @@ if __name__ == '__main__':
     if dormant_flag == True:
       chromosome_data = data_manager.chromosomes(organism=organism)
 
-    args_list.append({'chromosome_data': chromosome_data,
+    args_list.append({  'origins_range': origins_range,
+                      'chromosome_data': chromosome_data,
                   'number_of_resources': number_of_resources,
                     'replication_speed': replication_fork_speed,
                     'simulation_number': k,

@@ -32,9 +32,13 @@ my $TIMEOUT = 100000000;
 #
 my $NUMBER_OF_CELLS = 30; 
 
+# Range of nucleotides for the constitutive origin firing.
+#
+my $RANGE = 200000;
+
 # Output path.
 #
-my $PATH = "../output/";
+my $PATH = "output/";
 
 # Clean up output directory before the experiments.
 #
@@ -45,7 +49,7 @@ for (my $F = 10; $F <= 100; $F += 5)
 {
   foreach my $period (0, 90000, 9000, 900, 300, 90)
   {
-    foreach my $has_dormant ('False', 'True')
+    foreach my $has_dormant ('False')
     {
       ($has_dormant eq 'False')
         and printf "Running assay with F = $F, period = $period and " . 
@@ -55,20 +59,21 @@ for (my $F = 10; $F <= 100; $F += 5)
                    "with dormant origin firing (%d cells)... ",
                    $NUMBER_OF_CELLS;  
     
-      system("time python3 ../src/main.py " .
+      system("time python3 ./src/main.py " .
              "--organism 'Trypanosoma brucei brucei TREU927' " .
              "--dormant $has_dormant " . 
              "--resources $F " .
              "--speed 1 " . 
              "--period $period " .
              "--timeout $TIMEOUT " .
+             "--constitutive $RANGE " .
              "--cells $NUMBER_OF_CELLS " .
              "1> " . $PATH . $has_dormant . "_" . $F . "_" . $period . "_out ".
              "2> " . $PATH . $has_dormant . "_" . $F . "_" . $period . "_err");
 
       # Aggregating the results.
       # 
-      system("./cell_output_aggregator.py " . $PATH . $has_dormant . "_" . $F .
+      system("./script/cell_output_aggregator.py " . $PATH . $has_dormant . "_" . $F .
              "_" . $period . " >> " . $PATH . $has_dormant . "_" . $period .
              ".txt");
    
