@@ -48,7 +48,7 @@ To run the program, the syntax of the main simulator program is the following on
 $ ./src/main.py --cells number_of_cells --dormant dormant_flag --organism 'organism_name' --resources number_of_forks --speed speed_value --timeout timeout_value [--constitutive range] [--period period_value]
 ```
 
-The command above must be executed within the project main directory. For example, to run a simulation of 7 cells of *T. brucei TREU927*, with 10 forks, replisome speed of 65 bp/iteration, transcription frequency of 150 sec, a timeout of one million iterations and with dormant origin firing, one must type at the project main directory:
+The command above must be executed within the project main directory. For example, to run a simulation of 7 cells of *T. brucei TREU927*, with 10 forks, replisome speed of 65 bp/iteration, transcription period of 150 iterations between two transcription initiations, a timeout of one million iterations and with dormant origin firing, one must type at the project main directory:
 ```
 $ ./src/main.py --cells 7 --organism 'Trypanosoma brucei brucei TREU927' --resources 10 --speed 65 --period 150 --timeout 1000000 --dormant True
 ```
@@ -65,13 +65,11 @@ In this case, the simulation results will be stored into the directory *output/F
 
 If more than one cell is simulated at once, then the results may be averaged through the usage of an aggregator script, whose syntax is the following:
 ```
-$ cd script
-$ ./cell_output_aggregator.py *output_directory* > *aggregation_file_and_path*
+$ ./script/cell_output_aggregator.py *output_directory* > *aggregation_file_and_path*
 ```
-where *output_directory* is the output directory of the simulation and *aggregation_file_and_path* is both the path and name for the file containing the result of data aggregation. For example, to aggregate the aforementioned example, one could just type:
+where *output_directory* is the output directory of the simulation and *aggregation_file_and_path* is both the path and name for the file containing the result of data aggregation. For example, to aggregate the aforementioned first example, one could just type:
 ```
-$ cd script
-$ ./cell_output_aggregator.py ../output/False_10_150 > ../output/aggregated.txt
+$ ./script/cell_output_aggregator.py output/False_10_150 > output/aggregated.txt
 ```
 
 ### Bug report and contact

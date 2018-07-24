@@ -138,10 +138,6 @@ def main(args):
           if use_constitutive_origins == True:
             number_of_constitutive_origins -= 1
 
-          # print('Available origins: ' + str(number_of_constitutive_origins) + ' Unattached forks: ' + str(fork_manager.number_of_free_forks))
-
-
-
   print('[done]')
   if genome.is_replicated():
     print('Genome was successfully duplicated!')
@@ -171,6 +167,15 @@ if __name__ == '__main__':
   # Maximum number of processes during the parallelized code execution.
   #
   number_of_processes = 40
+
+  # Check whether all mandatory arguments are present.
+  #
+  if '--cells' not in sys.argv[1:] or '--organism' not in sys.argv[1:] or\
+     '--resources' not in sys.argv[1:] or '--speed' not in sys.argv[1:] or\
+     '--timeout' not in sys.argv[1:]:
+     
+    print('Insufficient number of arguments (see README.md).')
+    sys.exit()
 
   number_of_repetitions = int(sys.argv[sys.argv.index('--cells') + 1])
   organism = sys.argv[sys.argv.index('--organism') + 1]
