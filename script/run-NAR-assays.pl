@@ -49,8 +49,10 @@ for (my $F = 10; $F <= 100; $F += 5)
 {
   foreach my $period (0, 90000)
   {
-    foreach my $has_dormant ('False')
+    foreach my $cell (1..$NUMBER_OF_CELLS)
     {
+      my $has_dormant = 'False';
+    
       ($has_dormant eq 'False')
         and printf "Running assay with F = $F, period = $period and " . 
                    "no dormant origin firing (%d cells)... ",
@@ -67,15 +69,15 @@ for (my $F = 10; $F <= 100; $F += 5)
              "--period $period " .
              "--timeout $TIMEOUT " .
              "--constitutive $RANGE " .
-             "--cells $NUMBER_OF_CELLS " .
+             "--cells 1 " .
              "1> " . $PATH . $has_dormant . "_" . $F . "_" . $period . "_out ".
              "2> " . $PATH . $has_dormant . "_" . $F . "_" . $period . "_err");
 
       # Aggregating the results.
       # 
-      system("./script/cell_output_aggregator.py " . $PATH . $has_dormant . "_" 
-             . $F . "_" . $period . " >> " . $PATH . $has_dormant . "_" . 
-             $period . ".txt");
+      #system("./script/cell_output_aggregator.py " . $PATH . $has_dormant   
+      #       . "_" . $F . "_" . $period . " >> " . $PATH . $has_dormant . "_"
+      #       . $F . "_" . $period . ".txt");
    
       print "[done]\n";
     }
