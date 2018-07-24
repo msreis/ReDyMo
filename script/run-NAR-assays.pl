@@ -22,10 +22,10 @@
 
 use strict;
 
-# The simulations were carried out with a very big timeout (== 100000000!),
+# The simulations were carried out with a very big timeout (== 10,000,000!),
 # in order to allow full replication.
 #
-my $TIMEOUT = 100000000;
+my $TIMEOUT = 10000000;
 
 # Number of simulations per set of parameters (i.e., each simulation is
 # considered to be the S-phase of an independent cell).
@@ -47,7 +47,7 @@ system ("mkdir $PATH");
 
 for (my $F = 10; $F <= 100; $F += 5)
 {
-  foreach my $period (0, 90000, 9000, 900, 300, 90)
+  foreach my $period (0, 90000)
   {
     foreach my $has_dormant ('False')
     {
@@ -73,9 +73,9 @@ for (my $F = 10; $F <= 100; $F += 5)
 
       # Aggregating the results.
       # 
-      system("./script/cell_output_aggregator.py " . $PATH . $has_dormant . "_" . $F .
-             "_" . $period . " >> " . $PATH . $has_dormant . "_" . $period .
-             ".txt");
+      system("./script/cell_output_aggregator.py " . $PATH . $has_dormant . "_" 
+             . $F . "_" . $period . " >> " . $PATH . $has_dormant . "_" . 
+             $period . ".txt");
    
       print "[done]\n";
     }

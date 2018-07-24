@@ -178,8 +178,16 @@ if __name__ == '__main__':
                  mfa_seq_folder_path='data/MFA-Seq_TBrucei_TREU927/')
   number_of_resources = (int(sys.argv[sys.argv.index('--resources') + 1]))
   replication_fork_speed = (int(sys.argv[sys.argv.index('--speed') + 1]))
-  transcription_period = (int(sys.argv[sys.argv.index('--period') + 1]))
   simulation_timeout = (int(sys.argv[sys.argv.index('--timeout') + 1]))
+
+
+  # transcription_period == 0 means that this simulation will be carried out 
+  # without constitutive transcription activation.
+  #
+  transcription_period = 0
+  if '--period' in sys.argv[1:]:
+    transcription_period = (int(sys.argv[sys.argv.index('--period') + 1]))
+
   
   # origins_range > 0 means that in this simulation it will be used 
   # constitutive origins only, with a range of 'origins_range' Kb per origin.
