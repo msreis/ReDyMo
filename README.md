@@ -21,14 +21,10 @@ The system uses a simple *SQLite* database. Python already has plenty of functio
 
 ### Parameters
 
-In this version of ReDyMo, all parameters are mandatory and are listed below:
- - *organism*: Organism name, as saved in the database (remember to add single quotation marks when using space-separated names).
- - *cells*: Number of independent simulations to be made.
- - *resources*: Number of available forks for the replication process.
- - *speed*: Movement speed of each replication machinery (in bases per second).
- - *period*: Time between consecutive activations of a transcription region (in seconds).
- - *timeout*: Maximum allowed number of iterations of a simulation; if this value is reached, then a simulation is ended even if DNA replication is not completed yet.
- - *dormant*: Flag that either activates ('True') or disables ('False') the firing of dormant origins.
+To view information about the configuration parameters, run:
+```
+$ ./src/main.py -h
+```
 
 ### Running the simulation
 
