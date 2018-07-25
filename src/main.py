@@ -20,6 +20,7 @@ import os
 import shutil
 import sys
 from multiprocessing import Pool
+import argparse
 
 sys.path.append('../')
 
@@ -168,78 +169,124 @@ if __name__ == '__main__':
   #
   number_of_processes = 40
 
-  # Check whether all mandatory arguments are present.
-  #
-  if '--cells' not in sys.argv[1:] or '--organism' not in sys.argv[1:] or\
-     '--resources' not in sys.argv[1:] or '--speed' not in sys.argv[1:] or\
-     '--timeout' not in sys.argv[1:]:
-     
-    print('Insufficient number of arguments (see README.md).')
-    sys.exit()
+  # Configure argument parser
+  parser = argparse.ArgumentParser(description='Dynamic model of the replication process in kinetoplastida')
 
-  number_of_repetitions = int(sys.argv[sys.argv.index('--cells') + 1])
-  organism = sys.argv[sys.argv.index('--organism') + 1]
+  parser.add_argument(
+    '--organism',
+    dest='organism',
+    type=str,
+    required=True,
+    help=('Name of the parasite species, as saved in the database. '
+          'Use single quotation marks for space-separated names.')
+  )
+
+  parser.add_argument(
+    '--cells',
+    dest='number_of_repetitions',
+    type=int,
+    required=True,
+    help='Number of independent simulations to be made. Must be a positive integer.',
+  )
+
+  parser.add_argument(
+    '--resources',
+    dest='number_of_resources',
+    type=int,
+    required=True,
+    help='Number of available forks for the replication process. Must be a positive integer.',
+  )
+
+  parser.add_argument(
+    '--speed',
+    dest='replication_fork_speed',
+    type=int,
+    required=True,
+    help='Velocity of each replication fork (in number of nucleotides per iteration).',
+  )
+
+  parser.add_argument(
+    '--period',
+    dest='transcription_period',
+    type=int,
+    default=0,
+    help=('Period (in number of simulation iterations) between two consecutive activations (i.e. RNAP binding) '
+          'of a transcription region. TRANSCRIPTION_PERIOD must be positive. If this parameter is not set, '
+          'then the simulation is carried out without transcription.'),
+  )
+
+  parser.add_argument(
+    '--timeout',
+    dest='simulation_timeout',
+    type=int,
+    required=True,
+    help=('Maximum allowed number of iterations of a simulation; if this value is reached, '
+          'then a simulation is ended even if DNA replication is not completed yet.'),
+  )
+
+  parser.add_argument(
+    '--dormant',
+    dest='dormant_flag',
+    type=bool,
+    required=True,
+    help='Whether dormant origins should be fired. Always treated as FALSE if the --constitutive parameter is used',
+  )
+
+  parser.add_argument(
+    '--constitutive_origins',
+    dest='constitutive_origins_flag',
+    type=bool,
+    default=True,
+    help='Whether constitutive origins should be used.',
+  )
+
+  parser.add_argument(
+      '--constitutive',
+      dest='origins_range',
+      type=int,
+      default=0,
+      help=('Specifies the range of nucleotides around each constitutive origin that can initiate replication. '
+            'Must be a positive integer. '
+            'When this parameter is provided, DNA replication will use the set of constitutive origins within '
+            'the database instead of the probability landscape.'),
+  )
+
+  # Parse arguments from command-line
+  args = parser.parse_args(sys.argv[1:])
+
   data_manager = DataManager(database_path='data/simulation.sqlite',
                  mfa_seq_folder_path='data/MFA-Seq_TBrucei_TREU927/')
-  number_of_resources = (int(sys.argv[sys.argv.index('--resources') + 1]))
-  replication_fork_speed = (int(sys.argv[sys.argv.index('--speed') + 1]))
-  simulation_timeout = (int(sys.argv[sys.argv.index('--timeout') + 1]))
-
-
-  # transcription_period == 0 means that this simulation will be carried out 
-  # without constitutive transcription activation.
-  #
-  transcription_period = 0
-  if '--period' in sys.argv[1:]:
-    transcription_period = (int(sys.argv[sys.argv.index('--period') + 1]))
-
-  
-  # origins_range > 0 means that in this simulation it will be used 
-  # constitutive origins only, with a range of 'origins_range' Kb per origin.
-  #
-  origins_range = 0
-  if '--constitutive' in sys.argv[1:]:
-    origins_range = (int(sys.argv[sys.argv.index('--constitutive') + 1]))
-
-  # 'False' or 'True'
-  #
-  if (sys.argv[sys.argv.index('--dormant') + 1] == 'True'):
-    dormant_flag = True
-  elif (sys.argv[sys.argv.index('--dormant') + 1] == 'False'):
-    dormant_flag = False
-  else:
-    print('Error: --dormant parameter must be either False or True.\n')
-    sys.exit()
 
   # Load data from database.
   #
   print('Loading data... ', end='')
   sys.stdout.flush()
 
-  chromosome_data = data_manager.chromosomes(organism=organism)
+  chromosome_data = data_manager.chromosomes(organism=args.organism)
 
   print('[done]')
   sys.stdout.flush()
 
   args_list = []
 
-  for k in range(number_of_repetitions):
+  for k in range(args.number_of_repetitions):
 
     # Once the dormant origins assay modifies the probability
     # landscape, for that type of experiment we need to load
     # the original landscape again.
     #
-    if dormant_flag == True:
-      chromosome_data = data_manager.chromosomes(organism=organism)
+    if args.dormant_flag == True:
+      chromosome_data = data_manager.chromosomes(organism=args.organism)
 
-    args_list.append({  'origins_range': origins_range,
-                      'chromosome_data': chromosome_data,
-                  'number_of_resources': number_of_resources,
-                    'replication_speed': replication_fork_speed,
+    args_list.append({'chromosome_data': chromosome_data,
+                        'origins_range': args.origins_range,
+                  'number_of_resources': args.number_of_resources,
+                    'replication_speed': args.replication_fork_speed,
                     'simulation_number': k,
-                              'timeout': simulation_timeout,
-                          'has_dormant': dormant_flag,
-                 'transcription_period': transcription_period})
+                              'timeout': args.simulation_timeout,
+                          'has_dormant': args.dormant_flag,
+             'use_constitutive_origins': args.constitutive_origins_flag,
+                 'transcription_period': args.transcription_period})
 
   Pool(processes=number_of_processes).map(main, args_list)
 

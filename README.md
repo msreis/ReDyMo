@@ -20,26 +20,10 @@ To run ReDyMo, you only need a system with Python3 installed, which is done by d
 The system uses a simple *SQLite* database. Python already has plenty of functionalities to access and modify *SQLite* databases. However, if it is necessary to visualize the data in a more intuitive fashion, we recommend the usage of a third-party software such as [SQLiteStudio].
 
 ### Parameters
-
-In this version of ReDyMo, most parameters are mandatory and are listed below:
-
- - --cells *number_of_cells*: Number of independent simulations to be made. *number_of_cells* is a positive integer.
-
- - --dormant *dormant_flag*: Flag that either activates ('True') or disables ('False') the firing of dormant origins. *dormant_value* is a Boolean flag. It is noteworthy that the dormant origing firing does not work when constitutive origins are used (parameter --constitutive).
-
- - --organism *'organism_name'*: Name of the parasite species, as saved in the database. *'organism_name'* is a string (in space-separated names, use single quotation marks).
-
- - --resources *number_of_forks*: Number of available forks for the replication process. *number_of_forks* is a positive integer.
-
- - --speed *speed_value*: Velocity of each replication fork (in number of nucleotides per iteration). *speed_value* is a positive integer.
-
- - --timeout *timeout_value*: Maximum allowed number of iterations of a simulation; if this value is reached, then a simulation is ended even if DNA replication is not completed yet.
-
-The two optional parameters are:
-
- - --constitutive *range*: When this parameter is provided, a DNA replication must use the set of constitutive origins within the database instead of the probability landscape. *range* is a positive integer, and specifies the range of nucleotides around each constitutive origin that can initiate replication.
-
- - --period *period_value*: Period (in number of simulation iterations) between two consecutive activations (i.e. RNAP binding) of a transcription region. *period_value* is a positive integer. If this parameter is not set, then the simulation is carried out without transcription.
+To view information about the configuration parameters, run:
+```
+$ ./src/main.py -h
+```
 
 ### Running the simulation
 
