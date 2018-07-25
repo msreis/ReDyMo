@@ -44,7 +44,7 @@ def output(simulation_number,dormant,resources,speed,time,iod,genome,period):
 
   simulation = 'simulation_{}/'.format(simulation_number)
 
-  os.makedirs(directory + simulation)
+  os.makedirs(directory + simulation, exist_ok=True)
 
   with open(directory + simulation + '/cell.txt', 'w')\
   as output_file:
@@ -66,7 +66,8 @@ def main(args):
   period = args['transcription_period']
   simulation_timeout = args['timeout']
   dormant = args['has_dormant']
-  use_constitutive_origins = args['use_constitutive_origins']
+
+  origins_range = args['origins_range']
 
   # Parameter that specifies the number of iterations between two
   # different attempts of origin firing (default value == 1).
@@ -82,12 +83,20 @@ def main(args):
   #
   number_of_collisions = 0
 
+  # Set the flag of constitutive origins.
+  #
+  use_constitutive_origins = False
+  if origins_range > 0:
+    use_constitutive_origins = True
+
+
   print('Starting simulation...', end='')
   sys.stdout.flush()
 
   while not genome.is_replicated() and simulation_timeout > 0\
-                                   and number_of_constitutive_origins > 0:
-
+  and not (number_of_constitutive_origins == 0 and \
+  fork_manager.number_of_free_forks == fork_manager.number_of_forks):
+  
     time += 1
 
     simulation_timeout -= 1
@@ -117,18 +126,30 @@ def main(args):
         # genomic_location = genome.random_unreplicated_genomic_location()
  
         if not genomic_location.is_replicated()\
-        and genomic_location.will_activate(use_constitutive_origins)\
-        and fork_manager.number_of_free_forks >= 2:
+        and fork_manager.number_of_free_forks >= 2\
+        and genomic_location.will_activate(use_constitutive_origins,\
+                                           origins_range):
+
+          origin = genomic_location.get_constitutive_origin(origins_range)
+
+          if genomic_location.put_fired_constitutive_origin(origin) == False:
+            print('Error in putting fired constitutive origin!')         
 
           fork_manager.attach_forks(genomic_location=genomic_location,time=time)
 
           if use_constitutive_origins == True:
             number_of_constitutive_origins -= 1
 
-
-
   print('[done]')
+  if genome.is_replicated():
+    print('Genome was successfully duplicated!')
+  elif simulation_timeout == 0:
+    print('WARNING: Simulation timeout reached!')
   print('Number of head-to-head collisions: ' + str(number_of_collisions))
+  if use_constitutive_origins == True:
+    print('Number of constitutive origins that did not fire: ' +\
+    str(number_of_constitutive_origins))
+
   print ('\n')
   sys.stdout.flush()
 
@@ -149,80 +170,49 @@ if __name__ == '__main__':
   #
   number_of_processes = 40
 
-  # Configure argument parser
-  parser = argparse.ArgumentParser(description='Dynamic model of the replication process in kinetoplastida')
+  # Check whether all mandatory arguments are present.
+  #
+  if '--cells' not in sys.argv[1:] or '--organism' not in sys.argv[1:] or\
+     '--resources' not in sys.argv[1:] or '--speed' not in sys.argv[1:] or\
+     '--timeout' not in sys.argv[1:]:
+     
+    print('Insufficient number of arguments (see README.md).')
+    sys.exit()
 
-  parser.add_argument(
-    '--organism',
-    dest='organism',
-    type=str,
-    required=True,
-    help=('Organism name, as saved in the database '
-          '(remember to add single quotation marks when using space-separated names)')
-  )
-
-  parser.add_argument(
-    '--cells',
-    dest='number_of_repetitions',
-    type=int,
-    required=True,
-    help='Number of independent simulations to be made.',
-  )
-
-  parser.add_argument(
-    '--resources',
-    dest='number_of_resources',
-    type=int,
-    required=True,
-    help='Number of available forks for the replication process.',
-  )
-
-  parser.add_argument(
-    '--speed',
-    dest='replication_fork_speed',
-    type=int,
-    required=True,
-    help='Movement speed of each replication machinery (in bases per second).',
-  )
-
-  parser.add_argument(
-    '--period',
-    dest='transcription_period',
-    type=int,
-    required=True,
-    help='Time between consecutive activations of a transcription region (in seconds).',
-  )
-
-  parser.add_argument(
-    '--timeout',
-    dest='simulation_timeout',
-    type=int,
-    required=True,
-    help=('Maximum allowed number of iterations of a simulation; if this value is reached, '
-          'then a simulation is ended even if DNA replication is not completed yet.'),
-  )
-
-  parser.add_argument(
-    '--dormant',
-    dest='dormant_flag',
-    type=bool,
-    required=True,
-    help='Whether dormant origins should be fired.',
-  )
-
-  parser.add_argument(
-    '--constitutive_origins',
-    dest='constitutive_origins_flag',
-    type=bool,
-    default=True,
-    help='Whether constitutive origins should be used.',
-  )
-
-  # Parse arguments from command-line
-  args = parser.parse_args(sys.argv[1:])
-
+  number_of_repetitions = int(sys.argv[sys.argv.index('--cells') + 1])
+  organism = sys.argv[sys.argv.index('--organism') + 1]
   data_manager = DataManager(database_path='data/simulation.sqlite',
                  mfa_seq_folder_path='data/MFA-Seq_TBrucei_TREU927/')
+  number_of_resources = (int(sys.argv[sys.argv.index('--resources') + 1]))
+  replication_fork_speed = (int(sys.argv[sys.argv.index('--speed') + 1]))
+  simulation_timeout = (int(sys.argv[sys.argv.index('--timeout') + 1]))
+
+
+  # transcription_period == 0 means that this simulation will be carried out 
+  # without constitutive transcription activation.
+  #
+  transcription_period = 0
+  if '--period' in sys.argv[1:]:
+    transcription_period = (int(sys.argv[sys.argv.index('--period') + 1]))
+
+  
+  # origins_range > 0 means that in this simulation it will be used 
+  # constitutive origins only, with a range of 'origins_range' Kb per origin.
+  #
+  origins_range = 0
+  if '--constitutive' in sys.argv[1:]:
+    origins_range = (int(sys.argv[sys.argv.index('--constitutive') + 1]))
+
+  # 'False' or 'True'
+  #
+  if (sys.argv[sys.argv.index('--dormant') + 1] == 'True'):
+    dormant_flag = True
+  elif (sys.argv[sys.argv.index('--dormant') + 1] == 'False'):
+    dormant_flag = False
+  else:
+    print('Error: --dormant parameter must be either False or True.\n')
+    sys.exit()
+
 
   # Load data from database.
   #
@@ -245,9 +235,10 @@ if __name__ == '__main__':
     if args.dormant_flag == True:
       chromosome_data = data_manager.chromosomes(organism=args.organism)
 
-    args_list.append({'chromosome_data': chromosome_data,
-                  'number_of_resources': args.number_of_resources,
-                    'replication_speed': args.replication_fork_speed,
+    args_list.append({  'origins_range': origins_range,
+                      'chromosome_data': chromosome_data,
+                  'number_of_resources': number_of_resources,
+                    'replication_speed': replication_fork_speed,
                     'simulation_number': k,
                               'timeout': args.simulation_timeout,
                           'has_dormant': args.dormant_flag,

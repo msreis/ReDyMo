@@ -44,23 +44,67 @@ class GenomicLocation:
 
 #-----------------------------------------------------------------------------#
 
-  ## Tests the probability of the base to be activated
+  ## Tests the probability of the base to be activated.
   # @param Boolean use_constitutive_origins True if uses this type of origin.
-  # @return True if the base will be activated
-  def will_activate(self, use_constitutive_origins):
+  # @param int origins_range Considered range around a constitutive origin.
+  # @return True if the base will be activated.
+  def will_activate(self, use_constitutive_origins, origins_range):
   
     if (not use_constitutive_origins):  
       return random.random() < self.chromosome.activation_probability\
       (base=self.base)
 
-    # We define a range of 500 Kb upstream and downstream the constitutive
-    # origin that can be activated (total 1000 Kb).
+    # We define a range of 'origins_range' upstream and downstream the
+    # constitutive origin that can be activated, with the origin located at
+    # the middle of such range.
     #
-    range = 500000
     for origin in self.chromosome.constitutive_origins:  
-      if (self.base >= (origin - range)) and (self.base <= (origin + range)):
+      if (self.base >= (origin - origins_range / 2))\
+      and (self.base <= (origin + origins_range / 2))\
+      and origin not in self.chromosome.fired_constitutive_origins:
         return True
   
+    return False
+
+#-----------------------------------------------------------------------------#
+
+  ## Retrieve a constitutive origin located in this range.
+  # @param int origins_range Considered range around a constitutive origin.
+  # @return True if the base will be activate, False otherwise.
+  def get_constitutive_origin(self, origins_range):
+  
+    # We define a range of 'origins_range' upstream and downstream the
+    # constitutive origin that can be activated, with the origin located at
+    # the middle of such range.
+    #
+    for origin in self.chromosome.constitutive_origins:  
+      if (self.base >= (origin - origins_range / 2))\
+      and (self.base <= (origin + origins_range / 2))\
+      and origin not in self.chromosome.fired_constitutive_origins:
+        return origin 
+          
+    return 0
+
+#-----------------------------------------------------------------------------#
+
+  ## Update the list of fired constitutive origins with an fired origin.
+  # @param int location of the constitutive origin.
+  # @return True if list was successfully updated and False otherwise.
+  def put_fired_constitutive_origin(self, origin):
+  
+    for current_origin in self.chromosome.constitutive_origins:  
+
+      if (current_origin == origin):
+        # If 'origin' is already in the fired list, then it does nothing!
+        if (current_origin in self.chromosome.fired_constitutive_origins):
+          return False
+        else:
+          self.chromosome.fired_constitutive_origins.append(origin)
+          return True
+
+    # If it reaches here, 'origin' was not found in the original list of 
+    # constitutive origins.
+    #
     return False
 
 #-----------------------------------------------------------------------------#

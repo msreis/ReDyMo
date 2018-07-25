@@ -54,6 +54,7 @@ class Chromosome:
         self.number_of_origins          = 0
         self.transcription_regions      = transcription_regions
         self.constitutive_origins       = constitutive_origins
+        self.fired_constitutive_origins = list()
 
 #-----------------------------------------------------------------------------#
 

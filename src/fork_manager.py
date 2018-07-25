@@ -32,6 +32,7 @@ class ForkManager:
 
   ## The class constructor
   def __init__(self, size, genome, speed):
+    self.number_of_forks = size
     self.number_of_free_forks = size
     self.replication_forks = list()
     self.just_unattached = dict()
@@ -48,7 +49,7 @@ class ForkManager:
   # base affected and unattaching the affected fork.
   # @param time The simulation time when it was checked.
   # @param period The period of the RNAP carousel.
-  # @param has_dormant Indication if the chromosome has dormant replication origins. 
+  # @param has_dormant Assigns if this chromosome has dormant origins. 
   def check_replication_transcription_conflicts(self,time,period,has_dormant):
 
     number_of_collisions = 0

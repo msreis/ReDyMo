@@ -21,36 +21,55 @@ The system uses a simple *SQLite* database. Python already has plenty of functio
 
 ### Parameters
 
-To view information about the configuration parameters, run:
-```
-$ ./src/main.py -h
-```
+In this version of ReDyMo, most parameters are mandatory and are listed below:
+
+ - --cells *number_of_cells*: Number of independent simulations to be made. *number_of_cells* is a positive integer.
+
+ - --dormant *dormant_flag*: Flag that either activates ('True') or disables ('False') the firing of dormant origins. *dormant_value* is a Boolean flag. It is noteworthy that the dormant origing firing does not work when constitutive origins are used (parameter --constitutive).
+
+ - --organism *'organism_name'*: Name of the parasite species, as saved in the database. *'organism_name'* is a string (in space-separated names, use single quotation marks).
+
+ - --resources *number_of_forks*: Number of available forks for the replication process. *number_of_forks* is a positive integer.
+
+ - --speed *speed_value*: Velocity of each replication fork (in number of nucleotides per iteration). *speed_value* is a positive integer.
+
+ - --timeout *timeout_value*: Maximum allowed number of iterations of a simulation; if this value is reached, then a simulation is ended even if DNA replication is not completed yet.
+
+The two optional parameters are:
+
+ - --constitutive *range*: When this parameter is provided, a DNA replication must use the set of constitutive origins within the database instead of the probability landscape. *range* is a positive integer, and specifies the range of nucleotides around each constitutive origin that can initiate replication.
+
+ - --period *period_value*: Period (in number of simulation iterations) between two consecutive activations (i.e. RNAP binding) of a transcription region. *period_value* is a positive integer. If this parameter is not set, then the simulation is carried out without transcription.
 
 ### Running the simulation
 
 To run the program, the syntax of the main simulator program is the following one:
 ```
-$ ./src/main.py --organism 'organism' --resources resources_value --speed speed_value --cells numbe_of_cells --period period_value --timeout timeout_value --dormant [True|False]
+$ ./src/main.py --cells number_of_cells --dormant dormant_flag --organism 'organism_name' --resources number_of_forks --speed speed_value --timeout timeout_value [--constitutive range] [--period period_value]
 ```
 
-The command above must be executed within the project main directory. For example, to run a simulation of seven cells of *T. brucei TREU927*, with 10 forks, replisome speed of 65 bp/sec, transcription frequency of 150 sec, a timeout of one million iterations and no dormant origin firing, one must type at the project main directory:
+The command above must be executed within the project main directory. For example, to run a simulation of 7 cells of *T. brucei TREU927*, with 10 forks, replisome speed of 65 bp/iteration, transcription period of 150 iterations between two transcription initiations, a timeout of one million iterations and with dormant origin firing, one must type at the project main directory:
 ```
-$ ./src/main.py --organism 'Trypanosoma brucei brucei TREU927' --resources 10 --speed 65 --period 150 --cells 7 --timeout 1000000 --dormant False
+$ ./src/main.py --cells 7 --organism 'Trypanosoma brucei brucei TREU927' --resources 10 --speed 65 --period 150 --timeout 1000000 --dormant True
 ```
-The simulation results will be stored into a directory named *output/False_10_50/*, in which "output" is the outer directory name and the inner directory name of composed of the concatenation of the used parameter values for dormant origin firing, resources and period.
+The simulation results will be stored into a directory named *output/True_10_150/*, in which "output" is the outer directory name and the inner directory name of composed of the concatenation of the used parameter values for dormant origin firing, resources and period.
 
+Another example: if one wants to simulate 30 cells of *T. brucei TREU927*, with 50 forks, replisome speed of 1 bp/iteration, no transcription, no dormant origin firing, using constitutive origins with a firing initiation range of 200 Kb, and the same timeout of the previous example:
+```
+$ ./src/main.py --cells 30 --organism 'Trypanosoma brucei brucei TREU927' --resources 50 --speed 1 --timeout 1000000 --dormant False --constitutive 200000
+```
+
+In this case, the simulation results will be stored into the directory *output/False_50_0*.
 
 ### Aggregating the simulation results
 
 If more than one cell is simulated at once, then the results may be averaged through the usage of an aggregator script, whose syntax is the following:
 ```
-$ cd script
-$ ./cell_output_aggregator.py *output_directory* > *aggregation_file_and_path*
+$ ./script/cell_output_aggregator.py *output_directory* > *aggregation_file_and_path*
 ```
-where *output_directory* is the output directory of the simulation and *aggregation_file_and_path* is both the path and name for the file containing the result of data aggregation. For example, to aggregate the aforementioned example, one could just type:
+where *output_directory* is the output directory of the simulation and *aggregation_file_and_path* is both the path and name for the file containing the result of data aggregation. For example, to aggregate the aforementioned first example, one could just type:
 ```
-$ cd script
-$ ./cell_output_aggregator.py ../output/False_10_150 > ../output/aggregated.txt
+$ ./script/cell_output_aggregator.py output/False_10_150 > output/aggregated.txt
 ```
 
 ### Bug report and contact
