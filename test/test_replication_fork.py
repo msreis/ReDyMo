@@ -33,8 +33,8 @@ class test_replication_fork(unittest.TestCase):
         with self.assertRaises(ValueError):
             rep_fork.attach(Mock(), None, None)
 
-        chrms = [Chromosome(1, 3, [0.2, 0.5, 0.6], None),
-                 Chromosome(3, 2, [0.1, 0.9], None)]
+        chrms = [Chromosome(1, 3, [0.2, 0.5, 0.6], None, constitutive_origins=None),
+                 Chromosome(3, 2, [0.1, 0.9], None, constitutive_origins=None)]
         chrms[0].replicate = MagicMock(return_value=True)
 
         gen = Genome(chrms)
@@ -56,8 +56,8 @@ class test_replication_fork(unittest.TestCase):
     ## Test the advancing of the fork by attaching it to a base and checking
     # that the replicate function was called with the right bases.
     def test_advance(self):
-        chrms = [Chromosome(1, 3, [0.2, 0.5, 0.6], None),
-                 Chromosome(3, 2, [0.1, 0.9], None)]
+        chrms = [Chromosome(1, 3, [0.2, 0.5, 0.6], None, constitutive_origins=None),
+                 Chromosome(3, 2, [0.1, 0.9], None, constitutive_origins=None)]
         chrms[0].replicate = MagicMock(return_value=True)
 
         gen = Genome(chrms)

@@ -18,16 +18,16 @@ class TestGenome(unittest.TestCase):
     ## Tests the constructor by creating a new object and comparing the setted
     # values with the given ones
     def test_constructor(self):
-        chrms = [Chromosome(1, 3, [0.2, 0.5, 0.6], None),
-                 Chromosome(3, 2, [0.1, 0.9], None)]
+        chrms = [Chromosome(1, 3, [0.2, 0.5, 0.6], None, constitutive_origins=None),
+                 Chromosome(3, 2, [0.1, 0.9], None, constitutive_origins=None)]
         gen = Genome(chrms)
         self.assertEqual(gen.chromosomes, chrms)
 
     ## Tests if the random_genomic_location stays within the chromosomes' area.
     def test_random_genomic_location(self):
         times = 500
-        chrms = [Chromosome(1, 3, [0.2, 0.5, 0.6], None),
-                 Chromosome(3, 2, [0.1, 0.9], None)]
+        chrms = [Chromosome(1, 3, [0.2, 0.5, 0.6], None, constitutive_origins=None),
+                 Chromosome(3, 2, [0.1, 0.9], None, constitutive_origins=None)]
         gen = Genome(chrms)
         for i in range(times):
             gen_loc = gen.random_genomic_location()
@@ -37,8 +37,8 @@ class TestGenome(unittest.TestCase):
 
     ## Tests if the is_replicated returns true in true cases and vce versa.
     def test_is_replicated(self):
-        chrms = [Chromosome(1, 3, [0.2, 0.5, 0.6], None),
-                 Chromosome(3, 2, [0.1, 0.9], None)]
+        chrms = [Chromosome(1, 3, [0.2, 0.5, 0.6], None, constitutive_origins=None),
+                 Chromosome(3, 2, [0.1, 0.9], None, constitutive_origins=None)]
         chrms[0].is_replicated = MagicMock(return_value=True)
         chrms[1].is_replicated = MagicMock(return_value=False)
         gen = Genome(chrms)

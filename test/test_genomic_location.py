@@ -16,8 +16,8 @@ class TestGenomicLocation(unittest.TestCase):
 
     ## Tests the constructor by comparing the input with the objects generated.
     def test_constructor(self):
-        chrms = [Chromosome(1, 3, [0.5, 1, 0.4], None),
-                 Chromosome(3, 2, [0.0, 0.4], None)]
+        chrms = [Chromosome(1, 3, [0.5, 1, 0.4], None, constitutive_origins=None),
+                 Chromosome(3, 2, [0.0, 0.4], None, constitutive_origins=None)]
 
         gen_loc_1 = GenomicLocation(2, chrms[0])
         gen_loc_2 = GenomicLocation(2, chrms[1])
@@ -30,8 +30,8 @@ class TestGenomicLocation(unittest.TestCase):
 
     ## Tests by comparing the mock value with the function response.
     def test_is_replicated(self):
-        chrms = [Chromosome(1, 3, [0.5, 1, 0.4], None),
-                 Chromosome(3, 2, [0.0, 0.4], None)]
+        chrms = [Chromosome(1, 3, [0.5, 1, 0.4], None, constitutive_origins=None),
+                 Chromosome(3, 2, [0.0, 0.4], None, constitutive_origins=None)]
 
         chrms[0].base_is_replicated = MagicMock(return_value=False)
         chrms[1].base_is_replicated = MagicMock(return_value=True)
@@ -50,8 +50,8 @@ class TestGenomicLocation(unittest.TestCase):
     ## Tests by comaparing the proportion of times the function returns true
     # with the probability to return true. 
     def test_will_activate(self):
-        chrms = [Chromosome(1, 3, [0.5, 1, 0.4], None),
-                 Chromosome(3, 2, [0.0, 0.4], None)]
+        chrms = [Chromosome(1, 3, [0.5, 1, 0.4], None, constitutive_origins=None),
+                 Chromosome(3, 2, [0.0, 0.4], None, constitutive_origins=None)]
 
         chrms[0].base_is_replicated = MagicMock(return_value=False)
         chrms[1].base_is_replicated = MagicMock(return_value=True)
@@ -59,13 +59,12 @@ class TestGenomicLocation(unittest.TestCase):
         gen_loc_1 = GenomicLocation(1, chrms[0])
         gen_loc_2 = GenomicLocation(1, chrms[1])
         gen_loc_3 = GenomicLocation(0, chrms[1])
-        pass
 
         times_true = 0
         for i in range(50000):
-            self.assertTrue(gen_loc_1.will_activate())
-            self.assertFalse(gen_loc_3.will_activate())
-            if gen_loc_2.will_activate():
+            self.assertTrue(gen_loc_1.will_activate(use_constitutive_origins=False, origins_range=0))
+            self.assertFalse(gen_loc_3.will_activate(use_constitutive_origins=False, origins_range=0))
+            if gen_loc_2.will_activate(use_constitutive_origins=False, origins_range=0):
                 times_true += 1
         
         # Compares the number of times it was activated with its activation

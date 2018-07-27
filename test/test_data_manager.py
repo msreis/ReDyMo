@@ -61,7 +61,7 @@ class TestDataManager(unittest.TestCase):
         self.assertEqual(chrm, 
         [{'code': 'dummy_01', 'length': 150,
         'probability_landscape': 'dummy_landscape',
-        'transcription_regions': [{'start': 25, 'end': 80}]}]) 
+        'transcription_regions': [{'start': 25, 'end': 80}],'constitutive_origins': []}]) 
 
     ## Test by checking output against known data
     def test_select_transcription_regions_from_database(self):
