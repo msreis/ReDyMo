@@ -99,7 +99,7 @@ class GenomicLocation:
         if (current_origin in self.chromosome.fired_constitutive_origins):
           return False
         else:
-          self.chromosome.fired_constitutive_origins.append(origin)
+          self.chromosome.fired_constitutive_origins.append(origin)          
           return True
 
     # If it reaches here, 'origin' was not found in the original list of 

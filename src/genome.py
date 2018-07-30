@@ -91,7 +91,27 @@ class Genome:
   def average_interorigin_distance(self):
     number_of_interorigin_distances = 0
     for chromosome in self.chromosomes:
-      number_of_interorigin_distances += chromosome.number_of_origins + 1
+     #
+     # There are three ways to compute IOD:
+     #
+     # a) IOD = len(chromosome) / number_of_origins
+     #
+     # b) IOD = len(chromosome) / number_of_origins - 1
+     #
+     # c) IOD = len(chromosome) / number_of_origins + 1
+     #
+     # (a) should be used in circular chromosomes, or in linear chromosomes
+     # with a set of origin locations that minimizes the required replication
+     # time.
+     #
+     # (b) should be used under the assumption that there are origins at
+     # both subtelomeric regions (i.e., the extremities of the genome).
+     #
+     # (c) should be used in linear chromosome without the assumption of
+     # of optimal origin positioning; therefore, IOD represents the homogeneous
+     # partition of the chromosome by the set of origins.
+     #
+     number_of_interorigin_distances += chromosome.number_of_origins + 1
 
     return float(len(self)/number_of_interorigin_distances)
 

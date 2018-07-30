@@ -143,8 +143,12 @@ class Chromosome:
     # occurr
     # @return true if was a normal (not at the very end) transcription.
     def replicate(self, start, end, time):
+
+        # Each of the two spanwed forks comes from a single origin,
+        # that is, 0.5 + 0.5 = 1.
+        #
         if start == end:
-            self.number_of_origins += 1
+            self.number_of_origins += 0.5
 
         is_normal_transcription = True
         if end < 0:

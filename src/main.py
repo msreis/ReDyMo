@@ -128,14 +128,12 @@ def main(args):
         and genomic_location.will_activate(use_constitutive_origins,\
                                            origins_range):
 
-          origin = genomic_location.get_constitutive_origin(origins_range)
-
-          if genomic_location.put_fired_constitutive_origin(origin) == False:
-            print('Error in putting fired constitutive origin!')         
-
           fork_manager.attach_forks(genomic_location=genomic_location,time=time)
 
           if use_constitutive_origins == True:
+            origin = genomic_location.get_constitutive_origin(origins_range)
+            if genomic_location.put_fired_constitutive_origin(origin) == False:
+              print('Error in putting fired constitutive origin!')         
             number_of_constitutive_origins -= 1
 
   print('[done]')
