@@ -58,21 +58,6 @@ class TestGenome(unittest.TestCase):
         self.assertEqual((255 + 236) / (24 + 1 + 30 + 1),
                          gen.average_interorigin_distance())
 
-    ## Tests by sending values manually and comparing the returned ones.
-    def test_number_of_replicated_bases_in_this_step(self):
-        chrms = [Mock(number_of_recently_replicated_bases=200),
-                 Mock(number_of_recently_replicated_bases=195),
-                 Mock(number_of_recently_replicated_bases=255)
-                 ]
-        gen = Genome(chrms)
-        self.assertEqual(200+195+255,
-                         gen.number_of_replicated_bases_in_this_step())
-        chrms[0] = Mock(number_of_recently_replicated_bases=2)
-        chrms[1] = Mock(number_of_recently_replicated_bases=15)
-        chrms[2] = Mock(number_of_recently_replicated_bases=25)
-        self.assertEqual(
-            2+15+25, gen.number_of_replicated_bases_in_this_step())
-
 
 if __name__ == '__main__':
     unittest.main()
