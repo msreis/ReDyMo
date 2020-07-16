@@ -32,6 +32,9 @@ class Genome:
   ## The constructor 
   def __init__(self, chromosomes):
     self.chromosomes = chromosomes
+    self.genome_size = 0
+    for chromosome in self.chromosomes:
+      self.genome_size += len(chromosome)
 
 #-----------------------------------------------------------------------------#
 
@@ -53,10 +56,17 @@ class Genome:
   # @return A GenomicLocation object referencing the random base selected.
   # @see GenomicLocation
   def random_genomic_location(self):
-    random_chromosome = self.chromosomes[self.rng.randint(0,\
-    len(self.chromosomes) - 1)]
-    random_base = self.rng.randint(0, len(random_chromosome) - 1)
-    return GenomicLocation(base=random_base, chromosome=random_chromosome)
+    
+    random_position = self.rng.randint(1, self.genome_size)    
+    i = 0
+    current_size = len(self.chromosomes[i])
+    while random_position > current_size:
+      i += 1
+      current_size += len(self.chromosomes[i])
+     
+    random_base = self.rng.randint(0, len(self.chromosomes[i]) - 1)
+
+    return GenomicLocation(base=random_base, chromosome=self.chromosomes[i])
 
 #-----------------------------------------------------------------------------#
 
